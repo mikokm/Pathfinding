@@ -3,27 +3,34 @@ package tiralabra;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Node {
+public class Node implements Comparable<Node> {
 	private List<Edge> edges = new ArrayList<Edge>();
-	
-	private double distance;
-	private Node nearest;
-	private char type;
-	
-	private int x;
-	private int y;
-	
+	private Node nearest = null;
+
+	private char type = 0;
+	private double distance = 0, distanceEstimate = 0;
+	private int x, y;
+
 	public Node(int x, int y) {
 		this.x = x;
 		this.y = y;
-		
-		this.nearest = null;
-		this.distance = Double.POSITIVE_INFINITY;
-		this.type = 0;
 	}
-	
+
+	@Override
+	public int compareTo(Node node) {
+		return Double.compare(distance + this.distanceEstimate, node.distance + node.distanceEstimate);
+	}
+
 	public double getDistance() {
 		return distance;
+	}
+
+	public double getDistanceEstimate() {
+		return distanceEstimate;
+	}
+
+	public List<Edge> getEdges() {
+		return edges;
 	}
 
 	public Node getNearest() {
@@ -33,7 +40,7 @@ public class Node {
 	public char getType() {
 		return type;
 	}
-	
+
 	public int getX() {
 		return x;
 	}
@@ -42,8 +49,16 @@ public class Node {
 		return y;
 	}
 
-	public void setDistance(double maxValue) {
-		this.distance = maxValue;
+	public void setDistance(double distance) {
+		this.distance = distance;
+	}
+
+	public void setDistanceEstimate(double distanceEstimate) {
+		this.distanceEstimate = distanceEstimate;
+	}
+
+	public void setEdges(List<Edge> edges) {
+		this.edges = edges;
 	}
 
 	public void setNearest(Node nearest) {
@@ -55,14 +70,6 @@ public class Node {
 	}
 
 	public String toString() {
-		return "[" + x + ", " + y + "]: " + type; 
-	}
-
-	public List<Edge> getEdges() {
-		return edges;
-	}
-
-	public void setEdges(List<Edge> edges) {
-		this.edges = edges;
+		return "[" + x + ", " + y + "]: " + type;
 	}
 }

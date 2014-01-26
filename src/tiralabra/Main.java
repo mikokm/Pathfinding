@@ -19,11 +19,11 @@ public class Main {
 				{ '2', '2', 't' }
 		};
 		
-		/*
+		
 		Graph g = GraphBuilder.buildGraph(graph);
 		System.out.println(g);
-		*/
 		
+		/*
 		double start, end, init;
 		
 		start = System.nanoTime();
@@ -50,13 +50,13 @@ public class Main {
 		end = System.nanoTime();
 		System.out.println( (end-start-init)/1000000000 );
 		
-		/*
+		*/
 		Dijkstra d = new Dijkstra(g);
 		d.run();
 		
 		ArrayList<Node> path = g.getPath();
 		System.out.println(path);
-		*/
+		
 	}
 
 }

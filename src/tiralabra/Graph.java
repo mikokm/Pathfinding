@@ -43,7 +43,7 @@ public class Graph {
 		return graph[0].length;
 	}
 
-	public List<Node> getNeighbours(Node node) {
+	private List<Node> getNeighbours(Node node) {
 		List<Node> list = new ArrayList<>();
 
 		int x0 = node.getX(), y0 = node.getY();
@@ -61,10 +61,7 @@ public class Graph {
 				}
 
 				// Add the node to the neighbour list.
-				Node n = graph[y][x];
-				list.add(n);
-				
-				//System.out.println("Found neighbour: " + n);
+				list.add(graph[y][x]);
 			}
 		}
 
@@ -81,108 +78,13 @@ public class Graph {
 		return nodes;
 	}
 
-	public void initializeEdges() throws IllegalGraphException {
-		edges.clear();
-		start = null;
-		target = null;
-
-		for (Node node : nodes) {
-			//System.out.println("Node: " + node);
-			
-			if(node.getDistance() < 0) {
-				throw new IllegalGraphException("The graph has a node with a negative weight!");
-			}
-
-			if (node.getType() == Graph.WALL) {
-				continue;
-			}
-
-			if (node.getType() == Graph.START) {
-				start = node;
-			}
-
-			if (node.getType() == Graph.TARGET) {
-				target = node;
-			}
-
-			List<Edge> nodeEdges = new ArrayList<Edge>();
-			
-			for (Node n : getNeighbours(node)) {
-				if (n.getType() == Graph.WALL) {
-					continue;
-				}
-
-				// Calculate the Euclidean distance to the next node.
-				double dx = Math.pow(node.getX() - n.getX(), 2);
-				double dy = Math.pow(node.getY() - n.getY(), 2);
-				double distance = Math.sqrt(dx + dy);
-
-				Edge e = new Edge(node, n, distance);
-				
-				// Add the edge to the list of all edges.
-				edges.add(e);
-				
-				// Add the edge to the node specific list of edges.
-				nodeEdges.add(e);
-				
-				//System.out.println("Adding edge: " + e);
-			}
-			
-			node.setEdges(nodeEdges);
-		}
-
-		if (start == null || target == null) {
-			throw new IllegalGraphException("The graph is missing the start or target node!");
-		}
-	}
-
-	public void initializeNodes() {
-		for (Node n : nodes) {
-			if (n.getType() == Graph.START) {
-				n.setDistance(0);
-			} else {
-				n.setDistance(Double.POSITIVE_INFINITY);
-			}
-
-			n.setNearest(null);
-		}
-	}
-
-	public boolean isWithinGraph(int x, int y) {
-		if (x >= getGraphWidth() || y >= getGraphHeight() || x < 0 || y < 0) {
-			return false;
-		}
-
-		return true;
-	}
-
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		for (int y = 0; y < getGraphHeight(); ++y) {
-			for (int x = 0; x < getGraphWidth(); ++x) {
-				sb.append(graph[y][x].getType());
-			}
-			
-			// Skip the last new line.
-			if(y < getGraphHeight() - 1) {
-				sb.append('\n');
-			}
-		}
-
-		return sb.toString();
-	}
-
 	public ArrayList<Node> getPath() {
-		ArrayList<Node> path = new ArrayList<>();
+		assert (start != null && target != null);
 
-		if (start == null || target == null) {
-			System.out.println("Error: No start or target found!");
-			return null;
-		}
+		ArrayList<Node> path = new ArrayList<>();
+		Stack<Node> stack = new Stack<>();
 
 		Node node = target.getNearest();
-
-		Stack<Node> stack = new Stack<>();
 		while (node != start) {
 			if (node == null) {
 				System.out.println("No path found!");
@@ -196,13 +98,106 @@ public class Graph {
 		System.out.println("Path length is " + stack.size() + " nodes.");
 
 		path.add(start);
-
 		while (!stack.isEmpty()) {
 			path.add(stack.pop());
 		}
-
 		path.add(target);
 
 		return path;
+	}
+
+	public Node getStart() {
+		return start;
+	}
+
+	public Node getTarget() {
+		return target;
+	}
+
+	public void initializeEdges() throws IllegalGraphException {
+		edges.clear();
+		start = null;
+		target = null;
+
+		for (Node node : nodes) {
+			// System.out.println("Node: " + node);
+
+			if (node.getDistance() < 0) {
+				throw new IllegalGraphException("The graph has a node with a negative weight!");
+			}
+
+			switch (node.getType()) {
+			case Graph.START:
+				start = node;
+				break;
+			case Graph.TARGET:
+				target = node;
+				break;
+			case Graph.WALL:
+				continue;
+			}
+
+			List<Edge> nodeEdges = new ArrayList<Edge>();
+
+			for (Node n : getNeighbours(node)) {
+				if (n.getType() == Graph.WALL) {
+					continue;
+				}
+
+				// Calculate the Euclidean distance to the next node.
+				double dx = Math.pow(node.getX() - n.getX(), 2);
+				double dy = Math.pow(node.getY() - n.getY(), 2);
+
+				double distance = Math.sqrt(dx + dy);
+
+				Edge e = new Edge(node, n, distance);
+
+				// Add the edge to the list of all edges.
+				edges.add(e);
+
+				// Add the edge to the node specific list of edges.
+				nodeEdges.add(e);
+
+				// System.out.println("Adding edge: " + e);
+			}
+
+			node.setEdges(nodeEdges);
+		}
+
+		if (start == null || target == null) {
+			throw new IllegalGraphException("The graph is missing the start or target node!");
+		}
+	}
+
+	public boolean isWithinGraph(int x, int y) {
+		if (x >= getGraphWidth() || y >= getGraphHeight() || x < 0 || y < 0) {
+			return false;
+		}
+
+		return true;
+	}
+
+	public void setStart(Node start) {
+		this.start = start;
+	}
+
+	public void setTarget(Node target) {
+		this.target = target;
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for (int y = 0; y < getGraphHeight(); ++y) {
+			for (int x = 0; x < getGraphWidth(); ++x) {
+				sb.append(graph[y][x].getType());
+			}
+
+			// Skip the last new line.
+			if (y < getGraphHeight() - 1) {
+				sb.append('\n');
+			}
+		}
+
+		return sb.toString();
 	}
 }

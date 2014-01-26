@@ -8,28 +8,13 @@ public class BellmanFord {
 	}
 	
 	public void run() {
-		graph.initializeNodes();
+		GraphUtil.initializeNodes(graph.getNodes());
 		
 		for(int i = 0; i < graph.getNodes().size() - 1; ++i) {
 			for(Edge e : graph.getEdges()) {
 				//System.out.println(e);	
-				relax(e.u, e.v, e.w);
+				GraphUtil.relax(e.u, e.v, e.w);
 			}
-		}
-	}
-
-	private void relax(Node u, Node v, double w) {
-		//System.out.println("v: " + v.getDistance() + " u:  "+ u.getDistance());
-		
-		if(u.getDistance() == Double.POSITIVE_INFINITY) {
-			return;
-		}
-
-		double uw = u.getDistance() + w;
-		
-		if(v.getDistance() > uw) {
-			v.setDistance(uw);
-			v.setNearest(u);
 		}
 	}
 }
