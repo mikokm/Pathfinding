@@ -3,14 +3,8 @@ package fi.miko.tiralabra;
 import java.util.PriorityQueue;
 
 public class Dijkstra {
-	private Graph graph;
-
-	public Dijkstra(Graph graph) {
-		this.graph = graph;
-	}
-
-	public void run() {
-		GraphUtil.initializeNodes(graph.getNodes());
+	public static void runDijkstra(Graph graph) {
+		GraphUtil.initializeNodes(graph, Heuristic.Euclidean);
 
 		PriorityQueue<Node> nodes = new PriorityQueue<>(graph.getNodes().size());
 		for (Node node : graph.getNodes()) {
@@ -29,7 +23,6 @@ public class Dijkstra {
 					nodes.remove(e.v);
 					nodes.add(e.v);
 				}
-
 			}
 		}
 	}

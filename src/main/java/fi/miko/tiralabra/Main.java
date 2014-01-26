@@ -1,6 +1,6 @@
 package fi.miko.tiralabra;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 	public static void main(String[] args) {
@@ -23,40 +23,34 @@ public class Main {
 		Graph g = GraphBuilder.buildGraph(graph);
 		System.out.println(g);
 		
-		/*
-		double start, end, init;
+/*		
+		double start, end;
 		
 		start = System.nanoTime();
-		for(int i = 0; i < 100000; ++i) {
-			Graph b = GraphBuilder.buildGraph(graph);
+		for (int i = 0; i < 1000000; ++i) {
+			BellmanFord.runBellmanFord(g);
 		}
 		end = System.nanoTime();
-		init = end-start;
-		
+		System.out.println("Bellman-Ford: " + (end - start) / 1000000000);
+
 		start = System.nanoTime();
-		for(int i = 0; i < 100000; ++i) {
-			BellmanFord b = new BellmanFord(GraphBuilder.buildGraph(graph));
-			b.run();
+		for (int i = 0; i < 1000000; ++i) {
+			Dijkstra.runDijkstra(g);
 		}
 		end = System.nanoTime();
-		System.out.println( (end-start-init)/1000000000 );
+		System.out.println("Dijkstra: " + (end - start) / 1000000000);
+*/
 		
+		g = GraphBuilder.buildGraph(graph);
+		BellmanFord.runBellmanFord(g);
+		List<Node> path1 = GraphUtil.getShortestPath(g);
+		System.out.println(path1);
 		
-		start = System.nanoTime();
-		for(int i = 0; i < 100000; ++i) {
-			Dijkstra d = new Dijkstra(GraphBuilder.buildGraph(graph));
-			d.run();
-		}
-		end = System.nanoTime();
-		System.out.println( (end-start-init)/1000000000 );
-		
-		*/
-		Dijkstra d = new Dijkstra(g);
-		d.run();
-		
-		ArrayList<Node> path = g.getPath();
-		System.out.println(path);
-		
+		g = GraphBuilder.buildGraph(graph);
+		Dijkstra.runDijkstra(g);
+		List<Node> path2 = GraphUtil.getShortestPath(g);
+		System.out.println(path2);
+		 
 	}
 
 }

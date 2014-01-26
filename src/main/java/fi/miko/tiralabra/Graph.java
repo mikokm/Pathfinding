@@ -1,8 +1,7 @@
 package fi.miko.tiralabra;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Stack;
 
 public class Graph {
 	public static final char START = 's';
@@ -13,8 +12,8 @@ public class Graph {
 	private Node start = null;
 	private Node target = null;
 
-	private ArrayList<Edge> edges = new ArrayList<>();
-	private ArrayList<Node> nodes = new ArrayList<>();
+	private List<Edge> edges = new LinkedList<>();
+	private List<Node> nodes = new LinkedList<>();
 
 	public Graph(int width, int height) {
 		assert (width > 0 && height > 0);
@@ -31,7 +30,7 @@ public class Graph {
 		}
 	}
 
-	public ArrayList<Edge> getEdges() {
+	public List<Edge> getEdges() {
 		return edges;
 	}
 
@@ -44,7 +43,7 @@ public class Graph {
 	}
 
 	private List<Node> getNeighbours(Node node) {
-		List<Node> list = new ArrayList<>();
+		List<Node> list = new LinkedList<>();
 
 		int x0 = node.getX(), y0 = node.getY();
 
@@ -74,36 +73,8 @@ public class Graph {
 		return graph[y][x];
 	}
 
-	public ArrayList<Node> getNodes() {
+	public List<Node> getNodes() {
 		return nodes;
-	}
-
-	public ArrayList<Node> getPath() {
-		assert (start != null && target != null);
-
-		ArrayList<Node> path = new ArrayList<>();
-		Stack<Node> stack = new Stack<>();
-
-		Node node = target.getNearest();
-		while (node != start) {
-			if (node == null) {
-				System.out.println("No path found!");
-				return null;
-			}
-
-			stack.push(node);
-			node = node.getNearest();
-		}
-
-		System.out.println("Path length is " + stack.size() + " nodes.");
-
-		path.add(start);
-		while (!stack.isEmpty()) {
-			path.add(stack.pop());
-		}
-		path.add(target);
-
-		return path;
 	}
 
 	public Node getStart() {
@@ -120,8 +91,6 @@ public class Graph {
 		target = null;
 
 		for (Node node : nodes) {
-			// System.out.println("Node: " + node);
-
 			if (node.getDistance() < 0) {
 				throw new IllegalGraphException("The graph has a node with a negative weight!");
 			}
@@ -137,7 +106,7 @@ public class Graph {
 				continue;
 			}
 
-			List<Edge> nodeEdges = new ArrayList<Edge>();
+			List<Edge> nodeEdges = new LinkedList<Edge>();
 
 			for (Node n : getNeighbours(node)) {
 				if (n.getType() == Graph.WALL) {
@@ -175,14 +144,6 @@ public class Graph {
 		}
 
 		return true;
-	}
-
-	public void setStart(Node start) {
-		this.start = start;
-	}
-
-	public void setTarget(Node target) {
-		this.target = target;
 	}
 
 	public String toString() {

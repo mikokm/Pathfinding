@@ -1,10 +1,10 @@
 package fi.miko.tiralabra;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Node implements Comparable<Node> {
-	private List<Edge> edges = new ArrayList<Edge>();
+	private List<Edge> edges = new LinkedList<Edge>();
 	private Node nearest = null;
 
 	private char type = 0;
