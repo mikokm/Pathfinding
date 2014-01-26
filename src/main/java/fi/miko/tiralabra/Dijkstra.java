@@ -14,6 +14,11 @@ public class Dijkstra {
 		while (!nodes.isEmpty()) {
 			Node node = nodes.poll();
 
+			// TODO: Test that this works.
+			if (node == graph.getTarget()) {
+				return;
+			}
+
 			for (Edge e : node.getEdges()) {
 				double d = e.v.getDistance();
 
