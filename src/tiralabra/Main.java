@@ -19,18 +19,37 @@ public class Main {
 				{ '2', '2', 't' }
 		};
 		
-
+		/*
 		Graph g = GraphBuilder.buildGraph(graph);
 		System.out.println(g);
+		*/
 		
-		BellmanFord b = new BellmanFord(g);
-		//b.run();
+		double start, end;
 		
+		start = System.nanoTime();
+		for(int i = 0; i < 100000; ++i) {
+			BellmanFord b = new BellmanFord(GraphBuilder.buildGraph(graph));
+			b.run();
+		}
+		end = System.nanoTime();
+		System.out.println( (end-start)/1000000000 );
+		
+		
+		start = System.nanoTime();
+		for(int i = 0; i < 100000; ++i) {
+			Dijkstra d = new Dijkstra(GraphBuilder.buildGraph(graph));
+			d.run();
+		}
+		end = System.nanoTime();
+		System.out.println( (end-start)/1000000000 );
+		
+		/*
 		Dijkstra d = new Dijkstra(g);
 		d.run();
 		
 		ArrayList<Node> path = g.getPath();
 		System.out.println(path);
+		*/
 	}
 
 }

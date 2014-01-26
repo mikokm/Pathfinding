@@ -1,20 +1,17 @@
 package tiralabra;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Comparator;
 import java.util.PriorityQueue;
-import java.util.Set;
-import java.util.TreeSet;
 
 public class Dijkstra {
 	private Graph graph;
-	private Set<Node> set = new TreeSet<>();
 	
 	public Dijkstra(Graph graph) {
 		this.graph = graph;
 	}
 	
-	public void run() {
+	public void runWithoutHeap() {
 		graph.initializeNodes();
 		
 		ArrayList<Node> nodes = graph.getNodes();
@@ -35,14 +32,42 @@ public class Dijkstra {
 		}
 	}
 	
+	public void run() {
+		graph.initializeNodes();
+		
+		PriorityQueue<Node> nodes = new PriorityQueue<>(graph.getNodes().size(), new Comparator<Node>() {
+			@Override
+			public int compare(Node o1, Node o2) {
+				return Double.compare(o1.getDistance(), o2.getDistance());
+			}
+		});
+		
+		for(Node node : graph.getNodes()) {
+			nodes.add(node);
+		}
+		
+		while(!nodes.isEmpty()) {
+			Node node = nodes.poll();
+			
+			for(Edge e : node.getEdges()) {
+				double d = e.v.getDistance();
+				relax(e.u, e.v, e.w);
+				if(e.v.getDistance() < d) {
+					nodes.remove(e.v);
+					nodes.add(e.v);
+				}
+			}
+		}
+	}
+	
 	private void relax(Node u, Node v, double w) {
 		//System.out.println("v: " + v.getDistance() + " u:  "+ u.getDistance());
-		
-		double uw = u.getDistance() + w;
 		
 		if(u.getDistance() == Double.MAX_VALUE) {
 			return;
 		}
+		
+		double uw = u.getDistance() + w;
 
 		if(v.getDistance() > uw) {
 			v.setDistance(uw);

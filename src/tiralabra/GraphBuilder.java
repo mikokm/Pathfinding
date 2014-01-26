@@ -10,7 +10,7 @@ public class GraphBuilder {
 				Node n = g.getNode(x, y);
 				n.setType(graph[y][x]);
 				
-				System.out.println("Adding node: " + n);
+				//System.out.println("Adding node: " + n);
 			}
 		}
 		

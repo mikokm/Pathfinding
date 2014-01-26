@@ -63,7 +63,8 @@ public class Graph {
 				// Add the node to the neighbour list.
 				Node n = graph[y][x];
 				list.add(n);
-				System.out.println("Found neighbour: " + n);
+				
+				//System.out.println("Found neighbour: " + n);
 			}
 		}
 
@@ -85,8 +86,8 @@ public class Graph {
 		start = null;
 		target = null;
 
-		for (Node node : getNodes()) {
-			System.out.println("Node: " + node);
+		for (Node node : nodes) {
+			//System.out.println("Node: " + node);
 			
 			if(node.getDistance() < 0) {
 				throw new IllegalGraphException("The graph has a node with a negative weight!");
@@ -104,25 +105,30 @@ public class Graph {
 				target = node;
 			}
 
-			List<Edge> edgess = new ArrayList<Edge>();
+			List<Edge> nodeEdges = new ArrayList<Edge>();
 			
 			for (Node n : getNeighbours(node)) {
 				if (n.getType() == Graph.WALL) {
 					continue;
 				}
 
+				// Calculate the Euclidean distance to the next node.
 				double dx = Math.pow(node.getX() - n.getX(), 2);
 				double dy = Math.pow(node.getY() - n.getY(), 2);
 				double distance = Math.sqrt(dx + dy);
 
 				Edge e = new Edge(node, n, distance);
-				edges.add(e);
-				edgess.add(e);
 				
-				System.out.println("Adding edge: " + e);
+				// Add the edge to the list of all edges.
+				edges.add(e);
+				
+				// Add the edge to the node specific list of edges.
+				nodeEdges.add(e);
+				
+				//System.out.println("Adding edge: " + e);
 			}
 			
-			node.setEdges(edgess);
+			node.setEdges(nodeEdges);
 		}
 
 		if (start == null || target == null) {
