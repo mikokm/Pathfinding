@@ -63,7 +63,7 @@ public class Dijkstra {
 	private void relax(Node u, Node v, double w) {
 		//System.out.println("v: " + v.getDistance() + " u:  "+ u.getDistance());
 		
-		if(u.getDistance() == Double.MAX_VALUE) {
+		if(u.getDistance() == Double.POSITIVE_INFINITY) {
 			return;
 		}
 		

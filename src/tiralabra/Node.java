@@ -5,10 +5,11 @@ import java.util.List;
 
 public class Node {
 	private List<Edge> edges = new ArrayList<Edge>();
+	
 	private double distance;
 	private Node nearest;
-	
 	private char type;
+	
 	private int x;
 	private int y;
 	
@@ -17,7 +18,7 @@ public class Node {
 		this.y = y;
 		
 		this.nearest = null;
-		this.distance = Double.MAX_VALUE;
+		this.distance = Double.POSITIVE_INFINITY;
 		this.type = 0;
 	}
 	

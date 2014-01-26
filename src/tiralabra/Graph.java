@@ -141,7 +141,7 @@ public class Graph {
 			if (n.getType() == Graph.START) {
 				n.setDistance(0);
 			} else {
-				n.setDistance(Double.MAX_VALUE);
+				n.setDistance(Double.POSITIVE_INFINITY);
 			}
 
 			n.setNearest(null);

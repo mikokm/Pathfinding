@@ -21,12 +21,12 @@ public class BellmanFord {
 	private void relax(Node u, Node v, double w) {
 		//System.out.println("v: " + v.getDistance() + " u:  "+ u.getDistance());
 		
-		double uw = u.getDistance() + w;
-		
-		if(u.getDistance() == Double.MAX_VALUE) {
+		if(u.getDistance() == Double.POSITIVE_INFINITY) {
 			return;
 		}
 
+		double uw = u.getDistance() + w;
+		
 		if(v.getDistance() > uw) {
 			v.setDistance(uw);
 			v.setNearest(u);

@@ -24,7 +24,14 @@ public class Main {
 		System.out.println(g);
 		*/
 		
-		double start, end;
+		double start, end, init;
+		
+		start = System.nanoTime();
+		for(int i = 0; i < 100000; ++i) {
+			Graph b = GraphBuilder.buildGraph(graph);
+		}
+		end = System.nanoTime();
+		init = end-start;
 		
 		start = System.nanoTime();
 		for(int i = 0; i < 100000; ++i) {
@@ -32,7 +39,7 @@ public class Main {
 			b.run();
 		}
 		end = System.nanoTime();
-		System.out.println( (end-start)/1000000000 );
+		System.out.println( (end-start-init)/1000000000 );
 		
 		
 		start = System.nanoTime();
@@ -41,7 +48,7 @@ public class Main {
 			d.run();
 		}
 		end = System.nanoTime();
-		System.out.println( (end-start)/1000000000 );
+		System.out.println( (end-start-init)/1000000000 );
 		
 		/*
 		Dijkstra d = new Dijkstra(g);
