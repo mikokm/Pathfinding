@@ -1,4 +1,4 @@
-package tiralabra;
+package fi.miko.tiralabra.tiralabra;
 
 public class Edge {
 	public Node u;
