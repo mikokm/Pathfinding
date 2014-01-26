@@ -24,7 +24,10 @@ public class Main {
 		System.out.println(g);
 		
 		BellmanFord b = new BellmanFord(g);
-		b.run();
+		//b.run();
+		
+		Dijkstra d = new Dijkstra(g);
+		d.run();
 		
 		ArrayList<Node> path = g.getPath();
 		System.out.println(path);

@@ -43,7 +43,7 @@ public class Graph {
 		return graph[0].length;
 	}
 
-	private List<Node> getNeighbours(Node node) {
+	public List<Node> getNeighbours(Node node) {
 		List<Node> list = new ArrayList<>();
 
 		int x0 = node.getX(), y0 = node.getY();
@@ -104,6 +104,8 @@ public class Graph {
 				target = node;
 			}
 
+			List<Edge> edgess = new ArrayList<Edge>();
+			
 			for (Node n : getNeighbours(node)) {
 				if (n.getType() == Graph.WALL) {
 					continue;
@@ -115,8 +117,12 @@ public class Graph {
 
 				Edge e = new Edge(node, n, distance);
 				edges.add(e);
+				edgess.add(e);
+				
 				System.out.println("Adding edge: " + e);
 			}
+			
+			node.setEdges(edgess);
 		}
 
 		if (start == null || target == null) {

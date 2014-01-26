@@ -1,6 +1,10 @@
 package tiralabra;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Node {
+	private List<Edge> edges = new ArrayList<Edge>();
 	private double distance;
 	private Node nearest;
 	
@@ -16,7 +20,7 @@ public class Node {
 		this.distance = Double.MAX_VALUE;
 		this.type = 0;
 	}
-
+	
 	public double getDistance() {
 		return distance;
 	}
@@ -51,5 +55,13 @@ public class Node {
 
 	public String toString() {
 		return "[" + x + ", " + y + "]: " + type; 
+	}
+
+	public List<Edge> getEdges() {
+		return edges;
+	}
+
+	public void setEdges(List<Edge> edges) {
+		this.edges = edges;
 	}
 }
