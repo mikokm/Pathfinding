@@ -3,8 +3,8 @@ package fi.miko.tiralabra;
 import java.util.PriorityQueue;
 
 public class Dijkstra {
-	public static void runDijkstra(Graph graph) {
-		GraphUtil.initializeNodes(graph, Heuristic.Euclidean);
+	public static void runDijkstra(Graph graph, Heuristic heuristic) {
+		GraphUtil.initializeNodes(graph, heuristic);
 
 		PriorityQueue<Node> nodes = new PriorityQueue<>(graph.getNodes().size());
 		for (Node node : graph.getNodes()) {
@@ -14,7 +14,6 @@ public class Dijkstra {
 		while (!nodes.isEmpty()) {
 			Node node = nodes.poll();
 
-			// TODO: Test that this works.
 			if (node == graph.getTarget()) {
 				return;
 			}

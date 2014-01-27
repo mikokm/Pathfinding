@@ -14,6 +14,7 @@ public class Graph {
 
 	private List<Edge> edges = new LinkedList<>();
 	private List<Node> nodes = new LinkedList<>();
+	private static final double SQRT_2 = Math.sqrt(2);
 
 	public Graph(int width, int height) {
 		assert (width > 0 && height > 0);
@@ -113,11 +114,8 @@ public class Graph {
 					continue;
 				}
 
-				// Calculate the Euclidean distance to the next node.
-				double dx = Math.pow(node.getX() - n.getX(), 2);
-				double dy = Math.pow(node.getY() - n.getY(), 2);
-
-				double distance = Math.sqrt(dx + dy);
+				// Calculate the diagonal movement weight.
+				double distance = (node.getX() != n.getX() && node.getY() != n.getY() ? SQRT_2 : 1);
 
 				Edge e = new Edge(node, n, distance);
 
