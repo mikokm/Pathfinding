@@ -4,35 +4,20 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Graph {
-	public static final char START = 's';
-	public static final char TARGET = 't';
-	public static final char WALL = '#';
-
 	private Node[][] graph;
-	private Node start = null;
-	private Node target = null;
+	private LinkedList<Node> nodes = new LinkedList<>();
 
-	private List<Edge> edges = new LinkedList<>();
-	private List<Node> nodes = new LinkedList<>();
-	private static final double SQRT_2 = Math.sqrt(2);
-
-	public Graph(int width, int height) {
-		assert (width > 0 && height > 0);
-
-		this.graph = new Node[height][width];
-
-		for (int y = 0; y < height; ++y) {
-			for (int x = 0; x < width; ++x) {
-				Node node = new Node(x, y);
-
-				this.graph[y][x] = node;
-				nodes.add(node);
-			}
-		}
+	public Graph(char[][] map) {
+		setMap(map);
 	}
 
-	public List<Edge> getEdges() {
-		return edges;
+	public Graph(int width, int height) {
+		createNodes(width, height);
+	}
+
+	private void createNodes(int width, int height) {
+		assert (width > 0 && height > 0);
+		graph = new Node[height][width];
 	}
 
 	public int getGraphHeight() {
@@ -43,7 +28,7 @@ public class Graph {
 		return graph[0].length;
 	}
 
-	private List<Node> getNeighbours(Node node) {
+	public List<Node> getNeighbours(Node node) {
 		List<Node> list = new LinkedList<>();
 
 		int x0 = node.getX(), y0 = node.getY();
@@ -70,70 +55,11 @@ public class Graph {
 
 	public Node getNode(int x, int y) {
 		assert (isWithinGraph(x, y));
-
 		return graph[y][x];
 	}
 
-	public List<Node> getNodes() {
+	public LinkedList<Node> getNodes() {
 		return nodes;
-	}
-
-	public Node getStart() {
-		return start;
-	}
-
-	public Node getTarget() {
-		return target;
-	}
-
-	public void initializeEdges() throws IllegalGraphException {
-		edges.clear();
-		start = null;
-		target = null;
-
-		for (Node node : nodes) {
-			if (node.getDistance() < 0) {
-				throw new IllegalGraphException("The graph has a node with a negative weight!");
-			}
-
-			switch (node.getType()) {
-			case Graph.START:
-				start = node;
-				break;
-			case Graph.TARGET:
-				target = node;
-				break;
-			case Graph.WALL:
-				continue;
-			}
-
-			List<Edge> nodeEdges = new LinkedList<Edge>();
-
-			for (Node n : getNeighbours(node)) {
-				if (n.getType() == Graph.WALL) {
-					continue;
-				}
-
-				// Calculate the diagonal movement weight.
-				double distance = (node.getX() != n.getX() && node.getY() != n.getY() ? SQRT_2 : 1);
-
-				Edge e = new Edge(node, n, distance);
-
-				// Add the edge to the list of all edges.
-				edges.add(e);
-
-				// Add the edge to the node specific list of edges.
-				nodeEdges.add(e);
-
-				// System.out.println("Adding edge: " + e);
-			}
-
-			node.setEdges(nodeEdges);
-		}
-
-		if (start == null || target == null) {
-			throw new IllegalGraphException("The graph is missing the start or target node!");
-		}
 	}
 
 	public boolean isWithinGraph(int x, int y) {
@@ -144,6 +70,24 @@ public class Graph {
 		return true;
 	}
 
+	public void setMap(char[][] map) {
+		createNodes(map.length, map[0].length);
+
+		for (int y = 0; y < getGraphHeight(); ++y) {
+			for (int x = 0; x < getGraphWidth(); ++x) {
+				Node node = new Node(x, y, map[y][x]);
+				nodes.add(node);
+				graph[y][x] = node;
+			}
+		}
+	}
+
+	public void setNode(int x, int y, Node node) {
+		assert (isWithinGraph(x, y));
+		graph[y][x] = node;
+	}
+
+	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		for (int y = 0; y < getGraphHeight(); ++y) {

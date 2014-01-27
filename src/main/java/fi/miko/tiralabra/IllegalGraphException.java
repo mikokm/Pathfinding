@@ -1,6 +1,6 @@
 package fi.miko.tiralabra;
 
-public class IllegalGraphException extends Exception {
+public class IllegalGraphException extends RuntimeException {
 	
 	/**
 	 * 
