@@ -4,6 +4,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
+/**
+ * An abstract PathFinder class that can be used to implement Dijkstra and Bellman-Ford algorithms.
+ */
 abstract class PathFinder {
 	public static final char START = 's';
 	public static final char TARGET = 't';
@@ -16,20 +19,40 @@ abstract class PathFinder {
 	private Node start = null;
 	private Node target = null;
 
+	/**
+	 * Creates a new pathfinder that searches in the given graph.
+	 * @param graph The graph to search paths in.
+	 */
 	public PathFinder(Graph graph) {
 		this.graph = graph;
 	}
 
+	/**
+	 * Returns the list of edges for all nodes of the graph.
+	 * @return The list of edges for all nodes of the graph.
+	 */
 	protected List<Edge> getEdges() {
 		return edges;
 	}
 
+	/**
+	 * Returns the graph used by this pathfinder.
+	 * @return The graph used by this pathfinder.
+	 */
 	protected Graph getGraph() {
 		return graph;
 	}
 
+	/**
+	 * Finds the shortest path between the start and target nodes.
+	 */
 	abstract void findPath();
 
+	/**
+	 * Returns the list of nodes containing the shortest path between the start and target nodes.
+	 * If there isn't a path, an empty list is returned.
+	 * @return The list of nodes in between the start and target nodes, or an empty list.
+	 */
 	public List<Node> getShortestPath() {
 		assert (start != null && target != null);
 
@@ -60,14 +83,25 @@ abstract class PathFinder {
 		return path;
 	}
 
+	/**
+	 * Returns the start node.
+	 * @return the start node.
+	 */
 	public Node getStart() {
 		return start;
 	}
 
+	/**
+	 * Returns the target node.
+	 * @return the target node.
+	 */
 	public Node getTarget() {
 		return target;
 	}
 
+	/**
+	 * Initializes edge lists for pathfinding algorithms.
+	 */
 	public void initializeEdges() {
 		edges.clear();
 
@@ -119,6 +153,11 @@ abstract class PathFinder {
 		}
 	}
 
+	/**
+	 * Initializes nodes with initial values.
+	 * The given heuristic is used to calculate the estimated distance to the target node.
+	 * @param heuristic The heuristic to use for target distance estimation.
+	 */
 	protected void initializeNodes(Heuristic heuristic) {
 		for (Node n : graph.getNodes()) {
 			n.setDistance(Double.MAX_VALUE);
@@ -130,18 +169,37 @@ abstract class PathFinder {
 		start.setDistanceEstimate(0);
 	}
 
+	/**
+	 * Sets the graph used by the pathfinder.
+	 * @param graph The graph to search paths in.
+	 */
 	protected void setGraph(Graph graph) {
 		this.graph = graph;
 	}
 
+	/**
+	 * Sets the start node.
+	 * @param start The start node.
+	 */
 	public void setStart(Node start) {
 		this.start = start;
 	}
 
+	/**
+	 * Sets the target node.
+	 * @param target The target node.
+	 */
 	public void setTarget(Node target) {
 		this.target = target;
 	}
 
+	/**
+	 * Replaces the current path to the start node from node v with
+	 * a shorter path through node u if such path is possible. 
+	 * @param u The node that the path will go through.
+	 * @param v The node that is being inspected.
+	 * @param w The distance between u and v (edge weight).
+	 */
 	protected static void relax(Node u, Node v, double w) {
 		if (u.getDistance() == Double.MAX_VALUE) {
 			return;
