@@ -22,20 +22,20 @@ public class Main {
 
 	public static void measure(PathFinder f, String name, List<Node> path) {
 		long start = System.nanoTime();
-		
-		for (int i = 0; i < 1000; ++i) {
+
+		for (int i = 0; i < 10000; ++i) {
 			f.findPath();
-			
+
 			assert(f.getShortestPath() == path);
 		}
-		
+
 		long end = System.nanoTime();
 		double elapsed = (double)(end - start) / 1000000000;
-		
+
 		System.out.println(name + ": " + elapsed + "s");
-		
+
 	}
-	
+
 	public static void benchmark() {
 		char[][] graph = generateRandom(50, 50, 0.25);
 		Graph g = new Graph(graph);
@@ -44,10 +44,10 @@ public class Main {
 		BellmanFord f = new BellmanFord(g);
 		f.findPath();
 		List<Node> path = f.getShortestPath();
-		
+
 		Dijkstra d = new Dijkstra(g, Heuristic.None);
 		measure(d, "Dijkstra", path);
-		
+
 		Dijkstra a = new Dijkstra(g, Heuristic.Euclidean);
 		measure(a, "A*", path);
 	}

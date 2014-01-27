@@ -27,7 +27,7 @@ abstract class PathFinder {
 	protected Graph getGraph() {
 		return graph;
 	}
-	
+
 	abstract void findPath();
 
 	public List<Node> getShortestPath() {

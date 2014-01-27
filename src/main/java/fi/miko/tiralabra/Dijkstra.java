@@ -4,14 +4,15 @@ import java.util.PriorityQueue;
 
 public class Dijkstra extends PathFinder {
 	private Heuristic heuristic;
-	
+
 	public Dijkstra(Graph graph, Heuristic heuristic) {
 		super(graph);
 		initializeEdges();
-		
+
 		this.heuristic = heuristic;
 	}
 
+	@Override
 	public void findPath() {
 		initializeNodes(heuristic);
 

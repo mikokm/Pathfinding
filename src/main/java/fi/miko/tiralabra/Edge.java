@@ -11,6 +11,7 @@ public class Edge {
 		this.w = w;
 	}
 
+	@Override
 	public String toString() {
 		return u.toString() + " -> " + v.toString() + " : " + w;
 	}

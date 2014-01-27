@@ -15,7 +15,7 @@ public class Node implements Comparable<Node> {
 		this.x = x;
 		this.y = y;
 	}
-	
+
 	public Node(int x, int y, char type) {
 		this(x, y);
 		this.type = type;
@@ -74,6 +74,7 @@ public class Node implements Comparable<Node> {
 		this.type = type;
 	}
 
+	@Override
 	public String toString() {
 		return "[" + x + ", " + y + "]: " + type;
 	}

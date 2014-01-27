@@ -6,6 +6,7 @@ public class BellmanFord extends PathFinder {
 		initializeEdges();
 	}
 
+	@Override
 	public void findPath() {
 		initializeNodes(Heuristic.None);
 
