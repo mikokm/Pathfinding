@@ -37,19 +37,24 @@ public class Main {
 	}
 
 	public static void benchmark() {
-		char[][] graph = generateRandom(50, 50, 0.25);
+		char[][] graph = generateRandom(100, 100, 0.30);
 		Graph g = new Graph(graph);
 		System.out.println(g);
 
 		BellmanFord f = new BellmanFord(g);
+		Dijkstra d = new Dijkstra(g, Heuristic.None);
+		Dijkstra a = new Dijkstra(g, Heuristic.Diagonal);
+		Dijkstra a2 = new Dijkstra(g, Heuristic.Euclidean);
+		
 		f.findPath();
 		List<Node> path = f.getShortestPath();
+		if(path.isEmpty()) {
+			return;
+		}
 
-		Dijkstra d = new Dijkstra(g, Heuristic.None);
 		measure(d, "Dijkstra", path);
-
-		Dijkstra a = new Dijkstra(g, Heuristic.Euclidean);
-		measure(a, "A*", path);
+		measure(a, "A* Diagonal", path);
+		measure(a2, "A* Euclidean", path);
 	}
 
 	public static void main(String[] args) {

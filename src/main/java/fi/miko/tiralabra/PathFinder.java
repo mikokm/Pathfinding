@@ -160,8 +160,15 @@ abstract class PathFinder {
 	 */
 	protected void initializeNodes(Heuristic heuristic) {
 		for (Node n : graph.getNodes()) {
+			double distanceEstimate = 0;
+			
+			if(heuristic != Heuristic.None) {
+				int dx = target.getX() - n.getX(), dy = target.getY() - n.getY();
+				distanceEstimate = heuristic.distance(dx, dy); 
+			}
+			
+			n.setDistanceEstimate(distanceEstimate);
 			n.setDistance(Double.MAX_VALUE);
-			n.setDistanceEstimate(heuristic.distance(target.getX() - n.getX(), target.getY() - n.getY()));
 			n.setNearest(null);
 		}
 

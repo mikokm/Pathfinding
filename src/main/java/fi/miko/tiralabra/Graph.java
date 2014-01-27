@@ -98,7 +98,7 @@ public class Graph {
 	 * Returns the list of all nodes in the graph.
 	 * @return The list of all nodes in the graph.
 	 */
-	public LinkedList<Node> getNodes() {
+	public List<Node> getNodes() {
 		return nodes;
 	}
 

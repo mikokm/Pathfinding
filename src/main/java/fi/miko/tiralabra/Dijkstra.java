@@ -1,5 +1,6 @@
 package fi.miko.tiralabra;
 
+import java.util.List;
 import java.util.PriorityQueue;
 
 public class Dijkstra extends PathFinder {
@@ -16,13 +17,14 @@ public class Dijkstra extends PathFinder {
 	public void findPath() {
 		initializeNodes(heuristic);
 
-		PriorityQueue<Node> nodes = new PriorityQueue<>(getGraph().getNodes().size());
-		for (Node node : getGraph().getNodes()) {
-			nodes.add(node);
+		List<Node> nodes = getGraph().getNodes();
+		PriorityQueue<Node> pq = new PriorityQueue<>(nodes.size());
+		for (Node node : nodes) {
+			pq.add(node);
 		}
 
-		while (!nodes.isEmpty()) {
-			Node node = nodes.poll();
+		while (!pq.isEmpty()) {
+			Node node = pq.poll();
 
 			if (node == getTarget()) {
 				return;
@@ -34,8 +36,8 @@ public class Dijkstra extends PathFinder {
 				PathFinder.relax(e.u, e.v, e.w);
 
 				if (e.v.getDistance() < d) {
-					nodes.remove(e.v);
-					nodes.add(e.v);
+					pq.remove(e.v);
+					pq.add(e.v);
 				}
 			}
 		}
