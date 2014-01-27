@@ -85,8 +85,8 @@ public class Graph {
 
 	/**
 	 * Returns the node with the given (x, y) coordinates.
-	 * @param x The x coordinate of the node.
-	 * @param y The y coordinate of the node.
+	 * @param x The x-coordinate of the node.
+	 * @param y The y-coordinate of the node.
 	 * @return The node with the given (x, y) coordinates.
 	 */
 	public Node getNode(int x, int y) {
@@ -104,8 +104,8 @@ public class Graph {
 
 	/**
 	 * Returns true if the point (x, y) within the graph; false otherwise.
-	 * @param x The x coordinate to check.
-	 * @param y The y coordinate to check.
+	 * @param x The x-coordinate to check.
+	 * @param y The y-coordinate to check.
 	 * @return true if the point (x, y) within the graph; false otherwise.
 	 */
 	public boolean isWithinGraph(int x, int y) {
