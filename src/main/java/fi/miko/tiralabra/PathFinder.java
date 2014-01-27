@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Stack;
 
 /**
- * An abstract PathFinder class that can be used to implement Dijkstra and Bellman-Ford algorithms.
+ * PathFinder is a helper class that is used to implement Dijkstra and Bellman-Ford algorithms.
  */
 abstract class PathFinder {
 	public static final char START = 's';
@@ -85,7 +85,7 @@ abstract class PathFinder {
 
 	/**
 	 * Returns the start node.
-	 * @return the start node.
+	 * @return The start node.
 	 */
 	public Node getStart() {
 		return start;
@@ -93,7 +93,7 @@ abstract class PathFinder {
 
 	/**
 	 * Returns the target node.
-	 * @return the target node.
+	 * @return The target node.
 	 */
 	public Node getTarget() {
 		return target;
