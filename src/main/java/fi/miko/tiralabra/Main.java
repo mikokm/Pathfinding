@@ -23,14 +23,14 @@ public class Main {
 	public static void measure(PathFinder f, String name, List<Node> path) {
 		long start = System.nanoTime();
 
-		for (int i = 0; i < 10000; ++i) {
+		for (int i = 0; i < 1000; ++i) {
 			f.findPath();
 
-			assert(f.getShortestPath() == path);
+			assert (f.getShortestPath() == path);
 		}
 
 		long end = System.nanoTime();
-		double elapsed = (double)(end - start) / 1000000000;
+		double elapsed = (double) (end - start) / 1E9;
 
 		System.out.println(name + ": " + elapsed + "s");
 
