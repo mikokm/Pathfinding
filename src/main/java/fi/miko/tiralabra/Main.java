@@ -30,7 +30,7 @@ public class Main {
 		}
 
 		long end = System.nanoTime();
-		double elapsed = (double) (end - start) / 1E9;
+		double elapsed = (end - start) / 1E9;
 
 		System.out.println(name + ": " + elapsed + "s");
 
@@ -45,10 +45,10 @@ public class Main {
 		Dijkstra d = new Dijkstra(g, Heuristic.None);
 		Dijkstra a = new Dijkstra(g, Heuristic.Diagonal);
 		Dijkstra a2 = new Dijkstra(g, Heuristic.Euclidean);
-		
+
 		f.findPath();
 		List<Node> path = f.getShortestPath();
-		if(path.isEmpty()) {
+		if (path.isEmpty()) {
 			return;
 		}
 

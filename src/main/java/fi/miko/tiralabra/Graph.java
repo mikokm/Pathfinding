@@ -1,6 +1,5 @@
 package fi.miko.tiralabra;
 
-import fi.miko.tiralabra.LinkedList;
 import java.util.List;
 
 /**
@@ -12,7 +11,9 @@ public class Graph {
 
 	/**
 	 * Creates a new graph and sets the content from the given map.
-	 * @param map An array containing the graph data.
+	 *
+	 * @param map
+	 *            An array containing the graph data.
 	 */
 	public Graph(char[][] map) {
 		setMap(map);
@@ -20,8 +21,11 @@ public class Graph {
 
 	/**
 	 * Creates a new empty graph with given width and height.
-	 * @param width The width of the graph.
-	 * @param height The height of the graph.
+	 *
+	 * @param width
+	 *            The width of the graph.
+	 * @param height
+	 *            The height of the graph.
 	 */
 	public Graph(int width, int height) {
 		createNodes(width, height);
@@ -29,8 +33,11 @@ public class Graph {
 
 	/**
 	 * Allocates memory for node array used to store the graph data.
+	 *
 	 * @param width
+	 *            The width of the graph.
 	 * @param height
+	 *            The height of the graph.
 	 */
 	private void createNodes(int width, int height) {
 		assert (width > 0 && height > 0);
@@ -39,6 +46,7 @@ public class Graph {
 
 	/**
 	 * Returns the height of the graph.
+	 *
 	 * @return The height of the graph.
 	 */
 	public int getGraphHeight() {
@@ -47,6 +55,7 @@ public class Graph {
 
 	/**
 	 * Returns the width of the graph.
+	 *
 	 * @return The width of the graph.
 	 */
 	public int getGraphWidth() {
@@ -55,7 +64,9 @@ public class Graph {
 
 	/**
 	 * Returns a list of nodes containing the neighbours for the given node.
-	 * @param node the node to get neighbours for.
+	 *
+	 * @param node
+	 *            The node to get neighbours for.
 	 * @return A list of nodes containing the neighbours for the given node.
 	 */
 	public List<Node> getNeighbours(Node node) {
@@ -85,8 +96,11 @@ public class Graph {
 
 	/**
 	 * Returns the node with the given (x, y) coordinates.
-	 * @param x The x-coordinate of the node.
-	 * @param y The y-coordinate of the node.
+	 *
+	 * @param x
+	 *            The x-coordinate of the node.
+	 * @param y
+	 *            The y-coordinate of the node.
 	 * @return The node with the given (x, y) coordinates.
 	 */
 	public Node getNode(int x, int y) {
@@ -95,8 +109,9 @@ public class Graph {
 	}
 
 	/**
-	 * Returns the list of all nodes in the graph.
-	 * @return The list of all nodes in the graph.
+	 * Returns the list of all the nodes in the graph.
+	 *
+	 * @return The list of all the nodes in the graph.
 	 */
 	public List<Node> getNodes() {
 		return nodes;
@@ -104,8 +119,11 @@ public class Graph {
 
 	/**
 	 * Returns true if the point (x, y) within the graph; false otherwise.
-	 * @param x The x-coordinate to check.
-	 * @param y The y-coordinate to check.
+	 *
+	 * @param x
+	 *            The x-coordinate to check.
+	 * @param y
+	 *            The y-coordinate to check.
 	 * @return true if the point (x, y) within the graph; false otherwise.
 	 */
 	public boolean isWithinGraph(int x, int y) {
@@ -117,9 +135,11 @@ public class Graph {
 	}
 
 	/**
-	 * Sets the graph content from the given map.
-	 * The previous content is replaced.
-	 * @param map The graph content.
+	 * Sets the graph content from the given map. The previous content is
+	 * replaced.
+	 *
+	 * @param map
+	 *            The graph content.
 	 */
 	public void setMap(char[][] map) {
 		createNodes(map.length, map[0].length);

@@ -9,10 +9,14 @@ public class Edge {
 	public double w;
 
 	/**
-	 * Creates a new edge from the node u to node v with the weight w. 
-	 * @param u The source node.
-	 * @param v The destination node.
-	 * @param w The edge weight.
+	 * Creates a new edge from the node u to node v with the weight w.
+	 *
+	 * @param u
+	 *            The source node.
+	 * @param v
+	 *            The destination node.
+	 * @param w
+	 *            The edge weight.
 	 */
 	public Edge(Node u, Node v, double w) {
 		this.u = u;

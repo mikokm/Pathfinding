@@ -1,6 +1,3 @@
-/**
- * 
- */
 package fi.miko.tiralabra;
 
 import java.util.Collection;
@@ -14,11 +11,11 @@ import java.util.ListIterator;
 public class LinkedList<E> implements List<E> {
 	private class LinkedListIterator<V> implements Iterator<V> {
 		private ListNode<V> node;
-		
+
 		public LinkedListIterator(ListNode<V> head) {
 			this.node = head;
 		}
-		
+
 		@Override
 		public boolean hasNext() {
 			return node.next != null;
@@ -35,19 +32,19 @@ public class LinkedList<E> implements List<E> {
 			throw new UnsupportedOperationException("Not implemented");
 		}
 	}
-	
+
 	private class ListNode<V> {
 		V data = null;
 		ListNode<V> next = null;
-		
+
 		public ListNode() {
 		}
-		
+
 		public ListNode(V data) {
 			this.data = data;
 		}
 	}
-	
+
 	private int size;
 	private ListNode<E> head, tail;
 
@@ -56,17 +53,17 @@ public class LinkedList<E> implements List<E> {
 		tail = head;
 		size = 0;
 	}
-	
+
 	@Override
 	public boolean add(E e) {
 		ListNode<E> n = new ListNode<>(e);
 		tail.next = n;
 		tail = n;
 		size++;
-		
+
 		return true;
 	}
-	
+
 	@Override
 	public void clear() {
 		head.next = null;
@@ -77,15 +74,15 @@ public class LinkedList<E> implements List<E> {
 	@Override
 	public boolean contains(Object o) {
 		ListNode<E> n = head.next;
-		
-		while(n != null) {
-			if(n.data == o) {
+
+		while (n != null) {
+			if (n.data == o) {
 				return true;
 			}
-			
+
 			n = n.next;
 		}
-		
+
 		return false;
 	}
 
@@ -98,17 +95,16 @@ public class LinkedList<E> implements List<E> {
 	public Iterator<E> iterator() {
 		return new LinkedListIterator<E>(head);
 	}
-	
+
 	@Override
 	public int size() {
 		return size;
 	}
-	
-	
+
 	/*
 	 * Unimplemented stuff below this.
 	 */
-	
+
 	@Override
 	public void add(int index, E element) {
 		throw new UnsupportedOperationException("Not implemented");
@@ -193,5 +189,5 @@ public class LinkedList<E> implements List<E> {
 	public <T> T[] toArray(T[] a) {
 		throw new UnsupportedOperationException("Not implemented");
 	}
-	
+
 }

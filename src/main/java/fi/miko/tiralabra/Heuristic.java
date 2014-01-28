@@ -1,7 +1,10 @@
 package fi.miko.tiralabra;
 
+/**
+ * Heuristic calculates the distance between two points.
+ */
 public enum Heuristic {
-	Diagonal, Euclidean, None;
+	Diagonal, Euclidean, Manhattan, None;
 
 	public double distance(int dx, int dy) {
 		dx = Math.abs(dx);
@@ -12,6 +15,8 @@ public enum Heuristic {
 			return Math.max(dx, dy);
 		case Euclidean:
 			return Math.sqrt(dx * dx + dy * dy);
+		case Manhattan:
+			return dx + dy;
 		default:
 			return 0;
 		}

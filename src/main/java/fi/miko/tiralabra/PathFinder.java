@@ -1,11 +1,11 @@
 package fi.miko.tiralabra;
 
-import fi.miko.tiralabra.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
 /**
- * PathFinder is a helper class that is used to implement Dijkstra and Bellman-Ford algorithms.
+ * PathFinder is a helper class that is used to implement Dijkstra and
+ * Bellman-Ford algorithms.
  */
 abstract class PathFinder {
 	public static final char START = 's';
@@ -21,7 +21,9 @@ abstract class PathFinder {
 
 	/**
 	 * Creates a new pathfinder that searches in the given graph.
-	 * @param graph The graph to search paths in.
+	 *
+	 * @param graph
+	 *            The graph to search paths in.
 	 */
 	public PathFinder(Graph graph) {
 		this.graph = graph;
@@ -29,6 +31,7 @@ abstract class PathFinder {
 
 	/**
 	 * Returns the list of edges for all nodes of the graph.
+	 *
 	 * @return The list of edges for all nodes of the graph.
 	 */
 	protected List<Edge> getEdges() {
@@ -37,6 +40,7 @@ abstract class PathFinder {
 
 	/**
 	 * Returns the graph used by this pathfinder.
+	 *
 	 * @return The graph used by this pathfinder.
 	 */
 	protected Graph getGraph() {
@@ -49,9 +53,11 @@ abstract class PathFinder {
 	abstract void findPath();
 
 	/**
-	 * Returns the list of nodes containing the shortest path between the start and target nodes.
-	 * If there isn't a path, an empty list is returned.
-	 * @return The list of nodes in between the start and target nodes, or an empty list.
+	 * Returns the list of nodes containing the shortest path between the start
+	 * and target nodes. If there isn't a path, an empty list is returned.
+	 *
+	 * @return The list of nodes in between the start and target nodes, or an
+	 *         empty list.
 	 */
 	public List<Node> getShortestPath() {
 		assert (start != null && target != null);
@@ -85,6 +91,7 @@ abstract class PathFinder {
 
 	/**
 	 * Returns the start node.
+	 *
 	 * @return The start node.
 	 */
 	public Node getStart() {
@@ -93,6 +100,7 @@ abstract class PathFinder {
 
 	/**
 	 * Returns the target node.
+	 *
 	 * @return The target node.
 	 */
 	public Node getTarget() {
@@ -154,19 +162,21 @@ abstract class PathFinder {
 	}
 
 	/**
-	 * Initializes nodes with initial values.
-	 * The given heuristic is used to calculate the estimated distance to the target node.
-	 * @param heuristic The heuristic to use for target distance estimation.
+	 * Initializes nodes with initial values. The given heuristic is used to
+	 * calculate the estimated distance to the target node.
+	 *
+	 * @param heuristic
+	 *            The heuristic to use for target distance estimation.
 	 */
 	protected void initializeNodes(Heuristic heuristic) {
 		for (Node n : graph.getNodes()) {
 			double distanceEstimate = 0;
-			
-			if(heuristic != Heuristic.None) {
+
+			if (heuristic != Heuristic.None) {
 				int dx = target.getX() - n.getX(), dy = target.getY() - n.getY();
-				distanceEstimate = heuristic.distance(dx, dy); 
+				distanceEstimate = heuristic.distance(dx, dy);
 			}
-			
+
 			n.setDistanceEstimate(distanceEstimate);
 			n.setDistance(Double.MAX_VALUE);
 			n.setNearest(null);
@@ -178,7 +188,9 @@ abstract class PathFinder {
 
 	/**
 	 * Sets the graph used by the pathfinder.
-	 * @param graph The graph to search paths in.
+	 *
+	 * @param graph
+	 *            The graph to search paths in.
 	 */
 	protected void setGraph(Graph graph) {
 		this.graph = graph;
@@ -186,7 +198,9 @@ abstract class PathFinder {
 
 	/**
 	 * Sets the start node.
-	 * @param start The start node.
+	 *
+	 * @param start
+	 *            The start node.
 	 */
 	public void setStart(Node start) {
 		this.start = start;
@@ -194,18 +208,24 @@ abstract class PathFinder {
 
 	/**
 	 * Sets the target node.
-	 * @param target The target node.
+	 *
+	 * @param target
+	 *            The target node.
 	 */
 	public void setTarget(Node target) {
 		this.target = target;
 	}
 
 	/**
-	 * Replaces the current path to the start node from node v with
-	 * a shorter path through node u if such path is possible. 
-	 * @param u The node that the path will go through.
-	 * @param v The node that is being inspected.
-	 * @param w The distance between u and v (edge weight).
+	 * Replaces the current path to the start node from node v with a shorter
+	 * path through node u if such path is possible.
+	 *
+	 * @param u
+	 *            The node that the path will go through.
+	 * @param v
+	 *            The node that is being inspected.
+	 * @param w
+	 *            The distance between u and v (edge weight).
 	 */
 	protected static void relax(Node u, Node v, double w) {
 		if (u.getDistance() == Double.MAX_VALUE) {
