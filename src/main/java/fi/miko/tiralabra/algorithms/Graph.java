@@ -1,6 +1,8 @@
-package fi.miko.tiralabra;
+package fi.miko.tiralabra.algorithms;
 
 import java.util.List;
+
+import fi.miko.tiralabra.datastructures.LinkedList;
 
 /**
  * Graph class manages a grid type graph.

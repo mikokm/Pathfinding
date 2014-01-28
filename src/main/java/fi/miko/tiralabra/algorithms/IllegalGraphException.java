@@ -1,4 +1,4 @@
-package fi.miko.tiralabra;
+package fi.miko.tiralabra.algorithms;
 
 public class IllegalGraphException extends RuntimeException {
 

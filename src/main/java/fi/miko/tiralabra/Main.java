@@ -3,6 +3,13 @@ package fi.miko.tiralabra;
 import java.util.List;
 import java.util.Random;
 
+import fi.miko.tiralabra.algorithms.BellmanFord;
+import fi.miko.tiralabra.algorithms.Dijkstra;
+import fi.miko.tiralabra.algorithms.Graph;
+import fi.miko.tiralabra.algorithms.Heuristic;
+import fi.miko.tiralabra.algorithms.Node;
+import fi.miko.tiralabra.algorithms.PathFinder;
+
 public class Main {
 	public static char[][] generateRandom(int width, int height, double freq) {
 		char[][] graph = new char[height][width];

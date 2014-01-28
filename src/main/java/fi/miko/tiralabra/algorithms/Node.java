@@ -1,6 +1,8 @@
-package fi.miko.tiralabra;
+package fi.miko.tiralabra.algorithms;
 
 import java.util.List;
+
+import fi.miko.tiralabra.datastructures.LinkedList;
 
 /**
  * Node class contains the node information needed by graph search algorithms.

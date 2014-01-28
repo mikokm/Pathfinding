@@ -1,4 +1,4 @@
-package fi.miko.tiralabra;
+package fi.miko.tiralabra.algorithms;
 
 /**
  * Edge class represents a single, directed edge in the graph.

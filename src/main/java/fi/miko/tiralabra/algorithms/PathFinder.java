@@ -1,13 +1,15 @@
-package fi.miko.tiralabra;
+package fi.miko.tiralabra.algorithms;
 
 import java.util.List;
 import java.util.Stack;
+
+import fi.miko.tiralabra.datastructures.LinkedList;
 
 /**
  * PathFinder is a helper class that is used to implement Dijkstra and
  * Bellman-Ford algorithms.
  */
-abstract class PathFinder {
+public abstract class PathFinder {
 	public static final char START = 's';
 	public static final char TARGET = 't';
 	public static final char WALL = '#';
@@ -50,7 +52,7 @@ abstract class PathFinder {
 	/**
 	 * Finds the shortest path between the start and target nodes.
 	 */
-	abstract void findPath();
+	public abstract void findPath();
 
 	/**
 	 * Returns the list of nodes containing the shortest path between the start

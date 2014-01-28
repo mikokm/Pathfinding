@@ -1,4 +1,4 @@
-package fi.miko.tiralabra;
+package fi.miko.tiralabra.algorithms;
 
 public class BellmanFord extends PathFinder {
 	public BellmanFord(Graph graph) {

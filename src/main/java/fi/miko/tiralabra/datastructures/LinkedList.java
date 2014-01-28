@@ -1,4 +1,4 @@
-package fi.miko.tiralabra;
+package fi.miko.tiralabra.datastructures;
 
 import java.util.Collection;
 import java.util.Iterator;

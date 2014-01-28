@@ -1,4 +1,4 @@
-package fi.miko.tiralabra;
+package fi.miko.tiralabra.algorithms;
 
 import java.util.List;
 import java.util.PriorityQueue;

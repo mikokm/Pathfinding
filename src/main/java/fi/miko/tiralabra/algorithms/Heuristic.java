@@ -1,4 +1,4 @@
-package fi.miko.tiralabra;
+package fi.miko.tiralabra.algorithms;
 
 /**
  * Heuristic calculates the distance between two points.
