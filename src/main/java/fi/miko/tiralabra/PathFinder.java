@@ -1,6 +1,6 @@
 package fi.miko.tiralabra;
 
-import java.util.LinkedList;
+import fi.miko.tiralabra.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
