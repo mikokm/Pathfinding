@@ -42,7 +42,7 @@ public class Dijkstra extends PathFinder {
 			// Select the node closest to the target node.
 			Node node = pq.poll();
 
-			// If the next node is the priority queue is the target node, the
+			// If the next node in the priority queue is the target node, the
 			// shortest path has been found.
 			if (node == getTarget()) {
 				return;
