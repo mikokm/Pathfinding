@@ -10,7 +10,7 @@ public class Edge {
 
 	/**
 	 * Creates a new edge from the node u to node v with the weight w.
-	 *
+	 * 
 	 * @param u
 	 *            The source node.
 	 * @param v
