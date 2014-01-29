@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package fi.miko.tiralabra;
 

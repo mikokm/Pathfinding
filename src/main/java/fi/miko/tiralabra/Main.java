@@ -9,6 +9,8 @@ import fi.miko.tiralabra.algorithms.Graph;
 import fi.miko.tiralabra.algorithms.Heuristic;
 import fi.miko.tiralabra.algorithms.Node;
 import fi.miko.tiralabra.algorithms.PathFinder;
+import fi.miko.tiralabra.datastructures.BinaryHeap;
+import fi.miko.tiralabra.datastructures.LinkedList;
 
 public class Main {
 	public static char[][] generateRandom(int width, int height, double freq) {
@@ -65,7 +67,19 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-		benchmark();
+		// benchmark();
+
+		BinaryHeap<Integer> b = new BinaryHeap<>(10);
+		Random rand = new Random();
+		List<Integer> l = new LinkedList<>();
+
+		for (int i = 0; i < 5; ++i) {
+			int r = rand.nextInt(10);
+			b.insert(0, r);
+			l.add(r);
+		}
+
+		System.out.println(l);
 	}
 
 }

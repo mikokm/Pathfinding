@@ -17,7 +17,7 @@ public class Node implements Comparable<Node> {
 
 	/**
 	 * Creates a new node with the given coordinates.
-	 * 
+	 *
 	 * @param x
 	 *            The x-coordinate of the node.
 	 * @param y
@@ -30,7 +30,7 @@ public class Node implements Comparable<Node> {
 
 	/**
 	 * Creates a new node with the given coordinates and type.
-	 * 
+	 *
 	 * @param x
 	 *            The x-coordinate of the node.
 	 * @param y
@@ -57,7 +57,7 @@ public class Node implements Comparable<Node> {
 
 	/**
 	 * Returns the distance to the start node.
-	 * 
+	 *
 	 * @return The distance to the start node.
 	 */
 	public double getDistance() {
@@ -66,7 +66,7 @@ public class Node implements Comparable<Node> {
 
 	/**
 	 * Returns the distance estimate to the target node.
-	 * 
+	 *
 	 * @return The distance estimate to the target node.
 	 */
 	public double getDistanceEstimate() {
@@ -75,7 +75,7 @@ public class Node implements Comparable<Node> {
 
 	/**
 	 * Returns a list of edges from this node to the neighbour nodes.
-	 * 
+	 *
 	 * @return A list of edges from this node to the neighbour nodes.
 	 */
 	public List<Edge> getEdges() {
@@ -85,7 +85,7 @@ public class Node implements Comparable<Node> {
 	/**
 	 * Returns the node nearest to the start node that is accessible from this
 	 * node.
-	 * 
+	 *
 	 * @return The node nearest to the start node that is accessible from this
 	 *         node.
 	 */
@@ -95,7 +95,7 @@ public class Node implements Comparable<Node> {
 
 	/**
 	 * Returns the type of the node.
-	 * 
+	 *
 	 * @return The type of the node.
 	 */
 	public char getType() {
@@ -104,7 +104,7 @@ public class Node implements Comparable<Node> {
 
 	/**
 	 * Returns the x-coordinate of the node.
-	 * 
+	 *
 	 * @return The x-coordinate of the node.
 	 */
 	public int getX() {
@@ -113,7 +113,7 @@ public class Node implements Comparable<Node> {
 
 	/**
 	 * Returns the y-coordinate of the node.
-	 * 
+	 *
 	 * @return The y-coordinate of the node.
 	 */
 	public int getY() {
@@ -122,7 +122,7 @@ public class Node implements Comparable<Node> {
 
 	/**
 	 * Sets the distance to the start node.
-	 * 
+	 *
 	 * @param distance
 	 *            The distance to the start node.
 	 */
@@ -132,7 +132,7 @@ public class Node implements Comparable<Node> {
 
 	/**
 	 * Sets the estimated distance to the target node.
-	 * 
+	 *
 	 * @param distanceEstimate
 	 *            The estimated distance to the target node.
 	 */
@@ -142,7 +142,7 @@ public class Node implements Comparable<Node> {
 
 	/**
 	 * Sets the edges for the node.
-	 * 
+	 *
 	 * @param edges
 	 *            The node edges.
 	 */
@@ -153,7 +153,7 @@ public class Node implements Comparable<Node> {
 	/**
 	 * Sets the node nearest to the start node that is accessible from this
 	 * node.
-	 * 
+	 *
 	 * @param nearest
 	 *            The node nearest to the start node that is accessible from
 	 *            this node.
@@ -164,7 +164,7 @@ public class Node implements Comparable<Node> {
 
 	/**
 	 * Sets the type of the node.
-	 * 
+	 *
 	 * @param type
 	 *            The node type.
 	 */

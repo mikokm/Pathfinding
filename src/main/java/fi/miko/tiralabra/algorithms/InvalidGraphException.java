@@ -9,7 +9,7 @@ public class InvalidGraphException extends RuntimeException {
 
 	/**
 	 * Creates a new IllegalGraphException with the given message.
-	 * 
+	 *
 	 * @param message
 	 *            The exception description.
 	 */

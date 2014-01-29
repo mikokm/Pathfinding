@@ -23,7 +23,7 @@ public abstract class PathFinder {
 
 	/**
 	 * Creates a new pathfinder that searches in the given graph.
-	 * 
+	 *
 	 * @param graph
 	 *            The graph to search paths in.
 	 */
@@ -33,7 +33,7 @@ public abstract class PathFinder {
 
 	/**
 	 * Returns the list of edges for all nodes of the graph.
-	 * 
+	 *
 	 * @return The list of edges for all nodes of the graph.
 	 */
 	protected List<Edge> getEdges() {
@@ -42,7 +42,7 @@ public abstract class PathFinder {
 
 	/**
 	 * Returns the graph used by this pathfinder.
-	 * 
+	 *
 	 * @return The graph used by this pathfinder.
 	 */
 	protected Graph getGraph() {
@@ -57,7 +57,7 @@ public abstract class PathFinder {
 	/**
 	 * Returns the list of nodes containing the shortest path between the start
 	 * and target nodes. If there isn't a path, an empty list is returned.
-	 * 
+	 *
 	 * @return The list of nodes in between the start and target nodes, or an
 	 *         empty list.
 	 */
@@ -93,7 +93,7 @@ public abstract class PathFinder {
 
 	/**
 	 * Returns the start node.
-	 * 
+	 *
 	 * @return The start node.
 	 */
 	public Node getStart() {
@@ -102,7 +102,7 @@ public abstract class PathFinder {
 
 	/**
 	 * Returns the target node.
-	 * 
+	 *
 	 * @return The target node.
 	 */
 	public Node getTarget() {
@@ -166,7 +166,7 @@ public abstract class PathFinder {
 	/**
 	 * Initializes the graph nodes with initial values. The given heuristic is
 	 * used to calculate the estimated distance to the target node.
-	 * 
+	 *
 	 * @param heuristic
 	 *            The heuristic to use for target distance estimation.
 	 */
@@ -190,7 +190,7 @@ public abstract class PathFinder {
 
 	/**
 	 * Sets the graph used by the pathfinder.
-	 * 
+	 *
 	 * @param graph
 	 *            The graph to search paths in.
 	 */
@@ -200,7 +200,7 @@ public abstract class PathFinder {
 
 	/**
 	 * Sets the start node.
-	 * 
+	 *
 	 * @param start
 	 *            The start node.
 	 */
@@ -210,7 +210,7 @@ public abstract class PathFinder {
 
 	/**
 	 * Sets the target node.
-	 * 
+	 *
 	 * @param target
 	 *            The target node.
 	 */
@@ -221,7 +221,7 @@ public abstract class PathFinder {
 	/**
 	 * Replaces the current path to the start node from node v with a shorter
 	 * path through node u if such path is possible.
-	 * 
+	 *
 	 * @param u
 	 *            The node that the path will go through.
 	 * @param v

@@ -13,7 +13,7 @@ public class Graph {
 
 	/**
 	 * Creates a new graph and sets the content from the given map.
-	 * 
+	 *
 	 * @param map
 	 *            An array containing the graph data.
 	 */
@@ -23,7 +23,7 @@ public class Graph {
 
 	/**
 	 * Creates a new empty graph with given width and height.
-	 * 
+	 *
 	 * @param width
 	 *            The width of the graph.
 	 * @param height
@@ -35,7 +35,7 @@ public class Graph {
 
 	/**
 	 * Allocates memory for node array used to store the graph data.
-	 * 
+	 *
 	 * @param width
 	 *            The width of the graph.
 	 * @param height
@@ -48,7 +48,7 @@ public class Graph {
 
 	/**
 	 * Returns the height of the graph.
-	 * 
+	 *
 	 * @return The height of the graph.
 	 */
 	public int getGraphHeight() {
@@ -57,7 +57,7 @@ public class Graph {
 
 	/**
 	 * Returns the width of the graph.
-	 * 
+	 *
 	 * @return The width of the graph.
 	 */
 	public int getGraphWidth() {
@@ -66,7 +66,7 @@ public class Graph {
 
 	/**
 	 * Returns a list of nodes containing the neighbours for the given node.
-	 * 
+	 *
 	 * @param node
 	 *            The node to get neighbours for.
 	 * @return A list of nodes containing the neighbours for the given node.
@@ -98,7 +98,7 @@ public class Graph {
 
 	/**
 	 * Returns the node with the given (x, y) coordinates.
-	 * 
+	 *
 	 * @param x
 	 *            The x-coordinate of the node.
 	 * @param y
@@ -112,7 +112,7 @@ public class Graph {
 
 	/**
 	 * Returns the list of all the nodes in the graph.
-	 * 
+	 *
 	 * @return The list of all the nodes in the graph.
 	 */
 	public List<Node> getNodes() {
@@ -121,7 +121,7 @@ public class Graph {
 
 	/**
 	 * Returns true if the point (x, y) within the graph; false otherwise.
-	 * 
+	 *
 	 * @param x
 	 *            The x-coordinate to check.
 	 * @param y
@@ -139,7 +139,7 @@ public class Graph {
 	/**
 	 * Sets the graph content from the given map. The previous content is
 	 * replaced.
-	 * 
+	 *
 	 * @param map
 	 *            The graph content.
 	 */

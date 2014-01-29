@@ -14,7 +14,7 @@ public class Dijkstra extends PathFinder {
 	/**
 	 * Creates a new Dijkstra finder. The given heuristic is used to estimate
 	 * the node distances to the target node.
-	 * 
+	 *
 	 * @param graph
 	 *            The graph to search.
 	 * @param heuristic

@@ -9,10 +9,10 @@ import java.util.ListIterator;
  * LinkedList implements a simple generic type linked list.
  */
 public class LinkedList<E> implements List<E> {
-	private class LinkedListIterator<V> implements Iterator<V> {
-		private ListNode<V> node;
+	private class LinkedListIterator implements Iterator {
+		private Node node;
 
-		public LinkedListIterator(ListNode<V> head) {
+		public LinkedListIterator(Node head) {
 			this.node = head;
 		}
 
@@ -22,41 +22,41 @@ public class LinkedList<E> implements List<E> {
 		}
 
 		@Override
-		public V next() {
+		public E next() {
 			node = node.next;
 			return node.data;
 		}
 
 		@Override
 		public void remove() {
-			throw new UnsupportedOperationException("Not implemented");
+			throw new UnsupportedOperationException();
 		}
 	}
 
-	private class ListNode<V> {
-		V data = null;
-		ListNode<V> next = null;
+	private class Node {
+		E data = null;
+		Node next = null;
 
-		public ListNode() {
+		public Node() {
 		}
 
-		public ListNode(V data) {
+		public Node(E data) {
 			this.data = data;
 		}
 	}
 
 	private int size;
-	private ListNode<E> head, tail;
+	private Node head, tail;
 
 	public LinkedList() {
-		head = new ListNode<E>();
+		head = new Node();
 		tail = head;
 		size = 0;
 	}
 
 	@Override
 	public boolean add(E e) {
-		ListNode<E> n = new ListNode<>(e);
+		Node n = new Node(e);
 		tail.next = n;
 		tail = n;
 		size++;
@@ -73,7 +73,7 @@ public class LinkedList<E> implements List<E> {
 
 	@Override
 	public boolean contains(Object o) {
-		ListNode<E> n = head.next;
+		Node n = head.next;
 
 		while (n != null) {
 			if (n.data == o) {
@@ -93,12 +93,35 @@ public class LinkedList<E> implements List<E> {
 
 	@Override
 	public Iterator<E> iterator() {
-		return new LinkedListIterator<E>(head);
+		return new LinkedListIterator(head);
 	}
 
 	@Override
 	public int size() {
 		return size;
+	}
+
+	@Override
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("[");
+
+		Node n = head.next;
+
+		while (n != null) {
+			sb.append(n.data.toString());
+
+			if (n.next == null) {
+				break;
+			}
+
+			sb.append(", ");
+			n = n.next;
+		}
+
+		sb.append("]");
+
+		return sb.toString();
 	}
 
 	/*
@@ -107,87 +130,87 @@ public class LinkedList<E> implements List<E> {
 
 	@Override
 	public void add(int index, E element) {
-		throw new UnsupportedOperationException("Not implemented");
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean addAll(Collection<? extends E> c) {
-		throw new UnsupportedOperationException("Not implemented");
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean addAll(int index, Collection<? extends E> c) {
-		throw new UnsupportedOperationException("Not implemented");
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean containsAll(Collection<?> c) {
-		throw new UnsupportedOperationException("Not implemented");
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public E get(int index) {
-		throw new UnsupportedOperationException("Not implemented");
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public int indexOf(Object o) {
-		throw new UnsupportedOperationException("Not implemented");
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public int lastIndexOf(Object o) {
-		throw new UnsupportedOperationException("Not implemented");
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public ListIterator<E> listIterator() {
-		throw new UnsupportedOperationException("Not implemented");
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public ListIterator<E> listIterator(int index) {
-		throw new UnsupportedOperationException("Not implemented");
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public E remove(int index) {
-		throw new UnsupportedOperationException("Not implemented");
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean remove(Object o) {
-		throw new UnsupportedOperationException("Not implemented");
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean removeAll(Collection<?> c) {
-		throw new UnsupportedOperationException("Not implemented");
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean retainAll(Collection<?> c) {
-		throw new UnsupportedOperationException("Not implemented");
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public E set(int index, E element) {
-		throw new UnsupportedOperationException("Not implemented");
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public List<E> subList(int fromIndex, int toIndex) {
-		throw new UnsupportedOperationException("Not implemented");
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Object[] toArray() {
-		throw new UnsupportedOperationException("Not implemented");
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public <T> T[] toArray(T[] a) {
-		throw new UnsupportedOperationException("Not implemented");
+		throw new UnsupportedOperationException();
 	}
 
 }
