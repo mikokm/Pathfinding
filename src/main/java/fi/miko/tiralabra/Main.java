@@ -9,8 +9,6 @@ import fi.miko.tiralabra.algorithms.Graph;
 import fi.miko.tiralabra.algorithms.Heuristic;
 import fi.miko.tiralabra.algorithms.Node;
 import fi.miko.tiralabra.algorithms.PathFinder;
-import fi.miko.tiralabra.datastructures.BinaryHeap;
-import fi.miko.tiralabra.datastructures.LinkedList;
 
 public class Main {
 	public static char[][] generateRandom(int width, int height, double freq) {
@@ -42,18 +40,13 @@ public class Main {
 		double elapsed = (end - start) / 1E9;
 
 		System.out.println(name + ": " + elapsed + "s");
-
 	}
 
 	public static void benchmark() {
 		char[][] graph = generateRandom(100, 100, 0.30);
 		Graph g = new Graph(graph);
-		System.out.println(g);
-
+		// System.out.println(g);
 		BellmanFord f = new BellmanFord(g);
-		Dijkstra d = new Dijkstra(g, Heuristic.None);
-		Dijkstra a = new Dijkstra(g, Heuristic.Diagonal);
-		Dijkstra a2 = new Dijkstra(g, Heuristic.Euclidean);
 
 		f.findPath();
 		List<Node> path = f.getShortestPath();
@@ -61,25 +54,17 @@ public class Main {
 			return;
 		}
 
+		Dijkstra d = new Dijkstra(new Graph(graph), Heuristic.None);
+		Dijkstra a1 = new Dijkstra(new Graph(graph), Heuristic.Diagonal);
+		Dijkstra a2 = new Dijkstra(new Graph(graph), Heuristic.Euclidean);
+
 		measure(d, "Dijkstra", path);
-		measure(a, "A* Diagonal", path);
+		measure(a1, "A* Diagonal", path);
 		measure(a2, "A* Euclidean", path);
 	}
 
 	public static void main(String[] args) {
-		// benchmark();
-
-		BinaryHeap<Integer> b = new BinaryHeap<>(10);
-		Random rand = new Random();
-		List<Integer> l = new LinkedList<>();
-
-		for (int i = 0; i < 5; ++i) {
-			int r = rand.nextInt(10);
-			b.insert(0, r);
-			l.add(r);
-		}
-
-		System.out.println(l);
+		benchmark();
 	}
 
 }

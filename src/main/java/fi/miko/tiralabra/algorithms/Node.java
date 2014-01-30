@@ -45,13 +45,6 @@ public class Node implements Comparable<Node> {
 
 	@Override
 	public int compareTo(Node node) {
-		// TODO: Remove this if it doesn't speed up anything.
-		/*
-		 * if (this.distance == Double.MAX_VALUE && node.distance ==
-		 * Double.MAX_VALUE) { return Double.compare(this.distanceEstimate,
-		 * node.distanceEstimate); }
-		 */
-
 		return Double.compare(distance + this.distanceEstimate, node.distance + node.distanceEstimate);
 	}
 

@@ -85,18 +85,18 @@ public class LinkedList<E> implements List<E> {
 
 		return false;
 	}
-	
+
 	@Override
 	public E get(int index) {
-		if(index < 0 || index >= size()) {
+		if (index < 0 || index >= size()) {
 			throw new IndexOutOfBoundsException();
 		}
-		
+
 		Node node = head.next;
-		for(int i = 0; i < index; ++i) {
+		for (int i = 0; i < index; ++i) {
 			node = node.next;
 		}
-		
+
 		return node.data;
 	}
 
