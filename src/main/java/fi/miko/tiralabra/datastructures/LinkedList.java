@@ -9,7 +9,7 @@ import java.util.ListIterator;
  * LinkedList implements a simple generic type linked list.
  */
 public class LinkedList<E> implements List<E> {
-	private class LinkedListIterator implements Iterator {
+	private class LinkedListIterator implements Iterator<E> {
 		private Node node;
 
 		public LinkedListIterator(Node head) {
@@ -85,6 +85,20 @@ public class LinkedList<E> implements List<E> {
 
 		return false;
 	}
+	
+	@Override
+	public E get(int index) {
+		if(index < 0 || index >= size()) {
+			throw new IndexOutOfBoundsException();
+		}
+		
+		Node node = head.next;
+		for(int i = 0; i < index; ++i) {
+			node = node.next;
+		}
+		
+		return node.data;
+	}
 
 	@Override
 	public boolean isEmpty() {
@@ -145,11 +159,6 @@ public class LinkedList<E> implements List<E> {
 
 	@Override
 	public boolean containsAll(Collection<?> c) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public E get(int index) {
 		throw new UnsupportedOperationException();
 	}
 

@@ -11,7 +11,7 @@ import org.junit.Test;
  * @author Miko
  *
  */
-public class PathFinderTests {
+public class PathFinderTest {
 	@Test
 	public void test() {
 		fail("Not yet implemented");
