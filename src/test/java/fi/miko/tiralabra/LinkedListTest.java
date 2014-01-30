@@ -29,8 +29,8 @@ public class LinkedListTest {
 		list.add(1);
 		list.add(2);
 
-		assertTrue(1 == list.get(0));
-		assertTrue(2 == list.get(1));
+		assertEquals(1, (int)list.get(0));
+		assertEquals(2, (int)list.get(1));
 
 		assertEquals(2, list.size());
 	}
@@ -40,8 +40,8 @@ public class LinkedListTest {
 		list.add(1);
 		list.add(1);
 
-		assertTrue(1 == list.get(0));
-		assertTrue(1 == list.get(1));
+		assertEquals(1, (int)list.get(0));
+		assertEquals(1, (int)list.get(1));
 
 		assertEquals(2, list.size());
 	}
@@ -110,8 +110,8 @@ public class LinkedListTest {
 
 		int pos = 0;
 		for (int n : list) {
-			assertTrue(elements[pos] == n);
-			assertTrue(elements[pos] == list.get(pos));
+			assertEquals(elements[pos], n);
+			assertEquals(elements[pos], (int)list.get(pos));
 			pos++;
 		}
 	}
