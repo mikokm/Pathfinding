@@ -108,11 +108,21 @@ public class LinkedList<E> implements List<E> {
 		@SuppressWarnings("unchecked")
 		LinkedList<E> other = (LinkedList<E>) obj;
 
+		if (size != other.size) {
+			return false;
+		}
+
 		Node n = head.next;
 		Node m = other.head.next;
 
 		while (n != null && m != null) {
-			if (n.data.equals(m.data)) {
+			E e1 = n.data, e2 = m.data;
+
+			if (e1 == null && e2 != null) {
+				return false;
+			}
+
+			if (e1 != null && e1.equals(e2) == false) {
 				return false;
 			}
 

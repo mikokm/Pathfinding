@@ -12,9 +12,4 @@ import org.junit.Test;
  * 
  */
 public class PathFinderTest {
-	@Test
-	public void test() {
-		fail("Not yet implemented");
-	}
-
 }

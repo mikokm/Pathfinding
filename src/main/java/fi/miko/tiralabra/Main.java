@@ -20,9 +20,14 @@ public class Main {
 
 		f.findPath();
 		List<Node> path = f.getShortestPath();
+
 		if (path.isEmpty()) {
+			System.out.println("No path found!");
 			return;
 		}
+
+		System.out.println("Reference path size: " + path.size());
+		System.out.println();
 
 		PathFinder d = new Dijkstra(new Graph(graph));
 		PathFinder a1 = new AStar(new Graph(graph), Heuristic.None);
@@ -64,8 +69,18 @@ public class Main {
 		double elapsed = (end - start) / 1E9;
 
 		System.out.println(name + ": " + elapsed + "s");
-		boolean e = path.equals(f.getShortestPath());
+
+		List<Node> fp = f.getShortestPath();
+
+		boolean e = path.size() == fp.size();
 		System.out.println("Path check: " + e);
+
+		if (e == false) {
+			System.out.println("Expected: " + path);
+			System.out.println("Actual: " + fp);
+		}
+
+		System.out.println();
 	}
 
 }

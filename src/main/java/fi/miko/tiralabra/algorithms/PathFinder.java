@@ -27,6 +27,7 @@ public abstract class PathFinder {
 	 */
 	public PathFinder(Graph graph) {
 		this.graph = graph;
+		initializeNodes();
 	}
 
 	protected double getDistance(Node n1, Node n2) {
@@ -64,15 +65,12 @@ public abstract class PathFinder {
 		Node node = target.getNearest();
 		while (node != start) {
 			if (node == null) {
-				System.out.println("No path found!");
 				return path;
 			}
 
 			stack.push(node);
 			node = node.getNearest();
 		}
-
-		System.out.println("Path length is " + stack.size() + " nodes.");
 
 		path.add(start);
 
