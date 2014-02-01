@@ -4,13 +4,13 @@ package fi.miko.tiralabra.algorithms;
  * Edge class represents a single, directed edge in the graph.
  */
 public class Edge {
-	public Node u;
-	public Node v;
-	public double w;
+	final public Node u;
+	final public Node v;
+	final public double w;
 
 	/**
 	 * Creates a new edge from the node u to node v with the weight w.
-	 *
+	 * 
 	 * @param u
 	 *            The source node.
 	 * @param v

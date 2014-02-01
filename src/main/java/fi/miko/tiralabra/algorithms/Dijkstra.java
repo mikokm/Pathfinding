@@ -4,61 +4,52 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 /**
- * Dijkstra class uses Dijkstra's algorithm to find the shortest path in the
- * graph. If a heuristic besides Heuristic.None is given, the algorithm
- * transforms to A*.
+ * Dijkstra class uses Dijkstra's algorithm to find the shortest path in the graph. This algorithm implementation is
+ * taken from Tietorakenteet ja algoritmit course material and it seems to be fairly inefficient.
  */
 public class Dijkstra extends PathFinder {
-	private Heuristic heuristic;
-
 	/**
-	 * Creates a new Dijkstra finder. The given heuristic is used to estimate
-	 * the node distances to the target node.
-	 *
+	 * Creates a new Dijkstra finder.
+	 * 
 	 * @param graph
 	 *            The graph to search.
-	 * @param heuristic
-	 *            The heuristic used in distance estimation.
 	 */
-	public Dijkstra(Graph graph, Heuristic heuristic) {
+	public Dijkstra(Graph graph) {
 		super(graph);
-		initializeEdges();
-
-		this.heuristic = heuristic;
 	}
 
 	@Override
 	public void findPath() {
-		initializeNodes(heuristic);
+		initializeNodes();
 
 		// Add the initialized nodes to the priority queue.
-		List<Node> nodes = getGraph().getNodes();
-		PriorityQueue<Node> pq = new PriorityQueue<>(nodes.size());
+		final List<Node> nodes = getGraph().getNodes();
+		final PriorityQueue<Node> pq = new PriorityQueue<>(nodes.size());
 		for (Node node : nodes) {
 			pq.add(node);
 		}
 
 		while (!pq.isEmpty()) {
 			// Select the node closest to the target node.
-			Node node = pq.poll();
+			final Node node = pq.poll();
 
-			// If the next node in the priority queue is the target node, the
-			// shortest path has been found.
 			if (node == getTarget()) {
 				return;
 			}
 
-			// Update the neighbouring node distances.
-			for (Edge e : node.getEdges()) {
-				// The node is removed and added to priority queue, because
-				// decrease-key operation is not supported.
-				double d = e.v.getDistance();
+			for (Node neighbour : getGraph().getNeighbours(node)) {
+				if (neighbour.getType() == WALL) {
+					continue;
+				}
 
-				PathFinder.relax(e.u, e.v, e.w);
+				double distance = node.getDistance() + getDistance(node, neighbour);
 
-				if (e.v.getDistance() < d) {
-					pq.remove(e.v);
-					pq.add(e.v);
+				if (distance < neighbour.getDistance()) {
+					neighbour.setDistance(distance);
+					neighbour.setNearest(node);
+
+					pq.remove(neighbour);
+					pq.add(neighbour);
 				}
 			}
 		}

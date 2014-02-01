@@ -86,6 +86,43 @@ public class LinkedList<E> implements List<E> {
 		return false;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (obj == null) {
+			return false;
+		}
+
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+
+		@SuppressWarnings("unchecked")
+		LinkedList<E> other = (LinkedList<E>) obj;
+
+		Node n = head.next;
+		Node m = other.head.next;
+
+		while (n != null && m != null) {
+			if (n.data.equals(m.data)) {
+				return false;
+			}
+
+			n = n.next;
+			m = m.next;
+		}
+
+		return (n == null && m == null);
+	}
+
 	@Override
 	public E get(int index) {
 		if (index < 0 || index >= size()) {
@@ -98,6 +135,23 @@ public class LinkedList<E> implements List<E> {
 		}
 
 		return node.data;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+
+		for (E e : this) {
+			result = prime * result + e.hashCode();
+		}
+
+		return result;
 	}
 
 	@Override
@@ -221,5 +275,4 @@ public class LinkedList<E> implements List<E> {
 	public <T> T[] toArray(T[] a) {
 		throw new UnsupportedOperationException();
 	}
-
 }

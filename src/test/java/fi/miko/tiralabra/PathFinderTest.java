@@ -9,7 +9,7 @@ import org.junit.Test;
 
 /**
  * @author Miko
- *
+ * 
  */
 public class PathFinderTest {
 	@Test

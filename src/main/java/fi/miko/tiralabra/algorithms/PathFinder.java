@@ -6,24 +6,22 @@ import java.util.Stack;
 import fi.miko.tiralabra.datastructures.LinkedList;
 
 /**
- * PathFinder is a helper class that is used to implement Dijkstra and
- * Bellman-Ford algorithms.
+ * PathFinder is a helper class that is used to implement Dijkstra and Bellman-Ford algorithms.
  */
 public abstract class PathFinder {
 	public static final char START = 's';
 	public static final char TARGET = 't';
 	public static final char WALL = '#';
+
 	private static final double SQRT_2 = Math.sqrt(2);
 
 	private Graph graph;
-	private List<Edge> edges = new LinkedList<>();
-
 	private Node start = null;
 	private Node target = null;
 
 	/**
 	 * Creates a new pathfinder that searches in the given graph.
-	 *
+	 * 
 	 * @param graph
 	 *            The graph to search paths in.
 	 */
@@ -31,22 +29,10 @@ public abstract class PathFinder {
 		this.graph = graph;
 	}
 
-	/**
-	 * Returns the list of edges for all nodes of the graph.
-	 *
-	 * @return The list of edges for all nodes of the graph.
-	 */
-	protected List<Edge> getEdges() {
-		return edges;
-	}
-
-	/**
-	 * Returns the graph used by this pathfinder.
-	 *
-	 * @return The graph used by this pathfinder.
-	 */
-	protected Graph getGraph() {
-		return graph;
+	protected double getDistance(Node n1, Node n2) {
+		final int dx = n1.getX() - n2.getX();
+		final int dy = n1.getY() - n2.getY();
+		return (dx != 0 && dy != 0 ? SQRT_2 : 1);
 	}
 
 	/**
@@ -55,11 +41,19 @@ public abstract class PathFinder {
 	public abstract void findPath();
 
 	/**
-	 * Returns the list of nodes containing the shortest path between the start
-	 * and target nodes. If there isn't a path, an empty list is returned.
-	 *
-	 * @return The list of nodes in between the start and target nodes, or an
-	 *         empty list.
+	 * Returns the graph used by this pathfinder.
+	 * 
+	 * @return The graph used by this pathfinder.
+	 */
+	protected Graph getGraph() {
+		return graph;
+	}
+
+	/**
+	 * Returns the list of nodes containing the shortest path between the start and target nodes. If there isn't a path,
+	 * an empty list is returned.
+	 * 
+	 * @return The list of nodes in between the start and target nodes, or an empty list.
 	 */
 	public List<Node> getShortestPath() {
 		assert (start != null && target != null);
@@ -93,7 +87,7 @@ public abstract class PathFinder {
 
 	/**
 	 * Returns the start node.
-	 *
+	 * 
 	 * @return The start node.
 	 */
 	public Node getStart() {
@@ -102,7 +96,7 @@ public abstract class PathFinder {
 
 	/**
 	 * Returns the target node.
-	 *
+	 * 
 	 * @return The target node.
 	 */
 	public Node getTarget() {
@@ -110,78 +104,19 @@ public abstract class PathFinder {
 	}
 
 	/**
-	 * Initializes edge lists for pathfinding algorithms.
+	 * Initializes the graph nodes with initial values.
 	 */
-	public void initializeEdges() {
-		edges.clear();
-
-		start = null;
-		target = null;
-
-		for (Node node : graph.getNodes()) {
-			if (node.getDistance() < 0) {
-				throw new InvalidGraphException("The graph has a node with a negative weight!");
-			}
-
-			switch (node.getType()) {
-			case PathFinder.START:
-				start = node;
-				break;
-			case PathFinder.TARGET:
-				target = node;
-				break;
-			case PathFinder.WALL:
-				continue;
-			}
-
-			List<Edge> nodeEdges = new LinkedList<Edge>();
-
-			for (Node n : graph.getNeighbours(node)) {
-				if (n.getType() == PathFinder.WALL) {
-					continue;
-				}
-
-				// Calculate the diagonal movement weight.
-				double distance = (node.getX() != n.getX() && node.getY() != n.getY() ? SQRT_2 : 1);
-
-				Edge e = new Edge(node, n, distance);
-
-				// Add the edge to the list of all edges.
-				edges.add(e);
-
-				// Add the edge to the node edges.
-				nodeEdges.add(e);
-
-				// System.out.println("Adding edge: " + e);
-			}
-
-			node.setEdges(nodeEdges);
-		}
-
-		if (start == null || target == null) {
-			throw new InvalidGraphException("The graph is missing the start or target node!");
-		}
-	}
-
-	/**
-	 * Initializes the graph nodes with initial values. The given heuristic is
-	 * used to calculate the estimated distance to the target node.
-	 *
-	 * @param heuristic
-	 *            The heuristic to use for target distance estimation.
-	 */
-	protected void initializeNodes(Heuristic heuristic) {
+	protected void initializeNodes() {
 		for (Node n : graph.getNodes()) {
-			double distanceEstimate = 0;
+			n.reset();
 
-			if (heuristic != Heuristic.None) {
-				int dx = target.getX() - n.getX(), dy = target.getY() - n.getY();
-				distanceEstimate = heuristic.distance(dx, dy);
+			if (n.getType() == START) {
+				start = n;
 			}
 
-			n.setDistanceEstimate(distanceEstimate);
-			n.setDistance(Double.MAX_VALUE);
-			n.setNearest(null);
+			if (n.getType() == TARGET) {
+				target = n;
+			}
 		}
 
 		start.setDistance(0);
@@ -190,7 +125,7 @@ public abstract class PathFinder {
 
 	/**
 	 * Sets the graph used by the pathfinder.
-	 *
+	 * 
 	 * @param graph
 	 *            The graph to search paths in.
 	 */
@@ -200,7 +135,7 @@ public abstract class PathFinder {
 
 	/**
 	 * Sets the start node.
-	 *
+	 * 
 	 * @param start
 	 *            The start node.
 	 */
@@ -210,35 +145,11 @@ public abstract class PathFinder {
 
 	/**
 	 * Sets the target node.
-	 *
+	 * 
 	 * @param target
 	 *            The target node.
 	 */
 	public void setTarget(Node target) {
 		this.target = target;
-	}
-
-	/**
-	 * Replaces the current path to the start node from node v with a shorter
-	 * path through node u if such path is possible.
-	 *
-	 * @param u
-	 *            The node that the path will go through.
-	 * @param v
-	 *            The node that is being inspected.
-	 * @param w
-	 *            The distance between u and v (edge weight).
-	 */
-	protected static void relax(Node u, Node v, double w) {
-		if (u.getDistance() == Double.MAX_VALUE) {
-			return;
-		}
-
-		double uw = u.getDistance() + w;
-
-		if (v.getDistance() > uw) {
-			v.setDistance(uw);
-			v.setNearest(u);
-		}
 	}
 }

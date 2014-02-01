@@ -1,23 +1,22 @@
 package fi.miko.tiralabra.algorithms;
 
-import java.util.List;
-
-import fi.miko.tiralabra.datastructures.LinkedList;
-
 /**
  * Node class contains the node information needed by graph search algorithms.
  */
 public class Node implements Comparable<Node> {
-	private List<Edge> edges = new LinkedList<Edge>();
 	private Node nearest = null;
 
-	private char type = 0;
-	private double distance = 0, distanceEstimate = 0;
+	private char type;
+	private double distance;
+	private double distanceEstimate;
 	private int x, y;
+
+	private boolean open;
+	private boolean closed;
 
 	/**
 	 * Creates a new node with the given coordinates.
-	 *
+	 * 
 	 * @param x
 	 *            The x-coordinate of the node.
 	 * @param y
@@ -30,7 +29,7 @@ public class Node implements Comparable<Node> {
 
 	/**
 	 * Creates a new node with the given coordinates and type.
-	 *
+	 * 
 	 * @param x
 	 *            The x-coordinate of the node.
 	 * @param y
@@ -50,7 +49,7 @@ public class Node implements Comparable<Node> {
 
 	/**
 	 * Returns the distance to the start node.
-	 *
+	 * 
 	 * @return The distance to the start node.
 	 */
 	public double getDistance() {
@@ -59,7 +58,7 @@ public class Node implements Comparable<Node> {
 
 	/**
 	 * Returns the distance estimate to the target node.
-	 *
+	 * 
 	 * @return The distance estimate to the target node.
 	 */
 	public double getDistanceEstimate() {
@@ -67,20 +66,9 @@ public class Node implements Comparable<Node> {
 	}
 
 	/**
-	 * Returns a list of edges from this node to the neighbour nodes.
-	 *
-	 * @return A list of edges from this node to the neighbour nodes.
-	 */
-	public List<Edge> getEdges() {
-		return edges;
-	}
-
-	/**
-	 * Returns the node nearest to the start node that is accessible from this
-	 * node.
-	 *
-	 * @return The node nearest to the start node that is accessible from this
-	 *         node.
+	 * Returns the node nearest to the start node that is accessible from this node.
+	 * 
+	 * @return The node nearest to the start node that is accessible from this node.
 	 */
 	public Node getNearest() {
 		return nearest;
@@ -88,7 +76,7 @@ public class Node implements Comparable<Node> {
 
 	/**
 	 * Returns the type of the node.
-	 *
+	 * 
 	 * @return The type of the node.
 	 */
 	public char getType() {
@@ -97,7 +85,7 @@ public class Node implements Comparable<Node> {
 
 	/**
 	 * Returns the x-coordinate of the node.
-	 *
+	 * 
 	 * @return The x-coordinate of the node.
 	 */
 	public int getX() {
@@ -106,16 +94,36 @@ public class Node implements Comparable<Node> {
 
 	/**
 	 * Returns the y-coordinate of the node.
-	 *
+	 * 
 	 * @return The y-coordinate of the node.
 	 */
 	public int getY() {
 		return y;
 	}
 
+	public boolean isClosed() {
+		return closed;
+	}
+
+	public boolean isOpen() {
+		return open;
+	}
+
+	public void reset() {
+		open = false;
+		closed = false;
+		distance = Double.MAX_VALUE;
+		distanceEstimate = 0;
+		nearest = null;
+	}
+
+	public void setClosed() {
+		closed = true;
+	}
+
 	/**
 	 * Sets the distance to the start node.
-	 *
+	 * 
 	 * @param distance
 	 *            The distance to the start node.
 	 */
@@ -125,7 +133,7 @@ public class Node implements Comparable<Node> {
 
 	/**
 	 * Sets the estimated distance to the target node.
-	 *
+	 * 
 	 * @param distanceEstimate
 	 *            The estimated distance to the target node.
 	 */
@@ -134,30 +142,22 @@ public class Node implements Comparable<Node> {
 	}
 
 	/**
-	 * Sets the edges for the node.
-	 *
-	 * @param edges
-	 *            The node edges.
-	 */
-	public void setEdges(List<Edge> edges) {
-		this.edges = edges;
-	}
-
-	/**
-	 * Sets the node nearest to the start node that is accessible from this
-	 * node.
-	 *
+	 * Sets the node nearest to the start node that is accessible from this node.
+	 * 
 	 * @param nearest
-	 *            The node nearest to the start node that is accessible from
-	 *            this node.
+	 *            The node nearest to the start node that is accessible from this node.
 	 */
 	public void setNearest(Node nearest) {
 		this.nearest = nearest;
 	}
 
+	public void setOpen() {
+		open = true;
+	}
+
 	/**
 	 * Sets the type of the node.
-	 *
+	 * 
 	 * @param type
 	 *            The node type.
 	 */

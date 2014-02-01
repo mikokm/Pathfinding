@@ -12,7 +12,7 @@ public class AStar extends PathFinder {
 
 	/**
 	 * Creates a new A* pathfinder. The given heuristic is used to estimate the node distances to the target node.
-	 *
+	 * 
 	 * @param graph
 	 *            The graph to search.
 	 * @param heuristic
@@ -54,10 +54,7 @@ public class AStar extends PathFinder {
 			return;
 		}
 
-		// Calculate the edge weight
-		final int ex = node.getX() - neighbour.getX();
-		final int ey = node.getY() - neighbour.getY();
-		double distance = node.getDistance() + (ex != 0 && ey != 0 ? SQRT_2 : 1);
+		final double distance = node.getDistance() + getDistance(node, neighbour);
 
 		if (distance < neighbour.getDistance()) {
 			neighbour.setDistance(distance);
