@@ -46,7 +46,7 @@ public abstract class PathFinder {
 	 * 
 	 * @return The graph used by this pathfinder.
 	 */
-	protected Graph getGraph() {
+	public Graph getGraph() {
 		return graph;
 	}
 

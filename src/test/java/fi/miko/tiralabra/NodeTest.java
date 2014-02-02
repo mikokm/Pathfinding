@@ -14,11 +14,11 @@ public class NodeTest {
 		Node n1 = new Node(1, 0);
 		Node n2 = new Node(0, 0);
 		assertFalse(n1.equals(n2));
-		
+
 		n1 = new Node(0, 0);
 		n2 = new Node(0, 1);
 		assertFalse(n1.equals(n2));
-		
+
 		n2 = null;
 		assertFalse(n1.equals(n2));
 	}
@@ -28,11 +28,11 @@ public class NodeTest {
 		Node n1 = new Node(0, 0);
 		Node n2 = new Node(0, 0);
 		assertTrue(n1.equals(n2));
-		
+
 		n1 = new Node(0, 1);
 		n2 = new Node(0, 1);
 		assertTrue(n1.equals(n2));
-		
+
 		n1 = new Node(1, 0);
 		n2 = new Node(1, 0);
 		assertTrue(n1.equals(n2));
@@ -84,7 +84,7 @@ public class NodeTest {
 		n2.setDistanceEstimate(2);
 		assertEquals(-1, n1.compareTo(n2));
 	}
-	
+
 	@Test
 	public void testConstructors() {
 		Node node = new Node(1, 0);
@@ -102,7 +102,7 @@ public class NodeTest {
 		assertEquals(1, node.getY());
 		assertEquals(1, node.getType());
 	}
-	
+
 	@Test
 	public void testDefaults() {
 		Node node = new Node(0, 0);

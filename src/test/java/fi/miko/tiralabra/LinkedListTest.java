@@ -90,43 +90,43 @@ public class LinkedListTest {
 	@Test
 	public void testEqualsDifferent() {
 		list.add(1);
-		
+
 		List<Integer> l2 = new LinkedList<Integer>();
 		l2.add(2);
-		
+
 		assertFalse(list.equals(l2));
 	}
 
 	@Test
-	public void testEqualsDifferentSize() {		
+	public void testEqualsDifferentSize() {
 		list.add(1);
 		list.add(2);
-		
+
 		List<Integer> l2 = new LinkedList<Integer>();
 		l2.add(1);
-		
+
 		assertFalse(list.equals(l2));
 	}
 
 	@Test
 	public void testEqualsEmpty() {
 		List<Integer> l2 = new LinkedList<Integer>();
-		
+
 		assertTrue(list.equals(l2));
 	}
 
 	@Test
 	public void testEqualsNullElements() {
 		list.add(null);
-		
+
 		List<Integer> l2 = new LinkedList<Integer>();
 		l2.add(1);
 
 		assertFalse(list.equals(l2));
-		
+
 		l2.clear();
 		l2.add(null);
-		
+
 		assertTrue(list.equals(l2));
 	}
 
@@ -135,10 +135,10 @@ public class LinkedListTest {
 		list.add(1);
 		list.add(2);
 		List<Integer> l2 = new LinkedList<Integer>();
-			
+
 		l2.add(1);
 		l2.add(2);
-		
+
 		assertTrue(list.equals(l2));
 	}
 
@@ -166,24 +166,24 @@ public class LinkedListTest {
 
 		list.get(1);
 	}
-	
+
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testGetOutsideListSize() {
 		list.add(1);
 
 		list.get(2);
 	}
-	
+
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testGetWithNegativeIndex() {
 		list.get(-1);
 	}
-	
+
 	@Test
 	public void testSizeNewList() {
 		testThatListIsEmpty();
 	}
-	
+
 	private void testThatListIsEmpty() {
 		assertEquals(0, list.size());
 		assertTrue(list.isEmpty());
