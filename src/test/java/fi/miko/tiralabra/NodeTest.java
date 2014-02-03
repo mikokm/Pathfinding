@@ -53,6 +53,13 @@ public class NodeTest {
 
 		node.setType((char) 1);
 		assertEquals(1, node.getType());
+
+		assertFalse(node.isClosed());
+		assertFalse(node.isOpen());
+		node.setClosed();
+		node.setOpen();
+		assertTrue(node.isClosed());
+		assertTrue(node.isOpen());
 	}
 
 	@Test
@@ -101,16 +108,28 @@ public class NodeTest {
 		assertEquals(1, node.getX());
 		assertEquals(1, node.getY());
 		assertEquals(1, node.getType());
+
+		node = new Node(0, 0);
+		testDefaults(node);
 	}
 
-	@Test
-	public void testDefaults() {
-		Node node = new Node(0, 0);
-
+	private void testDefaults(Node node) {
 		assertNull(node.getNearest());
 		assertEquals(Double.MAX_VALUE, node.getDistance(), delta);
 		assertEquals(0, node.getDistanceEstimate(), delta);
 		assertFalse(node.isOpen());
 		assertFalse(node.isClosed());
+	}
+
+	@Test
+	public void testReset() {
+		Node node = new Node(0, 0);
+		testDefaults(node);
+
+		node.setDistance(1);
+		assertEquals(1, node.getDistance(), delta);
+
+		node.reset();
+		testDefaults(node);
 	}
 }

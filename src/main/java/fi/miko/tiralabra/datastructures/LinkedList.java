@@ -33,6 +33,9 @@ public class LinkedList<E> implements List<E> {
 		}
 	}
 
+	/**
+	 * Node represents a single node in the linked list.
+	 */
 	private class Node {
 		E data = null;
 		Node next = null;
@@ -86,11 +89,6 @@ public class LinkedList<E> implements List<E> {
 		return false;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -118,10 +116,12 @@ public class LinkedList<E> implements List<E> {
 		while (n != null && m != null) {
 			E e1 = n.data, e2 = m.data;
 
+			// Check if one element is null and the another one isn't.
 			if (e1 == null && e2 != null) {
 				return false;
 			}
 
+			// Check if the both elements are null, or if the elements aren't equal.
 			if (e1 != null && e1.equals(e2) == false) {
 				return false;
 			}
@@ -147,11 +147,6 @@ public class LinkedList<E> implements List<E> {
 		return node.data;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#hashCode()
-	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;

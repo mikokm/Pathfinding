@@ -4,9 +4,8 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 /**
- * Dijkstra class uses Dijkstra's algorithm to find the shortest path in the graph. This algorithm implementation is
- * taken from Tietorakenteet ja algoritmit course material. Dijkstra's algorithm in this form is a tree search algorithm
- * and it visits all of the nodes.
+ * Dijkstra class implements Dijkstra's algorithm. This implementation is taken from Datastructures and algorithms
+ * course material. Dijkstra's algorithm in this form is a tree search algorithm and it visits all of the nodes.
  */
 public class Dijkstra extends PathFinder {
 	/**

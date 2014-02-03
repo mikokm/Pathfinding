@@ -4,6 +4,10 @@ import java.util.List;
 
 import fi.miko.tiralabra.datastructures.LinkedList;
 
+/**
+ * BellmanFord class implements Bellman-Ford's algorithm. The implementation is taken from Datastructures and algorithms
+ * course material.
+ */
 public class BellmanFord extends PathFinder {
 	private final List<Edge> edges = new LinkedList<Edge>();
 

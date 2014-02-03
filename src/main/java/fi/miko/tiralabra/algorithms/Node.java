@@ -103,14 +103,27 @@ public class Node implements Comparable<Node> {
 		return y;
 	}
 
+	/**
+	 * Returns true if the node is closed; otherwise false.
+	 * 
+	 * @return True if the node is closed; otherwise false.
+	 */
 	public boolean isClosed() {
 		return closed;
 	}
 
+	/**
+	 * Returns true if the node is open; otherwise false.
+	 * 
+	 * @return True if the node is open; otherwise false.
+	 */
 	public boolean isOpen() {
 		return open;
 	}
 
+	/**
+	 * Resets the node data to initial values.
+	 */
 	public void reset() {
 		open = false;
 		closed = false;
@@ -119,6 +132,9 @@ public class Node implements Comparable<Node> {
 		nearest = null;
 	}
 
+	/**
+	 * Marks the node as closed;
+	 */
 	public void setClosed() {
 		closed = true;
 	}
@@ -153,6 +169,9 @@ public class Node implements Comparable<Node> {
 		this.nearest = nearest;
 	}
 
+	/**
+	 * Sets the node as open.
+	 */
 	public void setOpen() {
 		open = true;
 	}
@@ -172,11 +191,6 @@ public class Node implements Comparable<Node> {
 		return "[" + x + ", " + y + "]";
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#hashCode()
-	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -186,11 +200,6 @@ public class Node implements Comparable<Node> {
 		return result;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
