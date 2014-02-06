@@ -60,7 +60,7 @@ public class AStar extends PathFinder {
 			neighbour.setNearest(node);
 
 			if (neighbour.isOpen()) {
-				heap.decreaseKey(neighbour, neighbour.getDistance() + neighbour.getDistanceEstimate());
+				heap.decreaseKey(neighbour);
 			}
 
 			if (!neighbour.isOpen()) {

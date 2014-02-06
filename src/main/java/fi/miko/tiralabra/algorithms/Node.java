@@ -69,6 +69,10 @@ public class Node implements Comparable<Node>, Indexable {
 	public double getDistanceEstimate() {
 		return distanceEstimate;
 	}
+	
+	public double getKey() {
+		return distance + distanceEstimate;
+	}
 
 	/**
 	 * Returns the node nearest to the start node that is accessible from this node.

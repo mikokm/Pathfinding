@@ -80,30 +80,33 @@ public class Main {
 	}
 
 	private static void measure(PathFinder f, String name, List<Node> path) {
-		double length = getPathDistance(path);
+		double cost = getPathDistance(path);
+		
+		double cost2 = 0;
+		List<Node> path2 = null;
 
 		long start = System.nanoTime();
-
 		for (int i = 0; i < 10000; ++i) {
 			f.findPath();
 
-			List<Node> path2 = f.getShortestPath();
-			double length2 = getPathDistance(path2);
+			path2 = f.getShortestPath();
+			cost2 = getPathDistance(path2);
 
-			boolean valid = path.size() == path2.size() && Double.compare(length, length2) == 0;
+			boolean valid = path.size() == path2.size() && Double.compare(cost, cost2) == 0;
 
 			if (!valid) {
 				System.out.println("The path is invalid!");
-				System.out.println("Expected: " + path.size() + " : " + length);
-				System.out.println("Actual: " + path2.size() + " : " + length2);
+				System.out.println("Expected: " + path.size() + " : " + cost);
+				System.out.println("Actual: " + path2.size() + " : " + cost2);
 				break;
 			}
 		}
-
 		long end = System.nanoTime();
+		
 		double elapsed = (end - start) / 1E9;
 
 		System.out.println(name + ": " + elapsed + "s");
+		System.out.println("Path length: " + path2.size() + " cost: " + cost2);
 		System.out.println();
 	}
 

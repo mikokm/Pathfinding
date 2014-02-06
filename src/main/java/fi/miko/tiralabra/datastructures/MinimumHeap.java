@@ -4,21 +4,6 @@ import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 public class MinimumHeap<E extends Indexable> {
-	public class Element {
-		E data = null;
-		double key;
-
-		public Element(E data, double key) {
-			this.data = data;
-			this.key = key;
-		}
-
-		@Override
-		public String toString() {
-			return "[" + key + "]";
-		}
-	}
-
 	private Object[] elements = null;
 	private int heapSize = 0;
 
@@ -35,19 +20,18 @@ public class MinimumHeap<E extends Indexable> {
 		updateIndex(i);
 	}
 
-	public void decreaseKey(E e, double key) {
+	public void decreaseKey(E e) {
 		int i = e.getIndex();
-		get(i).key = key;
 
-		while (i > 0 && get(parent(i)).key > key) {
+		while (i > 0 && get(parent(i)).getKey() > e.getKey()) {
 			swap(i, parent(i));
 			i = parent(i);
 		}
 	}
 
 	@SuppressWarnings("unchecked")
-	private Element get(int i) {
-		return (Element) elements[i];
+	private E get(int i) {
+		return (E) elements[i];
 	}
 
 	private void heapify(int i) {
@@ -61,19 +45,19 @@ public class MinimumHeap<E extends Indexable> {
 			int smallest;
 
 			// Get the smallest element of the two
-			if (get(left).key < get(right).key) {
+			if (get(left).getKey() < get(right).getKey()) {
 				smallest = left;
 			} else {
 				smallest = right;
 			}
 
-			if (get(i).key > get(smallest).key) {
+			if (get(i).getKey() > get(smallest).getKey()) {
 				swap(i, smallest);
 				heapify(smallest);
 			}
 
 			// Node i has one child node.
-		} else if (left == (heapSize - 1) && get(i).key > get(left).key) {
+		} else if (left == (heapSize - 1) && get(i).getKey() > get(left).getKey()) {
 			swap(i, left);
 		}
 	}
@@ -88,12 +72,12 @@ public class MinimumHeap<E extends Indexable> {
 		// print();
 
 		int i = heapSize - 1;
-		while (i > 0 && get(parent(i)).key > key) {
+		while (i > 0 && get(parent(i)).getKey() > key) {
 			assign(i, parent(i));
 			i = parent(i);
 		}
 
-		elements[i] = new Element(e, key);
+		elements[i] = e;
 		updateIndex(i);
 
 		// print();
@@ -111,16 +95,12 @@ public class MinimumHeap<E extends Indexable> {
 		return i / 2;
 	}
 
-	public E peek() {
-		return get(0).data;
-	}
-
 	public E poll() {
 		if (isEmpty()) {
 			throw new NoSuchElementException();
 		}
 
-		E data = get(0).data;
+		E element = get(0);
 		heapSize--;
 
 		if (isEmpty()) {
@@ -130,7 +110,7 @@ public class MinimumHeap<E extends Indexable> {
 			heapify(0);
 		}
 
-		return data;
+		return element;
 	}
 
 	private void print() {
@@ -142,6 +122,7 @@ public class MinimumHeap<E extends Indexable> {
 
 	public void remove(E e) {
 		int index = e.getIndex();
+
 		if (index == -1) {
 			return;
 		}
@@ -173,6 +154,6 @@ public class MinimumHeap<E extends Indexable> {
 	}
 
 	private void updateIndex(int i) {
-		get(i).data.setIndex(i);
+		get(i).setIndex(i);
 	}
 }
