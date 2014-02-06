@@ -1,9 +1,11 @@
 package fi.miko.tiralabra.algorithms;
 
+import fi.miko.tiralabra.datastructures.Indexable;
+
 /**
  * Node class contains the node information needed by graph search algorithms.
  */
-public class Node implements Comparable<Node> {
+public class Node implements Comparable<Node>, Indexable {
 	private Node nearest = null;
 
 	private char type;
@@ -13,6 +15,7 @@ public class Node implements Comparable<Node> {
 
 	private boolean open;
 	private boolean closed;
+	private int heapIndex = -1;
 
 	/**
 	 * Creates a new node with the given coordinates.
@@ -221,6 +224,16 @@ public class Node implements Comparable<Node> {
 		}
 
 		return true;
+	}
+
+	@Override
+	public int getIndex() {
+		return heapIndex;
+	}
+
+	@Override
+	public void setIndex(int index) {
+		heapIndex = index;
 	}
 
 }

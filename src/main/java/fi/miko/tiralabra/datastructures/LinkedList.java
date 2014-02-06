@@ -175,6 +175,19 @@ public class LinkedList<E> implements List<E> {
 	}
 
 	@Override
+	public Object[] toArray() {
+		Object[] array = new Object[size];
+		int index = 0;
+
+		for (E e : this) {
+			array[index] = e;
+			index++;
+		}
+
+		return array;
+	}
+
+	@Override
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
 		sb.append("[");
@@ -268,11 +281,6 @@ public class LinkedList<E> implements List<E> {
 
 	@Override
 	public List<E> subList(int fromIndex, int toIndex) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public Object[] toArray() {
 		throw new UnsupportedOperationException();
 	}
 

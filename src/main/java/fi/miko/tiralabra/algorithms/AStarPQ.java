@@ -1,14 +1,14 @@
 package fi.miko.tiralabra.algorithms;
 
-import fi.miko.tiralabra.datastructures.MinimumHeap;
+import java.util.PriorityQueue;
 
 /**
  * AStar class uses Dijkstra's algorithm to find the shortest path in the graph. If an heuristic is given the algorithm
  * transforms to A*.
  */
-public class AStar extends PathFinder {
+public class AStarPQ extends PathFinder {
 	private final Heuristic heuristic;
-	private MinimumHeap<Node> heap;
+	private PriorityQueue<Node> pq;
 
 	/**
 	 * Creates a new A* pathfinder. The given heuristic is used to estimate the node distances to the target node.
@@ -18,7 +18,7 @@ public class AStar extends PathFinder {
 	 * @param heuristic
 	 *            The heuristic used in distance estimation.
 	 */
-	public AStar(Graph graph, Heuristic heuristic) {
+	public AStarPQ(Graph graph, Heuristic heuristic) {
 		super(graph);
 
 		this.heuristic = heuristic;
@@ -27,12 +27,13 @@ public class AStar extends PathFinder {
 	@Override
 	public void findPath() {
 		initializeNodes();
-		heap = new MinimumHeap<>();
-		heap.insert(getStart(), 0);
+		pq = new PriorityQueue<>(getGraph().getNodes().size());
 
-		while (!heap.isEmpty()) {
+		pq.add(getStart());
+
+		while (!pq.isEmpty()) {
 			// Select the node with the best distance.
-			final Node node = heap.poll();
+			final Node node = pq.poll();
 
 			node.setClosed();
 
@@ -60,7 +61,8 @@ public class AStar extends PathFinder {
 			neighbour.setNearest(node);
 
 			if (neighbour.isOpen()) {
-				heap.decreaseKey(neighbour, neighbour.getDistance() + neighbour.getDistanceEstimate());
+				pq.remove(neighbour);
+				pq.add(neighbour);
 			}
 
 			if (!neighbour.isOpen()) {
@@ -70,7 +72,7 @@ public class AStar extends PathFinder {
 				neighbour.setDistanceEstimate(heuristic.distance(dx, dy));
 
 				neighbour.setOpen();
-				heap.insert(neighbour, neighbour.getDistance() + neighbour.getDistanceEstimate());
+				pq.add(neighbour);
 			}
 		}
 	}

@@ -3,9 +3,9 @@ package fi.miko.tiralabra;
 import java.util.List;
 import java.util.Random;
 
-import fi.miko.tiralabra.algorithms.AStar;
+import fi.miko.tiralabra.algorithms.AStarPQ;
 import fi.miko.tiralabra.algorithms.BellmanFord;
-import fi.miko.tiralabra.algorithms.Dijkstra;
+import fi.miko.tiralabra.algorithms.AStar;
 import fi.miko.tiralabra.algorithms.Graph;
 import fi.miko.tiralabra.algorithms.Heuristic;
 import fi.miko.tiralabra.algorithms.Node;
@@ -30,13 +30,13 @@ public class Main {
 		System.out.println("Reference path length: " + path.size() + " cost: " + getPathDistance(path));
 		System.out.println();
 
-		PathFinder d = new Dijkstra(new Graph(graph));
-		PathFinder a1 = new AStar(new Graph(graph), Heuristic.None);
-		PathFinder a2 = new AStar(new Graph(graph), Heuristic.Euclidean);
+		// PathFinder d = new Dijkstra(new Graph(graph));
+		PathFinder a1 = new AStar(new Graph(graph), Heuristic.Euclidean);
+		PathFinder a2 = new AStarPQ(new Graph(graph), Heuristic.Euclidean);
 
-		measure(d, "Dijkstra", path);
-		measure(a1, "A* None", path);
-		measure(a2, "A* Euclidean", path);
+		// measure(d, "Dijkstra", path);
+		measure(a1, "A* MinimumHeap", path);
+		measure(a2, "A* PriorityQueue", path);
 	}
 
 	private static char[][] generateRandom(int width, int height, double freq) {
@@ -80,21 +80,22 @@ public class Main {
 	}
 
 	private static void measure(PathFinder f, String name, List<Node> path) {
+		double length = getPathDistance(path);
+
 		long start = System.nanoTime();
 
-		for (int i = 0; i < 1000; ++i) {
+		for (int i = 0; i < 10000; ++i) {
 			f.findPath();
 
-			List<Node> fp = f.getShortestPath();
+			List<Node> path2 = f.getShortestPath();
+			double length2 = getPathDistance(path2);
 
-			double d1 = getPathDistance(path);
-			double d2 = getPathDistance(fp);
-
-			boolean valid = path.size() == fp.size() && d1 == d2;
+			boolean valid = path.size() == path2.size() && Double.compare(length, length2) == 0;
 
 			if (!valid) {
 				System.out.println("The path is invalid!");
-				System.out.println("Actual: " + fp.size() + " : " + d2);
+				System.out.println("Expected: " + path.size() + " : " + length);
+				System.out.println("Actual: " + path2.size() + " : " + length2);
 				break;
 			}
 		}
