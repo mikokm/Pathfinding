@@ -1,7 +1,8 @@
 package fi.miko.tiralabra.algorithms;
 
 import java.util.List;
-import java.util.PriorityQueue;
+
+import fi.miko.tiralabra.datastructures.MinimumHeap;
 
 /**
  * Dijkstra class implements Dijkstra's algorithm. This implementation is taken from Datastructures and algorithms
@@ -24,14 +25,14 @@ public class Dijkstra extends PathFinder {
 
 		// Add the initialized nodes to the priority queue.
 		final List<Node> nodes = getGraph().getNodes();
-		final PriorityQueue<Node> pq = new PriorityQueue<>(nodes.size());
+		final MinimumHeap<Node> heap = new MinimumHeap<>(1);
 		for (Node node : nodes) {
-			pq.add(node);
+			heap.insert(node, Double.MAX_VALUE);
 		}
 
-		while (!pq.isEmpty()) {
+		while (!heap.isEmpty()) {
 			// Select the node closest to the target node.
-			final Node node = pq.poll();
+			final Node node = heap.poll();
 
 			if (node == getTarget()) {
 				return;
@@ -48,8 +49,7 @@ public class Dijkstra extends PathFinder {
 					neighbour.setDistance(distance);
 					neighbour.setNearest(node);
 
-					pq.remove(neighbour);
-					pq.add(neighbour);
+					heap.decreaseKey(neighbour);
 				}
 			}
 		}

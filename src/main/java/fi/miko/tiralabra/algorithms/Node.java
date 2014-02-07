@@ -11,7 +11,7 @@ public class Node implements Comparable<Node>, Indexable {
 	private char type;
 	private double distance;
 	private double distanceEstimate;
-	private int x, y;
+	private final int x, y;
 
 	private boolean open;
 	private boolean closed;
@@ -69,7 +69,8 @@ public class Node implements Comparable<Node>, Indexable {
 	public double getDistanceEstimate() {
 		return distanceEstimate;
 	}
-	
+
+	@Override
 	public double getKey() {
 		return distance + distanceEstimate;
 	}
@@ -239,5 +240,4 @@ public class Node implements Comparable<Node>, Indexable {
 	public void setIndex(int index) {
 		heapIndex = index;
 	}
-
 }

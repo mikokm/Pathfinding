@@ -35,8 +35,6 @@ public class MinimumHeap<E extends Indexable> {
 	}
 
 	private void heapify(int i) {
-		// print();
-
 		int left = left(i);
 		int right = right(i);
 
@@ -69,8 +67,6 @@ public class MinimumHeap<E extends Indexable> {
 			elements = Arrays.copyOf(elements, elements.length * 2);
 		}
 
-		// print();
-
 		int i = heapSize - 1;
 		while (i > 0 && get(parent(i)).getKey() > key) {
 			assign(i, parent(i));
@@ -79,8 +75,6 @@ public class MinimumHeap<E extends Indexable> {
 
 		elements[i] = e;
 		updateIndex(i);
-
-		// print();
 	}
 
 	public boolean isEmpty() {
@@ -111,13 +105,6 @@ public class MinimumHeap<E extends Indexable> {
 		}
 
 		return element;
-	}
-
-	private void print() {
-		for (int i = 0; i < heapSize; ++i) {
-			System.out.print(get(i));
-		}
-		System.out.println();
 	}
 
 	public void remove(E e) {

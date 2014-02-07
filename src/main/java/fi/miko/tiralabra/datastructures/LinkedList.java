@@ -47,7 +47,8 @@ public class LinkedList<E> extends AbstractList<E> {
 	}
 
 	private int size;
-	private Node head, tail;
+	private final Node head;
+	private Node tail;
 
 	public LinkedList() {
 		head = new Node();
@@ -111,7 +112,7 @@ public class LinkedList<E> extends AbstractList<E> {
 		Node n = head.next;
 		Node m = other.head.next;
 
-		while (n != null && m != null) {
+		while (n != null) {
 			E e1 = n.data, e2 = m.data;
 
 			// Check if one element is null and the another one isn't.
@@ -128,7 +129,7 @@ public class LinkedList<E> extends AbstractList<E> {
 			m = m.next;
 		}
 
-		return (n == null && m == null);
+		return true;
 	}
 
 	@Override

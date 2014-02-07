@@ -1,8 +1,13 @@
 package fi.miko.tiralabra;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
+import java.util.Iterator;
 import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,6 +19,28 @@ public class LinkedListTest {
 	@Before
 	public void setUp() {
 		list = new LinkedList<>();
+	}
+
+	@Test
+	public void testAccess() {
+		int size = 10;
+		int[] elements = new int[size];
+
+		for (int i = 0; i < size; ++i) {
+			list.add(i);
+			elements[i] = i;
+		}
+
+		Object[] arr = list.toArray();
+
+		int pos = 0;
+		for (int n : list) {
+			assertEquals(elements[pos], n);
+			assertEquals(n, arr[pos]);
+
+			assertEquals(elements[pos], (int) list.get(pos));
+			pos++;
+		}
 	}
 
 	@Test
@@ -88,6 +115,11 @@ public class LinkedListTest {
 	}
 
 	@Test
+	public void testEqualsDiffClass() {
+		assertFalse(list.equals(new Object()));
+	}
+
+	@Test
 	public void testEqualsDifferent() {
 		list.add(1);
 
@@ -116,6 +148,11 @@ public class LinkedListTest {
 	}
 
 	@Test
+	public void testEqualsNull() {
+		assertFalse(list.equals(null));
+	}
+
+	@Test
 	public void testEqualsNullElements() {
 		list.add(null);
 
@@ -131,7 +168,7 @@ public class LinkedListTest {
 	}
 
 	@Test
-	public void testEqualsSame() {
+	public void testEqualsSameContent() {
 		list.add(1);
 		list.add(2);
 		List<Integer> l2 = new LinkedList<Integer>();
@@ -143,21 +180,8 @@ public class LinkedListTest {
 	}
 
 	@Test
-	public void testGetAndIterator() {
-		int size = 10;
-		int[] elements = new int[size];
-
-		for (int i = 0; i < size; ++i) {
-			list.add(i);
-			elements[i] = i;
-		}
-
-		int pos = 0;
-		for (int n : list) {
-			assertEquals(elements[pos], n);
-			assertEquals(elements[pos], (int) list.get(pos));
-			pos++;
-		}
+	public void testEqualsSameObject() {
+		assertTrue(list.equals(list));
 	}
 
 	@Test(expected = IndexOutOfBoundsException.class)
@@ -180,6 +204,22 @@ public class LinkedListTest {
 	}
 
 	@Test
+	public void testHashCodeSimple() {
+		int h1 = list.hashCode();
+
+		list.add(1);
+		int h2 = list.hashCode();
+
+		assertNotEquals(h1, h2);
+	}
+
+	@Test(expected = UnsupportedOperationException.class)
+	public void testIteratorCantRemove() {
+		Iterator<Integer> it = list.iterator();
+		it.remove();
+	}
+
+	@Test
 	public void testSizeNewList() {
 		testThatListIsEmpty();
 	}
@@ -187,5 +227,24 @@ public class LinkedListTest {
 	private void testThatListIsEmpty() {
 		assertEquals(0, list.size());
 		assertTrue(list.isEmpty());
+	}
+
+	@Test
+	public void testToStringContainsItems() {
+		for (int i = 0; i < 10; ++i) {
+			list.add(i);
+		}
+
+		String s = list.toString();
+
+		for (int i = 0; i < 10; ++i) {
+			assertTrue(s.contains(new Integer(i).toString()));
+		}
+	}
+
+	@Test
+	public void testToStringEmpty() {
+		String s = list.toString();
+		assertTrue(s.equals("[]"));
 	}
 }
