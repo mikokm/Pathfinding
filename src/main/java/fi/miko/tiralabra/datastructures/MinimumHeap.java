@@ -23,10 +23,22 @@ public class MinimumHeap<E extends Indexable> {
 	public void decreaseKey(E e) {
 		int i = e.getIndex();
 
+		if (i == -1) {
+			return;
+		}
+
 		while (i > 0 && get(parent(i)).getKey() > e.getKey()) {
 			swap(i, parent(i));
 			i = parent(i);
 		}
+	}
+
+	public void clear() {
+		for (int i = 0; i < heapSize; ++i) {
+			elements[i] = null;
+		}
+
+		heapSize = 0;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -34,12 +46,32 @@ public class MinimumHeap<E extends Indexable> {
 		return (E) elements[i];
 	}
 
+	public E getMin() {
+		if (isEmpty()) {
+			throw new NoSuchElementException();
+		}
+
+		E element = get(0);
+		element.setIndex(-1);
+
+		heapSize--;
+
+		if (isEmpty()) {
+			elements[0] = null;
+		} else {
+			assign(0, heapSize);
+			heapify(0);
+		}
+
+		return element;
+	}
+
 	private void heapify(int i) {
 		int left = left(i);
 		int right = right(i);
 
-		// Node i has two child nodes.
 		if (right < heapSize) {
+			// Node i has two child nodes.
 			int smallest;
 
 			// Get the smallest element of the two
@@ -54,13 +86,13 @@ public class MinimumHeap<E extends Indexable> {
 				heapify(smallest);
 			}
 
-			// Node i has one child node.
 		} else if (left == (heapSize - 1) && get(i).getKey() > get(left).getKey()) {
+			// Node i has one child node and it's the smaller than that parent node.
 			swap(i, left);
 		}
 	}
 
-	public void insert(E e, double key) {
+	public void insert(E e) {
 		heapSize++;
 
 		if (heapSize > elements.length) {
@@ -68,7 +100,7 @@ public class MinimumHeap<E extends Indexable> {
 		}
 
 		int i = heapSize - 1;
-		while (i > 0 && get(parent(i)).getKey() > key) {
+		while (i > 0 && get(parent(i)).getKey() > e.getKey()) {
 			assign(i, parent(i));
 			i = parent(i);
 		}
@@ -87,36 +119,6 @@ public class MinimumHeap<E extends Indexable> {
 
 	private int parent(int i) {
 		return i / 2;
-	}
-
-	public E poll() {
-		if (isEmpty()) {
-			throw new NoSuchElementException();
-		}
-
-		E element = get(0);
-		heapSize--;
-
-		if (isEmpty()) {
-			elements[0] = null;
-		} else {
-			assign(0, heapSize);
-			heapify(0);
-		}
-
-		return element;
-	}
-
-	public void remove(E e) {
-		int index = e.getIndex();
-
-		if (index == -1) {
-			return;
-		}
-
-		assign(index, heapSize - 1);
-		heapSize--;
-		heapify(index);
 	}
 
 	private int right(int i) {
@@ -138,6 +140,25 @@ public class MinimumHeap<E extends Indexable> {
 
 	public Object[] toArray() {
 		return Arrays.copyOf(elements, heapSize);
+	}
+
+	@Override
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+
+		sb.append("[");
+
+		for (int i = 0; i < heapSize; ++i) {
+			sb.append(get(i).getKey());
+
+			if (i < heapSize - 1) {
+				sb.append(", ");
+			}
+		}
+
+		sb.append("]");
+
+		return sb.toString();
 	}
 
 	private void updateIndex(int i) {

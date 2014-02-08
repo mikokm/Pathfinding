@@ -30,9 +30,21 @@ public abstract class PathFinder {
 		initializeNodes();
 	}
 
+	/**
+	 * Returns the distance between the adjacent nodes.
+	 * 
+	 * @param n1
+	 *            First node.
+	 * @param n2
+	 *            Second node.
+	 * @return The distance between the adjacent nodes.
+	 */
 	protected double getDistance(Node n1, Node n2) {
-		final int dx = n1.getX() - n2.getX();
-		final int dy = n1.getY() - n2.getY();
+		final int dx = Math.abs(n1.getX() - n2.getX());
+		final int dy = Math.abs(n1.getY() - n2.getY());
+
+		assert (dx <= 1 && dy <= 1);
+
 		return (dx != 0 && dy != 0 ? SQRT_2 : 1);
 	}
 
@@ -110,6 +122,8 @@ public abstract class PathFinder {
 
 			if (n.getType() == START) {
 				start = n;
+				start.setDistance(0);
+				start.setDistanceEstimate(0);
 			}
 
 			if (n.getType() == TARGET) {
@@ -117,8 +131,9 @@ public abstract class PathFinder {
 			}
 		}
 
-		start.setDistance(0);
-		start.setDistanceEstimate(0);
+		if (start == null || target == null) {
+			throw new InvalidGraphException("No start or target node specified!");
+		}
 	}
 
 	/**

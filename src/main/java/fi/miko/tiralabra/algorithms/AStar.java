@@ -28,11 +28,11 @@ public class AStar extends PathFinder {
 	public void findPath() {
 		initializeNodes();
 		heap = new MinimumHeap<>();
-		heap.insert(getStart(), 0);
+		heap.insert(getStart());
 
 		while (!heap.isEmpty()) {
 			// Select the node with the best distance.
-			final Node node = heap.poll();
+			final Node node = heap.getMin();
 
 			node.setVisited();
 			node.setClosed();
@@ -73,7 +73,7 @@ public class AStar extends PathFinder {
 				neighbour.setDistanceEstimate(heuristic.distance(dx, dy));
 
 				neighbour.setOpen();
-				heap.insert(neighbour, neighbour.getDistance() + neighbour.getDistanceEstimate());
+				heap.insert(neighbour);
 			}
 		}
 	}

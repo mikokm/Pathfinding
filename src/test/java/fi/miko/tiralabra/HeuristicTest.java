@@ -12,6 +12,7 @@ public class HeuristicTest {
 	@Test
 	public void testDiagonal() {
 		Heuristic h = Heuristic.Diagonal;
+		assertEquals(Heuristic.Diagonal, Heuristic.valueOf("Diagonal"));
 
 		assertEquals(0, h.distance(0, 0), delta);
 		assertEquals(1, h.distance(1, 1), delta);
@@ -23,6 +24,7 @@ public class HeuristicTest {
 	@Test
 	public void testEuclidean() {
 		Heuristic h = Heuristic.Euclidean;
+		assertEquals(Heuristic.Euclidean, Heuristic.valueOf("Euclidean"));
 
 		assertEquals(0, h.distance(0, 0), delta);
 		assertEquals(Math.sqrt(2), h.distance(1, 1), delta);
@@ -34,6 +36,7 @@ public class HeuristicTest {
 	@Test
 	public void testManhattan() {
 		Heuristic h = Heuristic.Manhattan;
+		assertEquals(Heuristic.Manhattan, Heuristic.valueOf("Manhattan"));
 
 		assertEquals(0, h.distance(0, 0), delta);
 		assertEquals(2, h.distance(1, 1), delta);

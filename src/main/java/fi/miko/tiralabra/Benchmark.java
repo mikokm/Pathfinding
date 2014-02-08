@@ -59,6 +59,10 @@ public class Benchmark {
 	}
 
 	private double getPathDistance(List<Node> path) {
+		if (path.size() == 0) {
+			return 0;
+		}
+
 		return path.get(path.size() - 1).getDistance();
 	}
 
