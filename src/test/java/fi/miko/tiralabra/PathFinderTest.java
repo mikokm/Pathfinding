@@ -154,8 +154,6 @@ public class PathFinderTest {
 		pf.getShortestPath();
 	}
 
-
-
 	@Test
 	public void testShortestPathOnlyStartAndtarget() {
 		addNodes(2);

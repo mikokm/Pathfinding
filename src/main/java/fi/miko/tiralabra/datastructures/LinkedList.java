@@ -78,7 +78,7 @@ public class LinkedList<E> extends AbstractList<E> {
 		Node n = head.next;
 
 		while (n != null) {
-			if (n.data == o) {
+			if (n.data.equals(o)) {
 				return true;
 			}
 

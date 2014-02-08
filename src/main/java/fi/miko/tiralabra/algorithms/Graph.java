@@ -22,18 +22,6 @@ public class Graph {
 	}
 
 	/**
-	 * Creates a new empty graph with given width and height.
-	 * 
-	 * @param width
-	 *            The width of the graph.
-	 * @param height
-	 *            The height of the graph.
-	 */
-	public Graph(int width, int height) {
-		createNodes(width, height);
-	}
-
-	/**
 	 * Allocates memory for node array used to store the graph data.
 	 * 
 	 * @param width
@@ -42,7 +30,6 @@ public class Graph {
 	 *            The height of the graph.
 	 */
 	private void createNodes(int width, int height) {
-		assert (width > 0 && height > 0);
 		graph = new Node[height][width];
 	}
 
@@ -51,17 +38,8 @@ public class Graph {
 	 * 
 	 * @return The height of the graph.
 	 */
-	public int getGraphHeight() {
+	public int getHeight() {
 		return graph.length;
-	}
-
-	/**
-	 * Returns the width of the graph.
-	 * 
-	 * @return The width of the graph.
-	 */
-	public int getGraphWidth() {
-		return graph[0].length;
 	}
 
 	/**
@@ -75,6 +53,10 @@ public class Graph {
 		List<Node> list = new LinkedList<>();
 
 		int x0 = node.getX(), y0 = node.getY();
+
+		if (!isWithinGraph(x0, y0)) {
+			return list;
+		}
 
 		for (int y = y0 - 1; y <= y0 + 1; ++y) {
 			for (int x = x0 - 1; x <= x0 + 1; ++x) {
@@ -106,7 +88,6 @@ public class Graph {
 	 * @return The node with the given (x, y) coordinates.
 	 */
 	public Node getNode(int x, int y) {
-		assert (isWithinGraph(x, y));
 		return graph[y][x];
 	}
 
@@ -120,6 +101,15 @@ public class Graph {
 	}
 
 	/**
+	 * Returns the width of the graph.
+	 * 
+	 * @return The width of the graph.
+	 */
+	public int getWidth() {
+		return graph[0].length;
+	}
+
+	/**
 	 * Returns true if the point (x, y) within the graph; false otherwise.
 	 * 
 	 * @param x
@@ -129,7 +119,7 @@ public class Graph {
 	 * @return true if the point (x, y) within the graph; false otherwise.
 	 */
 	public boolean isWithinGraph(int x, int y) {
-		if (x >= getGraphWidth() || y >= getGraphHeight() || x < 0 || y < 0) {
+		if (x >= getWidth() || y >= getHeight() || x < 0 || y < 0) {
 			return false;
 		}
 
@@ -143,10 +133,17 @@ public class Graph {
 	 *            The graph content.
 	 */
 	public void setMap(char[][] map) {
-		createNodes(map.length, map[0].length);
+		int height = map.length;
+		int width = map[0].length;
 
-		for (int y = 0; y < getGraphHeight(); ++y) {
-			for (int x = 0; x < getGraphWidth(); ++x) {
+		if (width <= 0 || height <= 0) {
+			throw new RuntimeException("Cannot create graph with zero height or width!");
+		}
+
+		createNodes(width, height);
+
+		for (int y = 0; y < getHeight(); ++y) {
+			for (int x = 0; x < getWidth(); ++x) {
 				Node node = new Node(x, y, map[y][x]);
 				nodes.add(node);
 				graph[y][x] = node;
@@ -157,13 +154,13 @@ public class Graph {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		for (int y = 0; y < getGraphHeight(); ++y) {
-			for (int x = 0; x < getGraphWidth(); ++x) {
+		for (int y = 0; y < getHeight(); ++y) {
+			for (int x = 0; x < getWidth(); ++x) {
 				sb.append(graph[y][x].getType());
 			}
 
 			// Skip the last new line.
-			if (y < getGraphHeight() - 1) {
+			if (y < getHeight() - 1) {
 				sb.append('\n');
 			}
 		}

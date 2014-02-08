@@ -1,13 +1,14 @@
 package fi.miko.tiralabra;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 import fi.miko.tiralabra.algorithms.Edge;
 import fi.miko.tiralabra.algorithms.Node;
 
-public class TestEdge {
+public class EdgeTest {
 	@Test(expected = RuntimeException.class)
 	public void testCreateEdgeNegativeWeight() {
 		new Edge(new Node(0, 0), new Node(1, 1), -1);
