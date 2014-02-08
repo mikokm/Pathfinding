@@ -33,12 +33,15 @@ public class Dijkstra extends PathFinder {
 		while (!heap.isEmpty()) {
 			// Select the node closest to the target node.
 			final Node node = heap.poll();
+			node.setVisited();
 
 			if (node == getTarget()) {
 				return;
 			}
 
 			for (Node neighbour : getGraph().getNeighbours(node)) {
+				neighbour.setVisited();
+
 				if (neighbour.getType() == WALL) {
 					continue;
 				}

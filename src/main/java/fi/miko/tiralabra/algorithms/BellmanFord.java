@@ -61,6 +61,9 @@ public class BellmanFord extends PathFinder {
 	 *            The distance between u and v (edge weight).
 	 */
 	private void relax(Node u, Node v, double w) {
+		u.setVisited();
+		v.setVisited();
+
 		if (u.getDistance() == Double.MAX_VALUE) {
 			return;
 		}

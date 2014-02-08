@@ -31,11 +31,15 @@ public class NodeTest {
 
 		assertFalse(node.isClosed());
 		assertFalse(node.isOpen());
+		assertFalse(node.isVisited());
 
 		node.setClosed();
 		node.setOpen();
+		node.setVisited();
+
 		assertTrue(node.isClosed());
 		assertTrue(node.isOpen());
+		assertTrue(node.isVisited());
 
 		assertEquals(-1, node.getIndex());
 		node.setIndex(1);
@@ -69,6 +73,7 @@ public class NodeTest {
 		assertEquals(0, node.getDistanceEstimate(), delta);
 		assertFalse(node.isOpen());
 		assertFalse(node.isClosed());
+		assertFalse(node.isVisited());
 	}
 
 	@Test

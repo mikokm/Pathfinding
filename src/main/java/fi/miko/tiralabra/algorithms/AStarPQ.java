@@ -35,6 +35,7 @@ public class AStarPQ extends PathFinder {
 			// Select the node with the best distance.
 			final Node node = pq.poll();
 
+			node.setVisited();
 			node.setClosed();
 
 			// If the the node is the target node, the shortest path has been found.
@@ -49,6 +50,8 @@ public class AStarPQ extends PathFinder {
 	}
 
 	void processNode(Node node, Node neighbour) {
+		neighbour.setVisited();
+
 		// If the node is wall or if it is in the closed set, skip it.
 		if (neighbour.getType() == PathFinder.WALL || neighbour.isClosed()) {
 			return;

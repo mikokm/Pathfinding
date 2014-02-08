@@ -6,16 +6,17 @@ import fi.miko.tiralabra.datastructures.Indexable;
  * Node class contains the node information needed by graph search algorithms.
  */
 public class Node implements Comparable<Node>, Indexable {
-	private Node nearest = null;
+	private boolean closed;
 
-	private char type;
 	private double distance;
 	private double distanceEstimate;
-	private final int x, y;
+	private int heapIndex = -1;
+	private Node nearest = null;
 
 	private boolean open;
-	private boolean closed;
-	private int heapIndex = -1;
+	private char type;
+	private boolean visited;
+	private final int x, y;
 
 	/**
 	 * Creates a new node with the given coordinates.
@@ -52,6 +53,29 @@ public class Node implements Comparable<Node>, Indexable {
 		return Double.compare(distance + this.distanceEstimate, node.distance + node.distanceEstimate);
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (obj == null) {
+			return false;
+		}
+
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+
+		Node other = (Node) obj;
+
+		if (x != other.x || y != other.y) {
+			return false;
+		}
+
+		return true;
+	}
+
 	/**
 	 * Returns the distance to the start node.
 	 * 
@@ -68,6 +92,11 @@ public class Node implements Comparable<Node>, Indexable {
 	 */
 	public double getDistanceEstimate() {
 		return distanceEstimate;
+	}
+
+	@Override
+	public int getIndex() {
+		return heapIndex;
 	}
 
 	@Override
@@ -111,6 +140,15 @@ public class Node implements Comparable<Node>, Indexable {
 		return y;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + x;
+		result = prime * result + y;
+		return result;
+	}
+
 	/**
 	 * Returns true if the node is closed; otherwise false.
 	 * 
@@ -130,13 +168,25 @@ public class Node implements Comparable<Node>, Indexable {
 	}
 
 	/**
+	 * Returns true if this node was visited during pathfinding; otherwise false.
+	 * 
+	 * @return True if this node was visited during pathfinding; otherwise false.
+	 */
+	public boolean isVisited() {
+		return visited;
+	}
+
+	/**
 	 * Resets the node data to initial values.
 	 */
 	public void reset() {
 		open = false;
 		closed = false;
+		visited = false;
+
 		distance = Double.MAX_VALUE;
 		distanceEstimate = 0;
+
 		nearest = null;
 	}
 
@@ -167,6 +217,11 @@ public class Node implements Comparable<Node>, Indexable {
 		this.distanceEstimate = distanceEstimate;
 	}
 
+	@Override
+	public void setIndex(int index) {
+		heapIndex = index;
+	}
+
 	/**
 	 * Sets the node nearest to the start node that is accessible from this node.
 	 * 
@@ -194,50 +249,15 @@ public class Node implements Comparable<Node>, Indexable {
 		this.type = type;
 	}
 
+	/**
+	 * Marks the node as visited.
+	 */
+	public void setVisited() {
+		visited = true;
+	}
+
 	@Override
 	public String toString() {
 		return "[" + x + ", " + y + "]";
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + x;
-		result = prime * result + y;
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-
-		if (obj == null) {
-			return false;
-		}
-
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-
-		Node other = (Node) obj;
-
-		if (x != other.x || y != other.y) {
-			return false;
-		}
-
-		return true;
-	}
-
-	@Override
-	public int getIndex() {
-		return heapIndex;
-	}
-
-	@Override
-	public void setIndex(int index) {
-		heapIndex = index;
 	}
 }

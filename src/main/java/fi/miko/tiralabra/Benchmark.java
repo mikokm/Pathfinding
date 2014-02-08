@@ -29,7 +29,8 @@ public class Benchmark {
 			return;
 		}
 
-		System.out.println("Reference path length: " + path.size() + " cost: " + getPathDistance(path));
+		System.out.println("Reference path length: " + path.size() + " cost: " + getPathDistance(path) + " visited: "
+				+ getVisitedCount(f.getGraph().getNodes()));
 		System.out.println();
 
 		PathFinder d = new Dijkstra(new Graph(graph));
@@ -61,6 +62,17 @@ public class Benchmark {
 		return path.get(path.size() - 1).getDistance();
 	}
 
+	private int getVisitedCount(List<Node> nodes) {
+		int visited = 0;
+		for (Node node : nodes) {
+			if (node.isVisited()) {
+				visited++;
+			}
+		}
+
+		return visited;
+	}
+
 	private static boolean isValidPath(Graph graph, List<Node> path) {
 		Node prev = null;
 
@@ -84,6 +96,7 @@ public class Benchmark {
 		List<Node> path2 = null;
 
 		long start = System.nanoTime();
+
 		for (int i = 0; i < 1000; ++i) {
 			f.findPath();
 
@@ -99,12 +112,14 @@ public class Benchmark {
 				break;
 			}
 		}
-		long end = System.nanoTime();
 
+		long end = System.nanoTime();
 		double elapsed = (end - start) / 1E9;
 
+		int visited = getVisitedCount(f.getGraph().getNodes());
+
 		System.out.println(name + ": " + elapsed + "s");
-		System.out.println("Path length: " + path2.size() + " cost: " + cost2);
+		System.out.println("Path length: " + path2.size() + " cost: " + cost2 + " visited: " + visited);
 		System.out.println();
 	}
 }
