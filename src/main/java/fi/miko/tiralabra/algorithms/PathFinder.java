@@ -42,8 +42,6 @@ public abstract class PathFinder {
 		final int dx = Math.abs(n1.getX() - n2.getX());
 		final int dy = Math.abs(n1.getY() - n2.getY());
 
-		assert (dx <= 1 && dy <= 1);
-
 		return (dx != 0 && dy != 0 ? SQRT_2 : 1);
 	}
 
@@ -68,9 +66,12 @@ public abstract class PathFinder {
 	 * @return The list of nodes in between the start and target nodes, or an empty list.
 	 */
 	public List<Node> getShortestPath() {
-		assert (start != null && target != null);
-
 		List<Node> path = new LinkedList<>();
+
+		if (start == null || target == null) {
+			throw new InvalidGraphException("No start or target node specified!");
+		}
+
 		Stack<Node> stack = new Stack<>();
 
 		Node node = target.getNearest();
@@ -141,7 +142,7 @@ public abstract class PathFinder {
 	 * @param graph
 	 *            The graph to search paths in.
 	 */
-	protected void setGraph(Graph graph) {
+	public void setGraph(Graph graph) {
 		this.graph = graph;
 	}
 

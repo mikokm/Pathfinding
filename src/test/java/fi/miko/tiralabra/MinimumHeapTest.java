@@ -81,12 +81,28 @@ public class MinimumHeapTest {
 			heap.insert(o);
 
 			assertEquals(i + 1, heap.size());
+			testHeapProperty();
+		}
+	}
+
+	private void testHeapProperty() {
+		Object[] arr = heap.toArray();
+
+		for (int i = 0; i < arr.length / 2; i += 2) {
+
+			DummyObject parent = (DummyObject) arr[i / 2];
+			DummyObject right = (DummyObject) arr[i + 1];
+			DummyObject left = (DummyObject) arr[2 * i + 1];
+
+			assertTrue(parent.getKey() <= right.getKey());
+			assertTrue(parent.getKey() <= left.getKey());
 		}
 	}
 
 	@Before
 	public void setUp() {
 		heap = new MinimumHeap<>();
+		testHeapProperty();
 	}
 
 	@Test
@@ -118,7 +134,6 @@ public class MinimumHeapTest {
 		insertData(data);
 
 		Object[] arr = heap.toArray();
-		System.out.println(heap);
 
 		DummyObject fake = new DummyObject(0);
 		fake.setIndex(-1);
@@ -132,6 +147,7 @@ public class MinimumHeapTest {
 			}
 
 			heap.decreaseKey(o);
+			testHeapProperty();
 		}
 
 		data[11] = 1;
