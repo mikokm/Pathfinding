@@ -27,7 +27,6 @@ public abstract class PathFinder {
 	 */
 	public PathFinder(Graph graph) {
 		this.graph = graph;
-		initializeNodes();
 	}
 
 	/**
@@ -39,7 +38,7 @@ public abstract class PathFinder {
 	 *            Second node.
 	 * @return The distance between the adjacent nodes.
 	 */
-	protected double getDistance(Node n1, Node n2) {
+	public double getDistance(Node n1, Node n2) {
 		final int dx = Math.abs(n1.getX() - n2.getX());
 		final int dy = Math.abs(n1.getY() - n2.getY());
 

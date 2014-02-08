@@ -42,8 +42,6 @@ public class MinimumHeapTest {
 		}
 	}
 
-	private final static double delta = 1E-15;
-
 	MinimumHeap<DummyObject> heap;
 
 	private boolean containsKey(Object[] arr, double key) {
@@ -73,7 +71,7 @@ public class MinimumHeapTest {
 		Arrays.sort(data);
 
 		for (double element : data) {
-			assertEquals(element, heap.getMin().getKey(), delta);
+			assertEquals(element, heap.getMin().getKey(), 0);
 		}
 	}
 
@@ -142,7 +140,7 @@ public class MinimumHeapTest {
 		Arrays.sort(data);
 
 		for (int i = 0; i < 10; ++i) {
-			assertEquals(data[i], heap.getMin().getKey(), delta);
+			assertEquals(data[i], heap.getMin().getKey(), 0);
 		}
 	}
 

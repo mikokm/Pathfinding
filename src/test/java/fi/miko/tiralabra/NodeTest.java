@@ -11,7 +11,6 @@ import org.junit.Test;
 import fi.miko.tiralabra.algorithms.Node;
 
 public class NodeTest {
-	private static double delta = 1E-15;
 
 	@Test
 	public void testChanges() {
@@ -21,10 +20,10 @@ public class NodeTest {
 		assertEquals(node, node.getNearest());
 
 		node.setDistance(1);
-		assertEquals(1, node.getDistance(), delta);
+		assertEquals(1, node.getDistance(), 0);
 
 		node.setDistanceEstimate(2);
-		assertEquals(2, node.getDistanceEstimate(), delta);
+		assertEquals(2, node.getDistanceEstimate(), 0);
 
 		node.setType((char) 1);
 		assertEquals(1, node.getType());
@@ -69,8 +68,8 @@ public class NodeTest {
 
 	private void testDefaults(Node node) {
 		assertNull(node.getNearest());
-		assertEquals(Double.MAX_VALUE, node.getDistance(), delta);
-		assertEquals(0, node.getDistanceEstimate(), delta);
+		assertEquals(Double.MAX_VALUE, node.getDistance(), 0);
+		assertEquals(0, node.getDistanceEstimate(), 0);
 		assertFalse(node.isOpen());
 		assertFalse(node.isClosed());
 		assertFalse(node.isVisited());
@@ -144,13 +143,13 @@ public class NodeTest {
 
 		node.setDistance(0);
 		node.setDistanceEstimate(0);
-		assertEquals(0, node.getKey(), delta);
+		assertEquals(0, node.getKey(), 0);
 
 		node.setDistance(1);
-		assertEquals(1, node.getKey(), delta);
+		assertEquals(1, node.getKey(), 0);
 
 		node.setDistanceEstimate(1);
-		assertEquals(2, node.getKey(), delta);
+		assertEquals(2, node.getKey(), 0);
 	}
 
 	@Test
@@ -170,7 +169,7 @@ public class NodeTest {
 		testDefaults(node);
 
 		node.setDistance(1);
-		assertEquals(1, node.getDistance(), delta);
+		assertEquals(1, node.getDistance(), 0);
 
 		node.reset();
 		testDefaults(node);

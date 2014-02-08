@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Random;
 
 import fi.miko.tiralabra.algorithms.AStar;
-import fi.miko.tiralabra.algorithms.AStarPQ;
 import fi.miko.tiralabra.algorithms.BellmanFord;
 import fi.miko.tiralabra.algorithms.Dijkstra;
 import fi.miko.tiralabra.algorithms.Graph;
@@ -34,12 +33,12 @@ public class Benchmark {
 		System.out.println();
 
 		PathFinder d = new Dijkstra(new Graph(graph));
-		PathFinder a1 = new AStar(new Graph(graph), Heuristic.Euclidean);
-		PathFinder a2 = new AStarPQ(new Graph(graph), Heuristic.Euclidean);
+		PathFinder a1 = new AStar(new Graph(graph), Heuristic.None);
+		PathFinder a2 = new AStar(new Graph(graph), Heuristic.Euclidean);
 
 		measure(d, "Dijkstra", path);
-		measure(a1, "A* MinimumHeap", path);
-		measure(a2, "A* PriorityQueue", path);
+		measure(a1, "A* No Heuristic", path);
+		measure(a2, "A* Euclidean", path);
 	}
 
 	public char[][] generateRandom(int width, int height, double freq) {
