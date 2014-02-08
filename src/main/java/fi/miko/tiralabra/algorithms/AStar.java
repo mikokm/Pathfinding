@@ -7,8 +7,8 @@ import fi.miko.tiralabra.datastructures.MinimumHeap;
  * transforms to A*.
  */
 public class AStar extends PathFinder {
-	private final Heuristic heuristic;
 	private MinimumHeap<Node> heap;
+	private final Heuristic heuristic;
 
 	/**
 	 * Creates a new A* pathfinder. The given heuristic is used to estimate the node distances to the target node.

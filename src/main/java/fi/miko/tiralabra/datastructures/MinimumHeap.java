@@ -20,6 +20,14 @@ public class MinimumHeap<E extends Indexable> {
 		updateIndex(i);
 	}
 
+	public void clear() {
+		for (int i = 0; i < heapSize; ++i) {
+			elements[i] = null;
+		}
+
+		heapSize = 0;
+	}
+
 	public void decreaseKey(E e) {
 		int i = e.getIndex();
 
@@ -31,14 +39,6 @@ public class MinimumHeap<E extends Indexable> {
 			swap(i, parent(i));
 			i = parent(i);
 		}
-	}
-
-	public void clear() {
-		for (int i = 0; i < heapSize; ++i) {
-			elements[i] = null;
-		}
-
-		heapSize = 0;
 	}
 
 	@SuppressWarnings("unchecked")

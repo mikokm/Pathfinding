@@ -85,20 +85,6 @@ public class MinimumHeapTest {
 		}
 	}
 
-	private void testHeapProperty() {
-		Object[] arr = heap.toArray();
-
-		for (int i = 0; i < arr.length / 2; i += 2) {
-
-			DummyObject parent = (DummyObject) arr[i / 2];
-			DummyObject right = (DummyObject) arr[i + 1];
-			DummyObject left = (DummyObject) arr[2 * i + 1];
-
-			assertTrue(parent.getKey() <= right.getKey());
-			assertTrue(parent.getKey() <= left.getKey());
-		}
-	}
-
 	@Before
 	public void setUp() {
 		heap = new MinimumHeap<>();
@@ -163,6 +149,19 @@ public class MinimumHeapTest {
 	@Test(expected = NoSuchElementException.class)
 	public void testGetFromEmpty() {
 		heap.getMin();
+	}
+
+	private void testHeapProperty() {
+		Object[] arr = heap.toArray();
+
+		for (int i = 0; i < arr.length / 2; i += 2) {
+			DummyObject parent = (DummyObject) arr[i / 2];
+			DummyObject right = (DummyObject) arr[i + 1];
+			DummyObject left = (DummyObject) arr[2 * i + 1];
+
+			assertTrue(parent.getKey() <= right.getKey());
+			assertTrue(parent.getKey() <= left.getKey());
+		}
 	}
 
 	@Test

@@ -13,34 +13,6 @@ import fi.miko.tiralabra.algorithms.PathFinder;
 
 public class Benchmark {
 
-	public void run() {
-		char[][] graph = generateRandom(100, 100, 0.20);
-		Graph g = new Graph(graph);
-		// System.out.println(g);
-
-		PathFinder f = new BellmanFord(g);
-
-		f.findPath();
-		List<Node> path = f.getShortestPath();
-
-		if (path.isEmpty() || !isValidPath(g, path)) {
-			System.out.println("No path found!");
-			return;
-		}
-
-		System.out.println("Reference path length: " + path.size() + " cost: " + getPathDistance(path) + " visited: "
-				+ getVisitedCount(f.getGraph().getNodes()));
-		System.out.println();
-
-		PathFinder d = new Dijkstra(new Graph(graph));
-		PathFinder a1 = new AStar(new Graph(graph), Heuristic.None);
-		PathFinder a2 = new AStar(new Graph(graph), Heuristic.Euclidean);
-
-		measure(d, "Dijkstra", path);
-		measure(a1, "A* No Heuristic", path);
-		measure(a2, "A* Euclidean", path);
-	}
-
 	public char[][] generateRandom(int width, int height, double freq) {
 		char[][] graph = new char[height][width];
 		Random rand = new Random();
@@ -76,22 +48,6 @@ public class Benchmark {
 		return visited;
 	}
 
-	private static boolean isValidPath(Graph graph, List<Node> path) {
-		Node prev = null;
-
-		for (Node n : path) {
-			if (prev != null) {
-				if (graph.getNeighbours(prev).contains(n) == false) {
-					return false;
-				}
-			}
-
-			prev = n;
-		}
-
-		return true;
-	}
-
 	private void measure(PathFinder f, String name, List<Node> path) {
 		double cost = getPathDistance(path);
 
@@ -124,5 +80,49 @@ public class Benchmark {
 		System.out.println(name + ": " + elapsed + "s");
 		System.out.println("Path length: " + path2.size() + " cost: " + cost2 + " visited: " + visited);
 		System.out.println();
+	}
+
+	public void run() {
+		char[][] graph = generateRandom(100, 100, 0.20);
+		Graph g = new Graph(graph);
+		// System.out.println(g);
+
+		PathFinder f = new BellmanFord(g);
+
+		f.findPath();
+		List<Node> path = f.getShortestPath();
+
+		if (path.isEmpty() || !isValidPath(g, path)) {
+			System.out.println("No path found!");
+			return;
+		}
+
+		System.out.println("Reference path length: " + path.size() + " cost: " + getPathDistance(path) + " visited: "
+				+ getVisitedCount(f.getGraph().getNodes()));
+		System.out.println();
+
+		PathFinder d = new Dijkstra(new Graph(graph));
+		PathFinder a1 = new AStar(new Graph(graph), Heuristic.None);
+		PathFinder a2 = new AStar(new Graph(graph), Heuristic.Euclidean);
+
+		measure(d, "Dijkstra", path);
+		measure(a1, "A* No Heuristic", path);
+		measure(a2, "A* Euclidean", path);
+	}
+
+	private static boolean isValidPath(Graph graph, List<Node> path) {
+		Node prev = null;
+
+		for (Node n : path) {
+			if (prev != null) {
+				if (graph.getNeighbours(prev).contains(n) == false) {
+					return false;
+				}
+			}
+
+			prev = n;
+		}
+
+		return true;
 	}
 }

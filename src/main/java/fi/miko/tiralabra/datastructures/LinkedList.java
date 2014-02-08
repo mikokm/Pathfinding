@@ -46,8 +46,8 @@ public class LinkedList<E> extends AbstractList<E> {
 		}
 	}
 
-	private int size;
 	private final Node head;
+	private int size;
 	private Node tail;
 
 	public LinkedList() {

@@ -9,11 +9,11 @@ import fi.miko.tiralabra.datastructures.LinkedList;
  * PathFinder is a helper class that is used to implement Dijkstra and Bellman-Ford algorithms.
  */
 public abstract class PathFinder {
+	private static final double SQRT_2 = Math.sqrt(2);
 	public static final char START = 's';
 	public static final char TARGET = 't';
-	public static final char WALL = '#';
 
-	private static final double SQRT_2 = Math.sqrt(2);
+	public static final char WALL = '#';
 
 	private Graph graph;
 	private Node start = null;
@@ -30,6 +30,11 @@ public abstract class PathFinder {
 	}
 
 	/**
+	 * Finds the shortest path between the start and target nodes.
+	 */
+	public abstract void findPath();
+
+	/**
 	 * Returns the distance between the adjacent nodes.
 	 * 
 	 * @param n1
@@ -42,13 +47,12 @@ public abstract class PathFinder {
 		final int dx = Math.abs(n1.getX() - n2.getX());
 		final int dy = Math.abs(n1.getY() - n2.getY());
 
+		if (dx > 1 || dy > 1) {
+			throw new RuntimeException("Called getDistance() on non-adjacent nodes!");
+		}
+
 		return (dx != 0 && dy != 0 ? SQRT_2 : 1);
 	}
-
-	/**
-	 * Finds the shortest path between the start and target nodes.
-	 */
-	public abstract void findPath();
 
 	/**
 	 * Returns the graph used by this pathfinder.
@@ -69,7 +73,7 @@ public abstract class PathFinder {
 		List<Node> path = new LinkedList<>();
 
 		if (start == null || target == null) {
-			throw new InvalidGraphException("No start or target node specified!");
+			throw new RuntimeException("No start or target node specified!");
 		}
 
 		Stack<Node> stack = new Stack<>();
@@ -132,7 +136,7 @@ public abstract class PathFinder {
 		}
 
 		if (start == null || target == null) {
-			throw new InvalidGraphException("No start or target node specified!");
+			throw new RuntimeException("No start or target node specified!");
 		}
 	}
 

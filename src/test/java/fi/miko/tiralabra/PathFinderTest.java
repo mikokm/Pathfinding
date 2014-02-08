@@ -14,7 +14,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import fi.miko.tiralabra.algorithms.Graph;
-import fi.miko.tiralabra.algorithms.InvalidGraphException;
 import fi.miko.tiralabra.algorithms.Node;
 import fi.miko.tiralabra.algorithms.PathFinder;
 
@@ -59,14 +58,14 @@ public class PathFinderTest {
 		assertNull(pf.getTarget());
 	}
 
-	@Test(expected = InvalidGraphException.class)
+	@Test(expected = RuntimeException.class)
 	public void testFindPathInvalidGraphNoStart() {
 		addNodes(1);
 		nodes.get(0).setType('t');
 		pf.findPath();
 	}
 
-	@Test(expected = InvalidGraphException.class)
+	@Test(expected = RuntimeException.class)
 	public void testFindPathInvalidGraphNoTarget() {
 		addNodes(1);
 		nodes.get(0).setType('s');
@@ -85,6 +84,20 @@ public class PathFinderTest {
 
 		n2 = new Node(1, 1);
 		assertEquals(Math.sqrt(2), pf.getDistance(n1, n2), 0);
+	}
+
+	@Test(expected = RuntimeException.class)
+	public void testGetDistanceNonAdjacentDx() {
+		Node n1 = new Node(0, 0);
+		Node n2 = new Node(0, 2);
+		pf.getDistance(n1, n2);
+	}
+
+	@Test(expected = RuntimeException.class)
+	public void testGetDistanceNonAdjacentDy() {
+		Node n1 = new Node(0, 0);
+		Node n2 = new Node(2, 0);
+		pf.getDistance(n1, n2);
 	}
 
 	@Test
@@ -127,19 +140,21 @@ public class PathFinderTest {
 		assertTrue(pf.getShortestPath().isEmpty());
 	}
 
-	@Test(expected = InvalidGraphException.class)
+	@Test(expected = RuntimeException.class)
 	public void testShortestPathNoStart() {
 		addNodes(2);
-		nodes.get(1).setType('t');
+		nodes.get(0).setType('t');
 		pf.getShortestPath();
 	}
 
-	@Test(expected = InvalidGraphException.class)
+	@Test(expected = RuntimeException.class)
 	public void testShortestPathNoTarget() {
 		addNodes(2);
 		nodes.get(0).setType('s');
 		pf.getShortestPath();
 	}
+
+
 
 	@Test
 	public void testShortestPathOnlyStartAndtarget() {

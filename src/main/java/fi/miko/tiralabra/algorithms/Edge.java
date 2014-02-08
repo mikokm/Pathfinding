@@ -19,6 +19,14 @@ public class Edge {
 	 *            The edge weight.
 	 */
 	public Edge(Node u, Node v, double w) {
+		if (u == null || v == null) {
+			throw new RuntimeException("Cannot create edge with null node!");
+		}
+
+		if (w == -1) {
+			throw new RuntimeException("Cannot create edge with negative weight!");
+		}
+
 		this.u = u;
 		this.v = v;
 		this.w = w;
