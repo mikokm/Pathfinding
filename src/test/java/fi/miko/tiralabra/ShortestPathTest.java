@@ -223,7 +223,7 @@ public class ShortestPathTest {
 	}
 
 	@Test
-	public void testConclave() {
+	public void testHollowObstacle() {
 		testPathFinders(new char[][] {
 				{ 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n'},
 				{ 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n'},
