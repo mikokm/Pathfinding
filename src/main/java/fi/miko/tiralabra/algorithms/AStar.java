@@ -12,7 +12,7 @@ public class AStar extends PathFinder {
 
 	/**
 	 * Creates a new A* pathfinder. The given heuristic is used to estimate the node distances to the target node.
-	 * 
+	 *
 	 * @param graph
 	 *            The graph to search.
 	 * @param heuristic
@@ -52,7 +52,7 @@ public class AStar extends PathFinder {
 
 	/**
 	 * Process the edge between the given node and the given neighbour.
-	 * 
+	 *
 	 * @param node
 	 *            The node.
 	 * @param neighbour

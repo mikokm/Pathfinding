@@ -25,7 +25,7 @@ public class MinimumHeap<E extends Indexable> {
 
 	/**
 	 * Assigns the element in index j to index i.
-	 * 
+	 *
 	 * @param i
 	 *            The index to assign to.
 	 * @param j
@@ -49,7 +49,7 @@ public class MinimumHeap<E extends Indexable> {
 
 	/**
 	 * Returns a copy of the given source array.
-	 * 
+	 *
 	 * @param src
 	 *            The source array.
 	 * @param length
@@ -69,7 +69,7 @@ public class MinimumHeap<E extends Indexable> {
 
 	/**
 	 * Changes the position of the given element in the heap if needed.
-	 * 
+	 *
 	 * @param e
 	 *            The element to reposition.
 	 */
@@ -89,7 +89,7 @@ public class MinimumHeap<E extends Indexable> {
 
 	/**
 	 * Returns and typecasts the element at the given position.
-	 * 
+	 *
 	 * @param i
 	 *            The index of the element.
 	 * @return The element at the given index, typecasted to E.
@@ -101,7 +101,7 @@ public class MinimumHeap<E extends Indexable> {
 
 	/**
 	 * Returns the element at the top of the heap (the one with the smallest key).
-	 * 
+	 *
 	 * @return The element at the top of the heap
 	 */
 	public E getMin() {
@@ -129,7 +129,7 @@ public class MinimumHeap<E extends Indexable> {
 
 	/**
 	 * Fixes the heap property starting from the given index.
-	 * 
+	 *
 	 * @param i
 	 *            The index to fix.
 	 */
@@ -161,7 +161,7 @@ public class MinimumHeap<E extends Indexable> {
 
 	/**
 	 * Inserts the given element to the heap.
-	 * 
+	 *
 	 * @param e
 	 *            The element to insert.
 	 */
@@ -185,7 +185,7 @@ public class MinimumHeap<E extends Indexable> {
 
 	/**
 	 * Returns true if the heap is empty; otherwise false.
-	 * 
+	 *
 	 * @return True if the heap is empty; otherwise false.
 	 */
 	public boolean isEmpty() {
@@ -194,7 +194,7 @@ public class MinimumHeap<E extends Indexable> {
 
 	/**
 	 * Returns the index of the left child for the given index.
-	 * 
+	 *
 	 * @param i
 	 *            The index of the parent.
 	 * @return The index of the left child for the given index.
@@ -205,7 +205,7 @@ public class MinimumHeap<E extends Indexable> {
 
 	/**
 	 * Returns the parent of the given index.
-	 * 
+	 *
 	 * @param i
 	 *            The index of the child.
 	 * @return The parent of the given index.
@@ -216,7 +216,7 @@ public class MinimumHeap<E extends Indexable> {
 
 	/**
 	 * Returns the index of the right child for the given index.
-	 * 
+	 *
 	 * @param i
 	 *            The index of the parent.
 	 * @return The index of the right child for the given index.
@@ -227,7 +227,7 @@ public class MinimumHeap<E extends Indexable> {
 
 	/**
 	 * Returns the size of the heap.
-	 * 
+	 *
 	 * @return The size of the heap.
 	 */
 	public int size() {
@@ -236,7 +236,7 @@ public class MinimumHeap<E extends Indexable> {
 
 	/**
 	 * Swaps the given indexes in the heap array.
-	 * 
+	 *
 	 * @param i
 	 *            The index to swap.
 	 * @param j
@@ -253,7 +253,7 @@ public class MinimumHeap<E extends Indexable> {
 
 	/**
 	 * Returns the elements contained in the heap as an array.
-	 * 
+	 *
 	 * @return The elements contained in the heap as an array.
 	 */
 	public Object[] toArray() {
@@ -281,7 +281,7 @@ public class MinimumHeap<E extends Indexable> {
 
 	/**
 	 * Updates the heap array index of the item at the given index.
-	 * 
+	 *
 	 * @param i
 	 *            The index of the item to update.
 	 */

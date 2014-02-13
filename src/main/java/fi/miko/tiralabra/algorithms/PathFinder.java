@@ -20,7 +20,7 @@ public abstract class PathFinder {
 
 	/**
 	 * Creates a new pathfinder that searches in the given graph.
-	 * 
+	 *
 	 * @param graph
 	 *            The graph to search paths in.
 	 */
@@ -35,7 +35,7 @@ public abstract class PathFinder {
 
 	/**
 	 * Returns the distance between the adjacent nodes.
-	 * 
+	 *
 	 * @param n1
 	 *            First node.
 	 * @param n2
@@ -55,7 +55,7 @@ public abstract class PathFinder {
 
 	/**
 	 * Returns the graph used by this pathfinder.
-	 * 
+	 *
 	 * @return The graph used by this pathfinder.
 	 */
 	public Graph getGraph() {
@@ -65,7 +65,7 @@ public abstract class PathFinder {
 	/**
 	 * Returns the list of nodes containing the shortest path between the start and target nodes. If there isn't a path,
 	 * an empty list is returned.
-	 * 
+	 *
 	 * @return The list of nodes in between the start and target nodes, or an empty list.
 	 */
 	public LinkedList<Node> getShortestPath() {
@@ -100,7 +100,7 @@ public abstract class PathFinder {
 
 	/**
 	 * Returns the start node.
-	 * 
+	 *
 	 * @return The start node.
 	 */
 	public Node getStart() {
@@ -109,7 +109,7 @@ public abstract class PathFinder {
 
 	/**
 	 * Returns the target node.
-	 * 
+	 *
 	 * @return The target node.
 	 */
 	public Node getTarget() {
@@ -141,7 +141,7 @@ public abstract class PathFinder {
 
 	/**
 	 * Sets the graph used by the pathfinder.
-	 * 
+	 *
 	 * @param graph
 	 *            The graph to search paths in.
 	 */
@@ -151,7 +151,7 @@ public abstract class PathFinder {
 
 	/**
 	 * Sets the start node.
-	 * 
+	 *
 	 * @param start
 	 *            The start node.
 	 */
@@ -161,7 +161,7 @@ public abstract class PathFinder {
 
 	/**
 	 * Sets the target node.
-	 * 
+	 *
 	 * @param target
 	 *            The target node.
 	 */

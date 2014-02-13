@@ -20,7 +20,7 @@ public class Node implements Comparable<Node>, Indexable {
 
 	/**
 	 * Creates a new node with the given coordinates.
-	 * 
+	 *
 	 * @param x
 	 *            The x-coordinate of the node.
 	 * @param y
@@ -35,7 +35,7 @@ public class Node implements Comparable<Node>, Indexable {
 
 	/**
 	 * Creates a new node with the given coordinates and type.
-	 * 
+	 *
 	 * @param x
 	 *            The x-coordinate of the node.
 	 * @param y
@@ -78,7 +78,7 @@ public class Node implements Comparable<Node>, Indexable {
 
 	/**
 	 * Returns the distance to the start node.
-	 * 
+	 *
 	 * @return The distance to the start node.
 	 */
 	public double getDistance() {
@@ -87,7 +87,7 @@ public class Node implements Comparable<Node>, Indexable {
 
 	/**
 	 * Returns the distance estimate to the target node.
-	 * 
+	 *
 	 * @return The distance estimate to the target node.
 	 */
 	public double getDistanceEstimate() {
@@ -106,7 +106,7 @@ public class Node implements Comparable<Node>, Indexable {
 
 	/**
 	 * Returns the node nearest to the start node that is accessible from this node.
-	 * 
+	 *
 	 * @return The node nearest to the start node that is accessible from this node.
 	 */
 	public Node getNearest() {
@@ -115,7 +115,7 @@ public class Node implements Comparable<Node>, Indexable {
 
 	/**
 	 * Returns the type of the node.
-	 * 
+	 *
 	 * @return The type of the node.
 	 */
 	public char getType() {
@@ -124,7 +124,7 @@ public class Node implements Comparable<Node>, Indexable {
 
 	/**
 	 * Returns the x-coordinate of the node.
-	 * 
+	 *
 	 * @return The x-coordinate of the node.
 	 */
 	public int getX() {
@@ -133,7 +133,7 @@ public class Node implements Comparable<Node>, Indexable {
 
 	/**
 	 * Returns the y-coordinate of the node.
-	 * 
+	 *
 	 * @return The y-coordinate of the node.
 	 */
 	public int getY() {
@@ -151,7 +151,7 @@ public class Node implements Comparable<Node>, Indexable {
 
 	/**
 	 * Returns true if the node is closed; otherwise false.
-	 * 
+	 *
 	 * @return True if the node is closed; otherwise false.
 	 */
 	public boolean isClosed() {
@@ -160,7 +160,7 @@ public class Node implements Comparable<Node>, Indexable {
 
 	/**
 	 * Returns true if the node is open; otherwise false.
-	 * 
+	 *
 	 * @return True if the node is open; otherwise false.
 	 */
 	public boolean isOpen() {
@@ -169,7 +169,7 @@ public class Node implements Comparable<Node>, Indexable {
 
 	/**
 	 * Returns true if this node was visited during pathfinding; otherwise false.
-	 * 
+	 *
 	 * @return True if this node was visited during pathfinding; otherwise false.
 	 */
 	public boolean isVisited() {
@@ -199,7 +199,7 @@ public class Node implements Comparable<Node>, Indexable {
 
 	/**
 	 * Sets the distance to the start node.
-	 * 
+	 *
 	 * @param distance
 	 *            The distance to the start node.
 	 */
@@ -209,7 +209,7 @@ public class Node implements Comparable<Node>, Indexable {
 
 	/**
 	 * Sets the estimated distance to the target node.
-	 * 
+	 *
 	 * @param distanceEstimate
 	 *            The estimated distance to the target node.
 	 */
@@ -224,7 +224,7 @@ public class Node implements Comparable<Node>, Indexable {
 
 	/**
 	 * Sets the node nearest to the start node that is accessible from this node.
-	 * 
+	 *
 	 * @param nearest
 	 *            The node nearest to the start node that is accessible from this node.
 	 */
@@ -241,7 +241,7 @@ public class Node implements Comparable<Node>, Indexable {
 
 	/**
 	 * Sets the type of the node.
-	 * 
+	 *
 	 * @param type
 	 *            The node type.
 	 */

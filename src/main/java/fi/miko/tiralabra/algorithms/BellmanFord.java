@@ -11,7 +11,7 @@ public class BellmanFord extends PathFinder {
 
 	/**
 	 * Creates a new BellmanFord pathfinder.
-	 * 
+	 *
 	 * @param graph
 	 *            The graph to search.
 	 */
@@ -56,7 +56,7 @@ public class BellmanFord extends PathFinder {
 	/**
 	 * Replaces the current path to the start node from node v with a shorter path through node u if such path is
 	 * possible.
-	 * 
+	 *
 	 * @param u
 	 *            The node that the path will go through.
 	 * @param v

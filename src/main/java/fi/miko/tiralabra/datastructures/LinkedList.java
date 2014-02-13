@@ -11,7 +11,7 @@ public class LinkedList<E> implements Iterable<E> {
 
 		/**
 		 * Creates a new LinkedListIterator for the list with the given head node.
-		 * 
+		 *
 		 * @param head
 		 *            The head node of the underlying list.
 		 */
@@ -66,7 +66,7 @@ public class LinkedList<E> implements Iterable<E> {
 
 	/**
 	 * Adds the element to the end of the list.
-	 * 
+	 *
 	 * @param e
 	 *            The element to be added.
 	 * @return True if the item was added; otherwise false.
@@ -91,7 +91,7 @@ public class LinkedList<E> implements Iterable<E> {
 
 	/**
 	 * Returns true if the list contains the given object.
-	 * 
+	 *
 	 * @param o
 	 *            The object to look for.
 	 * @return True if the list contains the given object; otherwise false.
@@ -156,7 +156,7 @@ public class LinkedList<E> implements Iterable<E> {
 
 	/**
 	 * Returns the item item at the given index.
-	 * 
+	 *
 	 * @param index
 	 *            The index of the item.
 	 * @return The item item at the given index.
@@ -188,7 +188,7 @@ public class LinkedList<E> implements Iterable<E> {
 
 	/**
 	 * Returns true if the list is empty.
-	 * 
+	 *
 	 * @return True if the list is empty.
 	 */
 	public boolean isEmpty() {
@@ -202,7 +202,7 @@ public class LinkedList<E> implements Iterable<E> {
 
 	/**
 	 * Returns the size of the list.
-	 * 
+	 *
 	 * @return The size of the list.
 	 */
 	public int size() {
@@ -211,7 +211,7 @@ public class LinkedList<E> implements Iterable<E> {
 
 	/**
 	 * Returns an array representation of the list.
-	 * 
+	 *
 	 * @return An array representation of the list.
 	 */
 	public Object[] toArray() {
