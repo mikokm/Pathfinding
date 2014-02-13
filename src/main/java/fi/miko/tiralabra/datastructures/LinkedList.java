@@ -6,7 +6,7 @@ import java.util.Iterator;
  * LinkedList implements a simple generic type linked list.
  */
 public class LinkedList<E> implements Iterable<E> {
-	private class LinkedListIterator implements Iterator<E> {
+	public class LinkedListIterator implements Iterator<E> {
 		private Node node;
 
 		public LinkedListIterator(Node head) {
