@@ -9,7 +9,7 @@ import fi.miko.tiralabra.datastructures.MinimumHeap;
  */
 public class Dijkstra extends PathFinder {
 	/**
-	 * Creates a new Dijkstra finder.
+	 * Creates a new Dijkstra pathfinder.
 	 * 
 	 * @param graph
 	 *            The graph to search.

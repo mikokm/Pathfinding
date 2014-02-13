@@ -9,6 +9,12 @@ public class LinkedList<E> implements Iterable<E> {
 	public class LinkedListIterator implements Iterator<E> {
 		private Node node;
 
+		/**
+		 * Creates a new LinkedListIterator for the list with the given head node.
+		 * 
+		 * @param head
+		 *            The head node of the underlying list.
+		 */
 		public LinkedListIterator(Node head) {
 			this.node = head;
 		}

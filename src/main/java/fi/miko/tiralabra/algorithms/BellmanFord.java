@@ -9,6 +9,12 @@ import fi.miko.tiralabra.datastructures.LinkedList;
 public class BellmanFord extends PathFinder {
 	private final LinkedList<Edge> edges = new LinkedList<Edge>();
 
+	/**
+	 * Creates a new BellmanFord pathfinder.
+	 * 
+	 * @param graph
+	 *            The graph to search.
+	 */
 	public BellmanFord(Graph graph) {
 		super(graph);
 
@@ -59,6 +65,7 @@ public class BellmanFord extends PathFinder {
 	 *            The distance between u and v (edge weight).
 	 */
 	private void relax(Node u, Node v, double w) {
+		// Mark the nodes as visited.
 		u.setVisited();
 		v.setVisited();
 
