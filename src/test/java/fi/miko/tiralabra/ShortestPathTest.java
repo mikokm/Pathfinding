@@ -3,14 +3,13 @@ package fi.miko.tiralabra;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.Random;
-
 import org.junit.Test;
 
 import fi.miko.tiralabra.algorithms.AStar;
 import fi.miko.tiralabra.algorithms.BellmanFord;
 import fi.miko.tiralabra.algorithms.Dijkstra;
 import fi.miko.tiralabra.algorithms.Graph;
+import fi.miko.tiralabra.algorithms.GraphUtils;
 import fi.miko.tiralabra.algorithms.Heuristic;
 import fi.miko.tiralabra.algorithms.Node;
 import fi.miko.tiralabra.algorithms.PathFinder;
@@ -21,13 +20,16 @@ public class ShortestPathTest {
 
 	// @formatter:off
 	@Test
-	public void test1x1() {
+	public void test1x2() {
 		testPathFinders(new char[][] {
 				{ 's', 't' } }, 1);
 
 		testPathFinders(new char[][] {
 				{ 't', 's' } }, 1);
+	}
 
+	@Test
+	public void test2x1() {
 		testPathFinders(new char[][] {
 				{ 's' },
 				{ 't' } }, 1);
@@ -271,7 +273,7 @@ public class ShortestPathTest {
 		LinkedList<Node> path = getShortestPath(f);
 
 		if (length > 0) {
-			assertEquals(length, getPathDistance(path), 1E-9);
+			assertEquals(length, GraphUtils.getPathDistance(path), 1E-9);
 		} else {
 			assertTrue(path.isEmpty());
 		}
@@ -295,83 +297,30 @@ public class ShortestPathTest {
 		}
 	}
 
+	public static LinkedList<Node> getShortestPath(PathFinder f) {
+		f.findPath();
+
+		LinkedList<Node> path = f.getShortestPath();
+		assertTrue(GraphUtils.isValidPath(f.getGraph(), path));
+
+		return path;
+	}
+
 	private void testRandomGraph(int width, int height, double freq) {
-		char[][] map = generateRandom(width, height, freq);
+		char[][] map = GraphUtils.generateRandom(width, height, freq);
 
 		LinkedList<Node> p1 = getShortestPath(new Dijkstra(new Graph(map)));
 		LinkedList<Node> p2 = getShortestPath(new AStar(new Graph(map), Heuristic.Euclidean));
 
 		assertEquals(p1.size(), p2.size());
-		assertEquals(getPathDistance(p1), getPathDistance(p2), 1E-9);
+		assertEquals(GraphUtils.getPathDistance(p1), GraphUtils.getPathDistance(p2), 1E-9);
 
 		if (width < 20 && height < 20) {
 			LinkedList<Node> p3 = getShortestPath(new BellmanFord(new Graph(map)));
 
 			assertEquals(p2.size(), p3.size());
-			assertEquals(getPathDistance(p2), getPathDistance(p3), 1E-9);
+			assertEquals(GraphUtils.getPathDistance(p2), GraphUtils.getPathDistance(p3), 1E-9);
 		}
-	}
-
-	public static char[][] generateRandom(int width, int height, double freq) {
-		char[][] graph = new char[height][width];
-		Random rand = new Random();
-
-		for (int i = 0; i < height; ++i) {
-			for (int j = 0; j < width; ++j) {
-				graph[i][j] = (rand.nextDouble() <= freq ? '#' : 'p');
-			}
-		}
-
-		graph[rand.nextInt(height)][rand.nextInt(width)] = 's';
-
-		while (true) {
-			int h = rand.nextInt(height);
-			int w = rand.nextInt(width);
-
-			if (graph[h][w] != 's') {
-				graph[h][w] = 't';
-				break;
-			}
-		}
-
-		return graph;
-	}
-
-	public static double getPathDistance(LinkedList<Node> path) {
-		if (path.size() == 0) {
-			return 0;
-		}
-
-		return path.get(path.size() - 1).getDistance();
-	}
-
-	public static LinkedList<Node> getShortestPath(PathFinder f) {
-		f.findPath();
-
-		LinkedList<Node> path = f.getShortestPath();
-		assertTrue(isValidPath(f.getGraph(), path));
-
-		return path;
-	}
-
-	public static boolean isValidPath(Graph graph, LinkedList<Node> path) {
-		Node prev = null;
-
-		for (Node n : path) {
-			if (n.getType() != 'p' && n.getType() != 's' && n.getType() != 't') {
-				return false;
-			}
-
-			if (prev != null) {
-				if (graph.getNeighbours(prev).contains(n) == false) {
-					return false;
-				}
-			}
-
-			prev = n;
-		}
-
-		return true;
 	}
 
 }

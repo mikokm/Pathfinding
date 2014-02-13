@@ -29,7 +29,7 @@ public class Dijkstra extends PathFinder {
 			heap.insert(node);
 		}
 
-		while (!heap.isEmpty()) {
+		while (true) {
 			// Select the node closest to the target node.
 			final Node node = heap.getMin();
 			node.setVisited();
