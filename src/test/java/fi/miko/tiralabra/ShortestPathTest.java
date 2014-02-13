@@ -29,17 +29,6 @@ public class ShortestPathTest {
 	}
 
 	@Test
-	public void test2x1() {
-		testPathFinders(new char[][] {
-				{ 's' },
-				{ 't' } }, 1);
-
-		testPathFinders(new char[][] {
-				{ 't' },
-				{ 's' } }, 1);
-	}
-
-	@Test
 	public void test1x3() {
 		testPathFinders(new char[][] {
 				{ 's' },
@@ -60,6 +49,17 @@ public class ShortestPathTest {
 				{ 't' },
 				{ '#' },
 				{ 's' } }, -1);
+	}
+
+	@Test
+	public void test2x1() {
+		testPathFinders(new char[][] {
+				{ 's' },
+				{ 't' } }, 1);
+
+		testPathFinders(new char[][] {
+				{ 't' },
+				{ 's' } }, 1);
 	}
 
 	@Test
@@ -269,6 +269,15 @@ public class ShortestPathTest {
 
 	// @formatter:on
 
+	private LinkedList<Node> getShortestPath(PathFinder f) {
+		f.findPath();
+
+		LinkedList<Node> path = f.getShortestPath();
+		assertTrue(GraphUtils.isValidPath(f.getGraph(), path));
+
+		return path;
+	}
+
 	private void testPathFinder(PathFinder f, double length) {
 		LinkedList<Node> path = getShortestPath(f);
 
@@ -285,28 +294,18 @@ public class ShortestPathTest {
 		testPathFinder(new AStar(new Graph(map), Heuristic.Euclidean), length);
 	}
 
-
 	@Test
-	public void testRandom() {
+	public void testRandomGraph() {
 		for (int i = 2; i < 50; ++i) {
 			for (int j = 2; j < 50; ++j) {
 				for (int k = 20; k < 40; ++k) {
-					testRandomGraph(i, j, k / 100);
+					testRandomGraphHelper(i, j, k / 100);
 				}
 			}
 		}
 	}
 
-	public static LinkedList<Node> getShortestPath(PathFinder f) {
-		f.findPath();
-
-		LinkedList<Node> path = f.getShortestPath();
-		assertTrue(GraphUtils.isValidPath(f.getGraph(), path));
-
-		return path;
-	}
-
-	private void testRandomGraph(int width, int height, double freq) {
+	private void testRandomGraphHelper(int width, int height, double freq) {
 		char[][] map = GraphUtils.generateRandom(width, height, freq);
 
 		LinkedList<Node> p1 = getShortestPath(new Dijkstra(new Graph(map)));
