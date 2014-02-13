@@ -1,6 +1,5 @@
 package fi.miko.tiralabra.algorithms;
 
-import java.util.List;
 import java.util.Stack;
 
 import fi.miko.tiralabra.datastructures.LinkedList;
@@ -69,8 +68,8 @@ public abstract class PathFinder {
 	 * 
 	 * @return The list of nodes in between the start and target nodes, or an empty list.
 	 */
-	public List<Node> getShortestPath() {
-		List<Node> path = new LinkedList<>();
+	public LinkedList<Node> getShortestPath() {
+		LinkedList<Node> path = new LinkedList<>();
 
 		if (start == null || target == null) {
 			throw new RuntimeException("No start or target node specified!");

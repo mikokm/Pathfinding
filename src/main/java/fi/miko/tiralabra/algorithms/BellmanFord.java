@@ -1,7 +1,5 @@
 package fi.miko.tiralabra.algorithms;
 
-import java.util.List;
-
 import fi.miko.tiralabra.datastructures.LinkedList;
 
 /**
@@ -9,7 +7,7 @@ import fi.miko.tiralabra.datastructures.LinkedList;
  * course material.
  */
 public class BellmanFord extends PathFinder {
-	private final List<Edge> edges = new LinkedList<Edge>();
+	private final LinkedList<Edge> edges = new LinkedList<Edge>();
 
 	public BellmanFord(Graph graph) {
 		super(graph);
@@ -21,7 +19,7 @@ public class BellmanFord extends PathFinder {
 	public void findPath() {
 		initializeNodes();
 
-		final List<Node> nodes = getGraph().getNodes();
+		final LinkedList<Node> nodes = getGraph().getNodes();
 
 		for (int i = 0; i < nodes.size() - 1; ++i) {
 			for (Edge e : edges) {

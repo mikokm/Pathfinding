@@ -4,12 +4,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.util.List;
-
 import org.junit.Test;
 
 import fi.miko.tiralabra.algorithms.Graph;
 import fi.miko.tiralabra.algorithms.Node;
+import fi.miko.tiralabra.datastructures.LinkedList;
 
 public class GraphTest {
 	@Test
@@ -65,7 +64,7 @@ public class GraphTest {
 	@Test
 	public void testGetNeighboursValidNode() {
 		Graph g = new Graph(new char[2][2]);
-		List<Node> neighbours = g.getNeighbours(new Node(0, 0));
+		LinkedList<Node> neighbours = g.getNeighbours(new Node(0, 0));
 		assertEquals(3, neighbours.size());
 		assertTrue(neighbours.contains(new Node(0, 1)));
 		assertTrue(neighbours.contains(new Node(1, 0)));

@@ -7,15 +7,13 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 
 import fi.miko.tiralabra.algorithms.Graph;
 import fi.miko.tiralabra.algorithms.Node;
 import fi.miko.tiralabra.algorithms.PathFinder;
+import fi.miko.tiralabra.datastructures.LinkedList;
 
 public class PathFinderTest {
 	private class TestPathFinder extends PathFinder {
@@ -30,7 +28,7 @@ public class PathFinderTest {
 	};
 
 	private Graph graph;
-	private List<Node> nodes = new ArrayList<>();
+	private LinkedList<Node> nodes = new LinkedList<>();
 	private PathFinder pf;
 
 	private void addNodes(int count) {
@@ -163,7 +161,7 @@ public class PathFinderTest {
 		pf.findPath();
 		nodes.get(1).setNearest(nodes.get(0));
 
-		List<Node> p = pf.getShortestPath();
+		LinkedList<Node> p = pf.getShortestPath();
 		assertEquals(2, p.size());
 		assertEquals(nodes.get(0), p.get(0));
 		assertEquals(nodes.get(1), p.get(1));
@@ -180,7 +178,7 @@ public class PathFinderTest {
 		nodes.get(1).setNearest(nodes.get(0));
 		nodes.get(2).setNearest(nodes.get(1));
 
-		List<Node> p = pf.getShortestPath();
+		LinkedList<Node> p = pf.getShortestPath();
 		assertEquals(3, p.size());
 		assertEquals(nodes.get(0), p.get(0));
 		assertEquals(nodes.get(1), p.get(1));

@@ -1,6 +1,5 @@
 package fi.miko.tiralabra.datastructures;
 
-import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 public class MinimumHeap<E extends Indexable> {
@@ -92,11 +91,21 @@ public class MinimumHeap<E extends Indexable> {
 		}
 	}
 
+	private void copyArray(Object [] from, Object [] to, int len) {
+		for(int i = 0; i < len; ++i) {
+			to[i] = from[i];
+		}
+	}
+
 	public void insert(E e) {
 		heapSize++;
 
+		// Resize the array if needed.
 		if (heapSize > elements.length) {
-			elements = Arrays.copyOf(elements, elements.length * 2);
+			Object [] arr = new Object[elements.length * 2];
+
+			copyArray(elements, arr, elements.length);
+			elements = arr;
 		}
 
 		int i = heapSize - 1;
@@ -139,7 +148,10 @@ public class MinimumHeap<E extends Indexable> {
 	}
 
 	public Object[] toArray() {
-		return Arrays.copyOf(elements, heapSize);
+		Object [] arr = new Object[heapSize];
+		copyArray(elements, arr, heapSize);
+
+		return arr;
 	}
 
 	@Override

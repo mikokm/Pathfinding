@@ -1,7 +1,5 @@
 package fi.miko.tiralabra.algorithms;
 
-import java.util.List;
-
 import fi.miko.tiralabra.datastructures.LinkedList;
 
 /**
@@ -49,8 +47,8 @@ public class Graph {
 	 *            The node to get neighbours for.
 	 * @return A list of nodes containing the neighbours for the given node.
 	 */
-	public List<Node> getNeighbours(Node node) {
-		List<Node> list = new LinkedList<>();
+	public LinkedList<Node> getNeighbours(Node node) {
+		LinkedList<Node> list = new LinkedList<>();
 
 		int x0 = node.getX(), y0 = node.getY();
 
@@ -96,7 +94,7 @@ public class Graph {
 	 * 
 	 * @return The list of all the nodes in the graph.
 	 */
-	public List<Node> getNodes() {
+	public LinkedList<Node> getNodes() {
 		return nodes;
 	}
 

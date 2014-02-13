@@ -1,6 +1,5 @@
 package fi.miko.tiralabra;
 
-import java.util.List;
 import java.util.Random;
 
 import fi.miko.tiralabra.algorithms.AStar;
@@ -10,6 +9,7 @@ import fi.miko.tiralabra.algorithms.Graph;
 import fi.miko.tiralabra.algorithms.Heuristic;
 import fi.miko.tiralabra.algorithms.Node;
 import fi.miko.tiralabra.algorithms.PathFinder;
+import fi.miko.tiralabra.datastructures.LinkedList;
 
 public class Benchmark {
 
@@ -29,7 +29,7 @@ public class Benchmark {
 		return graph;
 	}
 
-	private double getPathDistance(List<Node> path) {
+	private double getPathDistance(LinkedList<Node> path) {
 		if (path.size() == 0) {
 			return 0;
 		}
@@ -37,7 +37,7 @@ public class Benchmark {
 		return path.get(path.size() - 1).getDistance();
 	}
 
-	private int getVisitedCount(List<Node> nodes) {
+	private int getVisitedCount(LinkedList<Node> nodes) {
 		int visited = 0;
 		for (Node node : nodes) {
 			if (node.isVisited()) {
@@ -48,11 +48,11 @@ public class Benchmark {
 		return visited;
 	}
 
-	private void measure(PathFinder f, String name, List<Node> path) {
+	private void measure(PathFinder f, String name, LinkedList<Node> path) {
 		double cost = getPathDistance(path);
 
 		double cost2 = 0;
-		List<Node> path2 = null;
+		LinkedList<Node> path2 = null;
 
 		long start = System.nanoTime();
 
@@ -90,7 +90,7 @@ public class Benchmark {
 		PathFinder f = new BellmanFord(g);
 
 		f.findPath();
-		List<Node> path = f.getShortestPath();
+		LinkedList<Node> path = f.getShortestPath();
 
 		if (path.isEmpty() || !isValidPath(g, path)) {
 			System.out.println("No path found!");
@@ -110,7 +110,7 @@ public class Benchmark {
 		measure(a2, "A* Euclidean", path);
 	}
 
-	private static boolean isValidPath(Graph graph, List<Node> path) {
+	private static boolean isValidPath(Graph graph, LinkedList<Node> path) {
 		Node prev = null;
 
 		for (Node n : path) {

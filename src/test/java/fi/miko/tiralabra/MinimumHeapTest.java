@@ -154,13 +154,11 @@ public class MinimumHeapTest {
 	private void testHeapProperty() {
 		Object[] arr = heap.toArray();
 
-		for (int i = 0; i < arr.length / 2; i += 2) {
+		for (int i = 0; i < arr.length; ++i) {
 			DummyObject parent = (DummyObject) arr[i / 2];
-			DummyObject right = (DummyObject) arr[i + 1];
-			DummyObject left = (DummyObject) arr[2 * i + 1];
+			DummyObject current = (DummyObject) arr[i];
 
-			assertTrue(parent.getKey() <= right.getKey());
-			assertTrue(parent.getKey() <= left.getKey());
+			assertTrue(parent.getKey() <= current.getKey());
 		}
 	}
 

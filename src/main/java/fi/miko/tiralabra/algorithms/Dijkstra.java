@@ -1,7 +1,6 @@
 package fi.miko.tiralabra.algorithms;
 
-import java.util.List;
-
+import fi.miko.tiralabra.datastructures.LinkedList;
 import fi.miko.tiralabra.datastructures.MinimumHeap;
 
 /**
@@ -24,7 +23,7 @@ public class Dijkstra extends PathFinder {
 		initializeNodes();
 
 		// Add the initialized nodes to the priority queue.
-		final List<Node> nodes = getGraph().getNodes();
+		final LinkedList<Node> nodes = getGraph().getNodes();
 		final MinimumHeap<Node> heap = new MinimumHeap<>(1);
 		for (Node node : nodes) {
 			heap.insert(node);

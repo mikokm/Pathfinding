@@ -6,7 +6,6 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Iterator;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +13,7 @@ import org.junit.Test;
 import fi.miko.tiralabra.datastructures.LinkedList;
 
 public class LinkedListTest {
-	private List<Integer> list;
+	private LinkedList<Integer> list;
 
 	@Before
 	public void setUp() {
@@ -123,7 +122,7 @@ public class LinkedListTest {
 	public void testEqualsDifferent() {
 		list.add(1);
 
-		List<Integer> l2 = new LinkedList<Integer>();
+		LinkedList<Integer> l2 = new LinkedList<Integer>();
 		l2.add(2);
 
 		assertFalse(list.equals(l2));
@@ -134,7 +133,7 @@ public class LinkedListTest {
 		list.add(1);
 		list.add(2);
 
-		List<Integer> l2 = new LinkedList<Integer>();
+		LinkedList<Integer> l2 = new LinkedList<Integer>();
 		l2.add(1);
 
 		assertFalse(list.equals(l2));
@@ -142,7 +141,7 @@ public class LinkedListTest {
 
 	@Test
 	public void testEqualsEmpty() {
-		List<Integer> l2 = new LinkedList<Integer>();
+		LinkedList<Integer> l2 = new LinkedList<Integer>();
 
 		assertTrue(list.equals(l2));
 	}
@@ -156,7 +155,7 @@ public class LinkedListTest {
 	public void testEqualsNullElements() {
 		list.add(null);
 
-		List<Integer> l2 = new LinkedList<Integer>();
+		LinkedList<Integer> l2 = new LinkedList<Integer>();
 		l2.add(1);
 
 		assertFalse(list.equals(l2));
@@ -171,7 +170,7 @@ public class LinkedListTest {
 	public void testEqualsSameContent() {
 		list.add(1);
 		list.add(2);
-		List<Integer> l2 = new LinkedList<Integer>();
+		LinkedList<Integer> l2 = new LinkedList<Integer>();
 
 		l2.add(1);
 		l2.add(2);

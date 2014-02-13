@@ -1,12 +1,11 @@
 package fi.miko.tiralabra.datastructures;
 
-import java.util.AbstractList;
 import java.util.Iterator;
 
 /**
  * LinkedList implements a simple generic type linked list.
  */
-public class LinkedList<E> extends AbstractList<E> {
+public class LinkedList<E> implements Iterable<E> {
 	private class LinkedListIterator implements Iterator<E> {
 		private Node node;
 
@@ -50,13 +49,22 @@ public class LinkedList<E> extends AbstractList<E> {
 	private int size;
 	private Node tail;
 
+	/**
+	 * Creates a new linked list.
+	 */
 	public LinkedList() {
 		head = new Node();
 		tail = head;
 		size = 0;
 	}
 
-	@Override
+	/**
+	 * Adds the element to the end of the list.
+	 * 
+	 * @param e
+	 *            The element to be added.
+	 * @return True if the item was added; otherwise false.
+	 */
 	public boolean add(E e) {
 		Node n = new Node(e);
 		tail.next = n;
@@ -66,14 +74,22 @@ public class LinkedList<E> extends AbstractList<E> {
 		return true;
 	}
 
-	@Override
+	/**
+	 * Clears the list.
+	 */
 	public void clear() {
 		head.next = null;
 		tail = head;
 		size = 0;
 	}
 
-	@Override
+	/**
+	 * Returns true if the list contains the given object.
+	 * 
+	 * @param o
+	 *            The object to look for.
+	 * @return True if the list contains the given object; otherwise false.
+	 */
 	public boolean contains(Object o) {
 		Node n = head.next;
 
@@ -132,7 +148,13 @@ public class LinkedList<E> extends AbstractList<E> {
 		return true;
 	}
 
-	@Override
+	/**
+	 * Returns the item item at the given index.
+	 * 
+	 * @param index
+	 *            The index of the item.
+	 * @return The item item at the given index.
+	 */
 	public E get(int index) {
 		if (index < 0 || index >= size()) {
 			throw new IndexOutOfBoundsException();
@@ -158,7 +180,11 @@ public class LinkedList<E> extends AbstractList<E> {
 		return result;
 	}
 
-	@Override
+	/**
+	 * Returns true if the list is empty.
+	 * 
+	 * @return True if the list is empty.
+	 */
 	public boolean isEmpty() {
 		return size == 0;
 	}
@@ -168,12 +194,20 @@ public class LinkedList<E> extends AbstractList<E> {
 		return new LinkedListIterator(head);
 	}
 
-	@Override
+	/**
+	 * Returns the size of the list.
+	 * 
+	 * @return The size of the list.
+	 */
 	public int size() {
 		return size;
 	}
 
-	@Override
+	/**
+	 * Returns an array representation of the list.
+	 * 
+	 * @return An array representation of the list.
+	 */
 	public Object[] toArray() {
 		Object[] array = new Object[size];
 		int index = 0;
