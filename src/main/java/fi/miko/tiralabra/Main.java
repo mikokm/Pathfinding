@@ -49,10 +49,10 @@ public class Main {
 
 	private static void usage() {
 		System.out.println("Usage:");
-		System.out.println("Benchmark algorithms: -b <width> <height> <freq> <iterations>");
-		System.out.println("Generate random graph: -r <width> <height> <freq>");
-		System.out.println("Solve:     -s <filename>");
-		System.out.println("Solve random graph: -sr <width> <height> <freq>");
+		System.out.println("Benchmark algorithms     -b <width> <height> <freq> <iterations>");
+		System.out.println("Generate random graph    -r <width> <height> <freq>");
+		System.out.println("Solve                    -s <filename>");
+		System.out.println("Solve random graph       -sr <width> <height> <freq>");
 	}
 
 	private static void solve(String[] args) {
