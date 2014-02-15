@@ -11,6 +11,8 @@ import fi.miko.tiralabra.algorithms.PathFinder;
 import fi.miko.tiralabra.datastructures.LinkedList;
 
 public class Benchmark {
+	private int iterations;
+
 	private int getVisitedCount(LinkedList<Node> nodes) {
 		int visited = 0;
 		for (Node node : nodes) {
@@ -27,7 +29,7 @@ public class Benchmark {
 
 		long start = System.nanoTime();
 
-		for (int i = 0; i < 100; ++i) {
+		for (int i = 0; i < iterations; ++i) {
 			f.findPath();
 			path = f.getShortestPath();
 		}
@@ -43,11 +45,13 @@ public class Benchmark {
 		System.out.println();
 	}
 
-	public void run() {
+	public void run(int width, int height, double freq, int iterations) {
+		this.iterations = iterations;
+
 		char[][] map;
 
 		while (true) {
-			map = GraphUtils.generateRandom(50, 50, 0.20);
+			map = GraphUtils.generateRandom(width, height, freq);
 			PathFinder f = new AStar(new Graph(map), Heuristic.Euclidean);
 			f.findPath();
 

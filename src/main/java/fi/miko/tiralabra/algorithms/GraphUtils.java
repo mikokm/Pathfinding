@@ -25,7 +25,7 @@ public class GraphUtils {
 
 		for (int i = 0; i < height; ++i) {
 			for (int j = 0; j < width; ++j) {
-				graph[i][j] = (rand.nextDouble() <= freq ? '#' : 'p');
+				graph[i][j] = (rand.nextDouble() <= freq ? '#' : '.');
 			}
 		}
 
@@ -75,7 +75,7 @@ public class GraphUtils {
 
 		Node prev = null;
 		for (Node n : path) {
-			if (n.getType() != 'p' && n.getType() != 's' && n.getType() != 't') {
+			if (n.getType() == 'x' || n.getType() == PathFinder.WALL) {
 				return false;
 			}
 
