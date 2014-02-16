@@ -296,9 +296,9 @@ public class ShortestPathTest {
 
 	@Test
 	public void testRandomGraph() {
-		for (int i = 2; i < 50; ++i) {
-			for (int j = 2; j < 50; ++j) {
-				for (int k = 20; k < 40; ++k) {
+		for (int i = 2; i <= 50; ++i) {
+			for (int j = 2; j <= 50; ++j) {
+				for (int k = 20; k <= 40; ++k) {
 					testRandomGraphHelper(i, j, k / 100);
 				}
 			}

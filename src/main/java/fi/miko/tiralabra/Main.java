@@ -5,22 +5,25 @@ import fi.miko.tiralabra.algorithms.GraphUtils;
 
 public class Main {
 	public static void main(String[] args) {
+		boolean ret = false;
 		if (args.length >= 1) {
 			switch (args[0]) {
 			case "-b":
-				benchmark(args);
+				ret = benchmark(args);
 				break;
 			case "-r":
-				randomize(args);
+				ret = randomize(args);
 				break;
 			case "-s":
-				solve(args);
+				ret = solve(args);
 				break;
 			case "-sr":
-				solveRandom(args);
+				ret = solveRandom(args);
 				break;
 			}
-		} else {
+		}
+
+		if (!ret) {
 			usage();
 		}
 	}
@@ -38,13 +41,17 @@ public class Main {
 		return GraphUtils.generateRandom(width, height, freq);
 	}
 
-	private static void solveRandom(String[] args) {
+	private static boolean solveRandom(String[] args) {
 		char[][] map = generateRandom(args);
 
-		if (map != null) {
-			Solver s = new Solver();
-			s.solve(map);
+		if (map == null) {
+			return false;
 		}
+
+		Solver s = new Solver();
+		s.solve(map);
+
+		return true;
 	}
 
 	private static void usage() {
@@ -55,28 +62,32 @@ public class Main {
 		System.out.println("Solve random graph       -sr <width> <height> <freq>");
 	}
 
-	private static void solve(String[] args) {
+	private static boolean solve(String[] args) {
 		// -s "map.txt"
 		if (args.length != 2) {
-			return;
+			return false;
 		}
 
 		String filename = args[1];
 		new Solver(filename);
+		return true;
 	}
 
-	private static void randomize(String[] args) {
+	private static boolean randomize(String[] args) {
 		char[][] map = generateRandom(args);
 
-		if (map != null) {
-			System.out.println(new Graph(map));
+		if (map == null) {
+			return false;
 		}
+
+		System.out.println(new Graph(map));
+		return true;
 	}
 
-	private static void benchmark(String[] args) {
+	private static boolean benchmark(String[] args) {
 		// -b 100 100 20 1000
 		if (args.length != 5) {
-			return;
+			return false;
 		}
 
 		int width = Integer.parseInt(args[1]);
@@ -86,5 +97,6 @@ public class Main {
 
 		Benchmark b = new Benchmark();
 		b.run(width, height, freq, iterations);
+		return true;
 	}
 }
