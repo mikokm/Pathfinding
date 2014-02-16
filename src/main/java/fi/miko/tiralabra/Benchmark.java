@@ -11,7 +11,7 @@ import fi.miko.tiralabra.algorithms.PathFinder;
 import fi.miko.tiralabra.datastructures.LinkedList;
 
 public class Benchmark {
-	private int iterations;
+	private double iterations;
 
 	private int getVisitedCount(LinkedList<Node> nodes) {
 		int visited = 0;
@@ -27,19 +27,33 @@ public class Benchmark {
 	private void measure(PathFinder f, String name) {
 		LinkedList<Node> path = null;
 
-		long start = System.nanoTime();
+		double iterationsDone = 0;
+		double start = System.nanoTime();
 
-		for (int i = 0; i < iterations; ++i) {
+		for (int i = 1; i <= iterations; ++i) {
 			f.findPath();
 			path = f.getShortestPath();
+
+			// Stop the benchmark if the elapsed time is more than 10 seconds.
+			if ((System.nanoTime() - start) > (1E9 * 15)) {
+				break;
+			}
+
+			iterationsDone = i;
 		}
 
-		long end = System.nanoTime();
+		double end = System.nanoTime();
+
 		double elapsed = (end - start) / 1E9;
+
+		// The benchmark was stopped.
+		if (iterationsDone < iterations) {
+			elapsed = (iterations / iterationsDone) * elapsed;
+		}
 
 		int visited = getVisitedCount(f.getGraph().getNodes());
 
-		System.out.println(name + ": " + elapsed + "s");
+		System.out.println(name + ": " + elapsed + "s" + (iterations == iterationsDone ? "" : " (estimated)"));
 		System.out.println("Path length: " + path.size() + " cost: " + GraphUtils.getPathDistance(path) + " visited: "
 				+ visited);
 		System.out.println();
