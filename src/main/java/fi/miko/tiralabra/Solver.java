@@ -46,12 +46,6 @@ public class Solver {
 		System.out.println("* Found shortest path of length: " + path.size() + " and distance: "
 				+ (int) GraphUtils.getPathDistance(path) + " *");
 
-		for (Node n : graph.getNodes()) {
-			if (n.getType() != PathFinder.START && n.getType() != PathFinder.TARGET && n.getType() != PathFinder.WALL) {
-				n.setType(' ');
-			}
-		}
-
 		for (Node n : path) {
 			if (n.getType() != PathFinder.START && n.getType() != PathFinder.TARGET) {
 				n.setType('o');
