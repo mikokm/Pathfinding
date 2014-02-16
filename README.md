@@ -1,11 +1,11 @@
-tiralabra
+Ôªøtiralabra
 =========
 
-Ohjelma lˆyt‰‰ lyhimm‰n polun tiedostoon tallennetusta tai generoidusta labyrintist‰.
+Ohjelma l√∂yt√§√§ lyhimm√§n polun tiedostoon tallennetusta tai generoidusta labyrintist√§.
 Toteutettujen algoritmien tehokkuutta voidaan testata benchmark-moodissa.
 
 
-K‰‰nt‰minen:
+K√§√§nt√§minen:
 ------------
 mvn package
 
