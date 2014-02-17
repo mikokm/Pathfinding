@@ -200,7 +200,7 @@ public class MinimumHeap<E extends Indexable> {
 	 * @return The index of the left child for the given index.
 	 */
 	private int left(int i) {
-		return 2 * i;
+		return (i == 0 ? 1 : 2 * i);
 	}
 
 	/**
@@ -222,7 +222,7 @@ public class MinimumHeap<E extends Indexable> {
 	 * @return The index of the right child for the given index.
 	 */
 	private int right(int i) {
-		return 2 * i + 1;
+		return (i == 0 ? 2 : 2 * i + 1);
 	}
 
 	/**
