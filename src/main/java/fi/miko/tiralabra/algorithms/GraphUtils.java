@@ -20,6 +20,10 @@ public class GraphUtils {
 	 * @return The generated graph.
 	 */
 	public static char[][] generateRandom(int width, int height, double freq) {
+		if(width < 1 || height < 1) {
+			throw new RuntimeException("Graph width and height must be positive integers!");
+		}
+
 		char[][] graph = new char[height][width];
 		Random rand = new Random();
 

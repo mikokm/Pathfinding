@@ -134,8 +134,8 @@ public class Graph {
 		int height = map.length;
 		int width = map[0].length;
 
-		if (width <= 0 || height <= 0) {
-			throw new RuntimeException("Cannot create graph with zero height or width!");
+		if (width < 1 || height < 1) {
+			throw new RuntimeException("Graph width and height must be positive integers!");
 		}
 
 		createNodes(width, height);
