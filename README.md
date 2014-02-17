@@ -21,3 +21,18 @@ Komentoriviparametrit:
 	Generate random graph    -r <width> <height> <freq>
 	Solve                    -s <filename>
 	Solve random graph       -sr <width> <height> <freq>
+
+
+Labyrinttitiedostojen muoto:
+----------------------------
+	s################
+	#.####...###.####
+	#.###..#..##.####
+	#...##...###...t#
+	####..###...#####
+	#################
+
+# : seinä  
+. : lattia  
+s : lähtö  
+t : maali  

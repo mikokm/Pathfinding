@@ -1,8 +1,9 @@
 package fi.miko.tiralabra;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import fi.miko.tiralabra.algorithms.AStar;
 import fi.miko.tiralabra.algorithms.Graph;
@@ -56,12 +57,17 @@ public class Solver {
 	}
 
 	private char[][] readMapFromFile(String filename) {
-		System.out.println(System.getProperty("user.dir"));
 		LinkedList<String> lines = new LinkedList<>();
 
-		try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+		try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(filename), "UTF-8"))) {
 			while (reader.ready()) {
 				String line = reader.readLine();
+
+				// Remove BOM
+				if (line.length() > 0 && line.charAt(0) == 65279) {
+					line = line.substring(1);
+				}
+
 				lines.add(line);
 			}
 		} catch (IOException e) {
@@ -69,6 +75,7 @@ public class Solver {
 		}
 
 		if (lines.isEmpty() || lines.get(0).isEmpty()) {
+			System.out.println("Couldn't read any data!");
 			return null;
 		}
 
@@ -79,6 +86,7 @@ public class Solver {
 			String line = lines.get(i);
 
 			if (line.length() != length) {
+				System.out.println("The graph is invalid!");
 				return null;
 			}
 
