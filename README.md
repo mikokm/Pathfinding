@@ -16,10 +16,10 @@ java -jar target/tiralabra-1.0-SNAPSHOT.jar
 
 Command line parameters:
 --
-	Benchmark algorithms     -b <width> <height> <freq> <iterations>
-	Generate random graph    -r <width> <height> <freq>
+	Benchmark algorithms     -b <width> <height> <wall freq> <iterations>
+	Generate random graph    -r <width> <height> <wall freq>
 	Solve                    -s <filename>
-	Solve random graph       -sr <width> <height> <freq>
+	Solve random graph       -sr <width> <height> <wall freq>
 
 
 The labyrinth file format:
