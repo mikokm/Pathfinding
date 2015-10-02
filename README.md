@@ -1,30 +1,29 @@
-﻿tiralabra
-=========
+﻿tiralabra: Data Structures Project
+==
 
-Ohjelma löytää lyhimmän polun tiedostoon tallennetusta tai generoidusta labyrintistä.  
-Toteutettujen algoritmien tehokkuutta voidaan testata benchmark-moodissa.
+The program reads a labyrinth from a file or generates one, after which it finds the shortest path between the start and goal nodes. These nodes are placed in the labyrinth as described in the format section at the bottom.
+There is also a benchmarking mode, which allows performance comparison of the implemented algorithms.
 
-
-Kääntäminen:
-------------
+How to build:
+--
 mvn package
 
 
-Ajaminen:
----------
+How to run:
+--
 java -jar target/tiralabra-1.0-SNAPSHOT.jar
 
 
-Komentoriviparametrit:
------------
+Command line parameters:
+--
 	Benchmark algorithms     -b <width> <height> <freq> <iterations>
 	Generate random graph    -r <width> <height> <freq>
 	Solve                    -s <filename>
 	Solve random graph       -sr <width> <height> <freq>
 
 
-Labyrinttitiedostojen muoto:
-----------------------------
+The labyrinth file format:
+--
 	################
 	#s####...###.###
 	#.###..#..##.###
@@ -32,7 +31,7 @@ Labyrinttitiedostojen muoto:
 	####..###...####
 	################
 	
-\# : seinä  
-. : lattia  
-s : lähtö  
-t : maali  
+\# : wall  
+. : floor  
+s : start  
+t : goal
