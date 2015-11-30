@@ -1,4 +1,4 @@
-﻿tiralabra: Data Structures Project
+Labyrinth Solver
 ==
 
 The program reads a labyrinth from a file or generates one, after which it finds the shortest path between the start and goal nodes. These nodes are placed in the labyrinth as described in the format section at the bottom.
